@@ -1,0 +1,606 @@
+{
+    "info": {
+        "name": "Job Portal API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "nama",
+                                    "value": "John Doe",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "john@example.com",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "password123",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password_confirmation",
+                                    "value": "password123",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "role",
+                                    "value": "pencari kerja",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "alamat",
+                                    "value": "Jakarta",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "tanggal_lahir",
+                                    "value": "1990-01-01",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "jenis_kelamin",
+                                    "value": "L",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "foto",
+                                    "type": "file",
+                                    "src": []
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/register",
+                            "host": ["{{base_url}}"],
+                            "path": ["register"]
+                        }
+                    }
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/login",
+                            "host": ["{{base_url}}"],
+                            "path": ["login"]
+                        }
+                    }
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/logout",
+                            "host": ["{{base_url}}"],
+                            "path": ["logout"]
+                        }
+                    }
+                },
+                {
+                    "name": "Update Profile",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "nama",
+                                    "value": "Alvin Wibowo",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "alamat",
+                                    "value": "Bandung",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "tanggal_lahir",
+                                    "value": "1990-01-01",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "jenis_kelamin",
+                                    "value": "L",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "foto",
+                                    "type": "file",
+                                    "src": []
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/profile",
+                            "host": ["{{base_url}}"],
+                            "path": ["profile"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "CV",
+            "item": [
+                {
+                    "name": "Get CV",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/cv",
+                            "host": ["{{base_url}}"],
+                            "path": ["cv"]
+                        }
+                    }
+                },
+                {
+                    "name": "Create/Update CV",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"isi_cv\": \"<p>Your CV content here</p>\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/cv",
+                            "host": ["{{base_url}}"],
+                            "path": ["cv"]
+                        }
+                    }
+                },
+                {
+                    "name": "Generate CV with AI",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/cv/generate",
+                            "host": ["{{base_url}}"],
+                            "path": ["cv", "generate"]
+                        }
+                    }
+                },
+                {
+                    "name": "Export CV to PDF",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/cv/export",
+                            "host": ["{{base_url}}"],
+                            "path": ["cv", "export"]
+                        }
+                    }
+                },
+                {
+                    "name": "Match Jobs (AI)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/cv/match-jobs",
+                            "host": ["{{base_url}}"],
+                            "path": ["cv", "match-jobs"]
+                        }
+                    }
+                },
+                {
+                    "name": "Analyze Uploaded CV (AI)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Accept", "value": "application/json", "type": "text" },
+                            { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                { "key": "file", "type": "file", "src": [] }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/cv/analyze-upload",
+                            "host": ["{{base_url}}"],
+                            "path": ["cv", "analyze-upload"]
+                        }
+                    }
+                },
+                {
+                    "name": "Chat dengan AI tentang CV",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Accept", "value": "application/json", "type": "text" },
+                            { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+                            { "key": "Content-Type", "value": "application/json", "type": "text" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"message\": \"Tolong analisa CV saya\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/cv/ai-chat",
+                            "host": ["{{base_url}}"],
+                            "path": ["cv", "ai-chat"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Experience",
+            "item": [
+                {
+                    "name": "List Experiences",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/pengalaman",
+                            "host": ["{{base_url}}"],
+                            "path": ["pengalaman"]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Experience",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"institusi\": \"Company Name\",\n    \"posisi\": \"Software Engineer\",\n    \"lokasi\": \"Jakarta\",\n    \"tanggal_mulai\": \"2020-01-01\",\n    \"tanggal_akhir\": \"2023-01-01\",\n    \"deskripsi\": \"Job description here\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/pengalaman",
+                            "host": ["{{base_url}}"],
+                            "path": ["pengalaman"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Education",
+            "item": [
+                {
+                    "name": "List Education",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/pendidikan",
+                            "host": ["{{base_url}}"],
+                            "path": ["pendidikan"]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Education",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"institusi\": \"University Name\",\n    \"jenjang\": \"S1\",\n    \"jurusan\": \"Computer Science\",\n    \"lokasi\": \"Jakarta\",\n    \"tanggal_mulai\": \"2016-01-01\",\n    \"tanggal_akhir\": \"2020-01-01\",\n    \"ipk\": 3.50,\n    \"deskripsi\": \"Education description here\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/pendidikan",
+                            "host": ["{{base_url}}"],
+                            "path": ["pendidikan"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Skills",
+            "item": [
+                {
+                    "name": "List Skills",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/skills",
+                            "host": ["{{base_url}}"],
+                            "path": ["skills"]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Skill",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "nama_skill",
+                                    "value": "Laravel",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "level",
+                                    "value": "Advanced",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "sertifikasi",
+                                    "type": "file",
+                                    "src": []
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/skills",
+                            "host": ["{{base_url}}"],
+                            "path": ["skills"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Scraped Jobs",
+            "item": [
+                {
+                    "name": "List Jobs",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/jobs?keyword=developer&location=jakarta&company=abc",
+                            "host": ["{{base_url}}"],
+                            "path": ["jobs"],
+                            "query": [
+                                {"key": "keyword", "value": "developer"},
+                                {"key": "location", "value": "jakarta"},
+                                {"key": "company", "value": "abc"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Job Detail",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/jobs/1",
+                            "host": ["{{base_url}}"],
+                            "path": ["jobs", "1"]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000/api"
+        },
+        {
+            "key": "token",
+            "value": "your_token_here"
+        }
+    ]
+}
