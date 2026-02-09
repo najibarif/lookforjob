@@ -15,12 +15,23 @@ class ScrapedJob extends Model
         'position',
         'company',
         'location',
+        'description',
+        'requirements',
+        'employment_type',
+        'experience_level',
         'date',
         'salary',
         'jobUrl',
         'companyLogo',
         'agoTime',
         'keyword',
+        'category',
+        'is_remote',
         'source',
+    ];
+
+    protected $casts = [
+        'is_remote' => 'boolean',
+        'date' => 'datetime',
     ];
 }
