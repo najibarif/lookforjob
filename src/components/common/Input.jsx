@@ -9,16 +9,26 @@ const InputWrapper = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const StyledInput = styled(motion.input)`
+const inputStyles = `
   width: 100%;
-  border: 2px solid black;
-  background-color: white;
   transition: all 0.2s ease;
 
   &:focus {
     outline: none;
     box-shadow: none;
   }
+`;
+
+const StyledInput = styled(motion.input)`
+  ${inputStyles}
+`;
+
+const StyledSelect = styled(motion.select)`
+  ${inputStyles}
+`;
+
+const StyledTextarea = styled(motion.textarea)`
+  ${inputStyles}
 `;
 
 const StyledLabel = styled.label`
@@ -53,6 +63,12 @@ const Input = forwardRef(
     },
     ref
   ) => {
+    let Component = StyledInput;
+    if (props.as === "select") Component = StyledSelect;
+    if (props.as === "textarea") Component = StyledTextarea;
+
+    const { as, children, ...restProps } = props;
+
     return (
       <InputWrapper>
         {label && (
@@ -61,7 +77,7 @@ const Input = forwardRef(
             {required && <span className='text-primary ml-1'>*</span>}
           </StyledLabel>
         )}
-        <StyledInput
+        <Component
           type={type}
           id={name}
           name={name}
@@ -72,10 +88,13 @@ const Input = forwardRef(
           disabled={disabled}
           className={`
           px-4 py-3 rounded-xl
-          shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)]
+          bg-white dark:bg-gray-800
+          border-2 border-black dark:border-gray-600
+          text-black dark:text-white
+          shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] dark:shadow-none
           focus:ring-2 focus:ring-accent focus:shadow-none
           disabled:opacity-70 disabled:cursor-not-allowed
-          ${error ? "border-primary" : "border-black"}
+          ${error ? "border-primary" : ""}
           ${className}
         `}
           ref={ref}
@@ -84,8 +103,10 @@ const Input = forwardRef(
             x: 0,
             boxShadow: "0px 0px 0px 0px rgba(0,0,0,0.8)",
           }}
-          {...props}
-        />
+          {...restProps}
+        >
+          {Component !== StyledInput ? children : null}
+        </Component>
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </InputWrapper>
     );

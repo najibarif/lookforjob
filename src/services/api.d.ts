@@ -11,7 +11,7 @@ export declare const authAPI: {
 export declare const cvAPI: {
   getCV(): Promise<AxiosResponse<any>>;
   createUpdateCV(data: any): Promise<AxiosResponse<any>>;
-  generateCV(): Promise<AxiosResponse<any>>;
+  generateCV(data?: { language?: string; tone?: string }): Promise<AxiosResponse<any>>;
   exportCV(): Promise<AxiosResponse<any>>;
   matchJobs(): Promise<AxiosResponse<any>>;
   analyzeUploadedCV(file: File): Promise<AxiosResponse<any>>;

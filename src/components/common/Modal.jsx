@@ -19,8 +19,6 @@ const Overlay = styled(motion.div)`
 `;
 
 const ModalContainer = styled(motion.div)`
-  background-color: white;
-  border: 3px solid black;
   border-radius: 24px;
   max-width: 90%;
   width: 500px;
@@ -34,8 +32,6 @@ const CloseButton = styled(motion.button)`
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: white;
-  border: 2px solid black;
   border-radius: 50%;
   width: 32px;
   height: 32px;
@@ -48,7 +44,6 @@ const CloseButton = styled(motion.button)`
 
 const ModalHeader = styled.div`
   padding: 1.5rem 1.5rem 0.75rem;
-  border-bottom: 2px solid black;
 `;
 
 const ModalBody = styled.div`
@@ -62,13 +57,13 @@ const ModalFooter = styled.div`
   gap: 0.75rem;
 `;
 
-const Modal = ({ 
-  isOpen, 
-  onClose, 
-  title, 
-  children, 
+const Modal = ({
+  isOpen,
+  onClose,
+  title,
+  children,
   footer = null,
-  className = '' 
+  className = ''
 }) => {
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -77,7 +72,7 @@ const Modal = ({
     } else {
       document.body.style.overflow = 'unset';
     }
-    
+
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -97,9 +92,9 @@ const Modal = ({
 
   const modalVariants = {
     hidden: { opacity: 0, y: 50, scale: 0.95 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       scale: 1,
       transition: {
         type: 'spring',
@@ -107,12 +102,12 @@ const Modal = ({
         stiffness: 500
       }
     },
-    exit: { 
-      opacity: 0, 
-      y: 50, 
+    exit: {
+      opacity: 0,
+      y: 50,
       scale: 0.95,
-      transition: { 
-        duration: 0.2 
+      transition: {
+        duration: 0.2
       }
     }
   };
@@ -130,26 +125,27 @@ const Modal = ({
         >
           <ModalContainer
             variants={modalVariants}
-            className={`shadow-neo-lg ${className}`}
+            className={`bg-white dark:bg-gray-800 border-2 border-black dark:border-gray-700 shadow-neo-lg dark:shadow-none ${className}`}
             role="dialog"
             aria-modal="true"
           >
-            <CloseButton 
+            <CloseButton
               onClick={onClose}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
+              className="bg-white dark:bg-gray-700 border-2 border-black dark:border-gray-600 text-black dark:text-white"
             >
               <X size={18} />
             </CloseButton>
-            
+
             {title && (
-              <ModalHeader>
-                <h3 className="text-xl font-bold">{title}</h3>
+              <ModalHeader className="border-b-2 border-black dark:border-gray-700">
+                <h3 className="text-xl font-bold dark:text-white">{title}</h3>
               </ModalHeader>
             )}
-            
+
             <ModalBody>{children}</ModalBody>
-            
+
             {footer && <ModalFooter>{footer}</ModalFooter>}
           </ModalContainer>
         </Overlay>

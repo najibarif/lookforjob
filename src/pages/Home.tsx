@@ -42,20 +42,20 @@ const Home: React.FC = () => {
   return (
     <div className='container mx-auto px-4 py-8'>
       {/* Hero Section */}
-      <section className='py-12 md:py-20'>
+      <section className='py-12 md:py-20 bg-white dark:bg-gray-900 transition-colors duration-300'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className='text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight mb-6'>
+            <h1 className='text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight mb-6 dark:text-gray-100'>
               Temukan <span className='text-primary'>Pekerjaan</span> Impianmu
               <br />
               Bangun <span className='text-accent'>Karier</span> Terbaikmu
             </h1>
 
-            <p className='text-gray-600 text-lg mb-8'>
+            <p className='text-gray-600 dark:text-gray-300 text-lg mb-8'>
               LookForJob menghubungkan kamu dengan peluang kerja yang sesuai dengan keahlian dan aspirasi, didukung AI untuk memberikan rekomendasi pekerjaan yang dipersonalisasi.
             </p>
 
@@ -124,21 +124,21 @@ const Home: React.FC = () => {
 
       {/* Features Section */}
       <motion.section
-        className='py-16'
+        className='py-16 bg-white dark:bg-gray-900 transition-colors duration-300'
         variants={containerVariants}
         initial='initial'
         whileInView='animate'
         viewport={{ once: true }}
       >
-        <h2 className='text-3xl md:text-4xl font-heading font-bold text-center mb-12'>
+        <h2 className='text-3xl md:text-4xl font-heading font-bold text-center mb-12 dark:text-gray-100'>
           Kenapa Memilih <span className='text-primary'>Look</span>
           <span className='text-accent'>For</span>Job?
         </h2>
 
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           <motion.div variants={itemVariants}>
-            <Card className='h-full'>
-              <div className='w-16 h-16 bg-primary/10 rounded-2xl border-2 border-black flex items-center justify-center mb-6'>
+            <Card className='h-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'>
+              <div className='w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-2xl border-2 border-black flex items-center justify-center mb-6'>
                 <Search size={32} className='text-primary' />
               </div>
 
@@ -146,15 +146,15 @@ const Home: React.FC = () => {
                 Pencocokan Pekerjaan Cerdas
               </h3>
 
-              <p className='text-gray-600'>
+              <p className='text-gray-600 dark:text-gray-300'>
                 Sistem pencocokan berbasis AI kami menghubungkan kamu dengan pekerjaan yang sesuai dengan keahlian, pengalaman, dan tujuan kariermu.
               </p>
             </Card>
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Card className='h-full'>
-              <div className='w-16 h-16 bg-secondary/10 rounded-2xl border-2 border-black flex items-center justify-center mb-6'>
+            <Card className='h-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'>
+              <div className='w-16 h-16 bg-secondary/10 dark:bg-secondary/20 rounded-2xl border-2 border-black flex items-center justify-center mb-6'>
                 <FileText size={32} className='text-secondary' />
               </div>
 
@@ -162,15 +162,15 @@ const Home: React.FC = () => {
                 Pembuat & Analisa CV
               </h3>
 
-              <p className='text-gray-600'>
+              <p className='text-gray-600 dark:text-gray-300'>
                 Buat CV profesional dengan pembuat CV kami yang mudah digunakan, dan dapatkan masukan personal untuk meningkatkan lamaranmu.
               </p>
             </Card>
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Card className='h-full'>
-              <div className='w-16 h-16 bg-accent/10 rounded-2xl border-2 border-black flex items-center justify-center mb-6'>
+            <Card className='h-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100'>
+              <div className='w-16 h-16 bg-accent/10 dark:bg-accent/20 rounded-2xl border-2 border-black flex items-center justify-center mb-6'>
                 <Sparkles size={32} className='text-accent' />
               </div>
 
@@ -178,7 +178,7 @@ const Home: React.FC = () => {
                 Asisten Karier AI
               </h3>
 
-              <p className='text-gray-600'>
+              <p className='text-gray-600 dark:text-gray-300'>
                 Dapatkan saran karier, tips wawancara, dan strategi pencarian kerja yang dipersonalisasi dari asisten AI kami.
               </p>
             </Card>
@@ -188,23 +188,23 @@ const Home: React.FC = () => {
 
       {/* CTA Section */}
       <motion.section
-        className='py-16'
+        className='py-16 bg-white dark:bg-gray-900 transition-colors duration-300'
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <div className='bg-black text-white rounded-3xl border-4 border-black p-8 md:p-12 relative overflow-hidden'>
+        <div className='bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-3xl border-4 border-black p-8 md:p-12 relative overflow-hidden'>
           {/* Background elements */}
           <div className='absolute top-0 right-0 w-64 h-64 bg-primary rounded-full opacity-20 -mr-32 -mt-32'></div>
           <div className='absolute bottom-0 left-0 w-96 h-96 bg-accent rounded-full opacity-20 -ml-48 -mb-48'></div>
 
           <div className='relative z-10 text-center max-w-3xl mx-auto'>
-            <h2 className='text-3xl md:text-4xl font-heading font-bold mb-6'>
+            <h2 className='text-3xl md:text-4xl font-heading font-bold mb-6 dark:text-gray-100'>
               Siap Menemukan Peluang Berikutnya?
             </h2>
 
-            <p className='text-gray-300 text-lg mb-8'>
+            <p className='text-gray-300 text-lg mb-8 dark:text-gray-200'>
               Bergabunglah dengan ribuan pencari kerja yang telah menemukan karier impian mereka melalui LookForJob. Buat profilmu, unggah CV, dan mulai perjalananmu hari ini.
             </p>
 

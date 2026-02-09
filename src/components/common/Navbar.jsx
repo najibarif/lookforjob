@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import { Menu, X, Search, Briefcase, User, FileText, Bot } from "lucide-react";
+import { Menu, X, Search, Briefcase, User, FileText, Bot, ClipboardList, Sun, Moon } from "lucide-react";
 import authService from "../../services/auth";
 
 const NavContainer = styled.nav`
@@ -52,6 +52,12 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
     const checkAuth = () => {
@@ -68,6 +74,16 @@ const Navbar = () => {
     // Close mobile menu when location changes
     setIsMenuOpen(false);
   }, [location]);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode]);
 
   const handleLogout = async () => {
     await authService.logout();
@@ -106,7 +122,7 @@ const Navbar = () => {
   };
 
   return (
-    <NavContainer>
+    <NavContainer className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b-2 border-black dark:border-gray-700">
       <div className='container mx-auto px-8 md:px-16'>
         <div className='flex items-center justify-between h-16'>
           {/* Logo */}
@@ -126,15 +142,22 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <Link key={link.to} to={link.to}>
                 <NavLink
-                  className={`font-medium flex items-center ${
-                    isActive(link.to) ? "active text-primary" : ""
-                  }`}
+                  className={`font-medium flex items-center ${isActive(link.to) ? "active text-primary" : ""
+                    }`}
                   whileHover={{ scale: 1.05 }}
                 >
                   {link.label}
                 </NavLink>
               </Link>
             ))}
+
+            <button
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              onClick={() => setDarkMode((v) => !v)}
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
 
             {isLoggedIn ? (
               <motion.button
@@ -187,6 +210,7 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 500 }}
+            className="fixed top-0 left-0 w-full h-full bg-white dark:bg-gray-900 z-50 flex flex-col p-6"
           >
             <div className='flex justify-between items-center mb-8'>
               <div className='font-heading text-xl font-bold'>
@@ -210,9 +234,8 @@ const Navbar = () => {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <motion.div
-                    className={`text-lg font-medium flex items-center py-2 ${
-                      isActive(link.to) ? "text-primary" : ""
-                    }`}
+                    className={`text-lg font-medium flex items-center py-2 ${isActive(link.to) ? "text-primary" : ""
+                      }`}
                     whileHover={{ x: 5, color: "#FF3366" }}
                   >
                     {link.icon}

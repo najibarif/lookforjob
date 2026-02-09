@@ -51,28 +51,28 @@ const InfoItem = styled.div`
   }
 `;
 
-const ProfileCard = ({ 
-  user, 
-  isLoading = false, 
+const ProfileCard = ({
+  user,
+  isLoading = false,
   onEdit,
   className = ''
 }) => {
   // Default image if user has no photo
   const profileImage = user?.foto_url || 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg';
-  
+
   return (
     <Card className={`overflow-visible ${className}`}>
       <ProfileInfo>
-        <ProfileImage 
+        <ProfileImage
           whileHover={{ scale: 1.05 }}
           className="shadow-neo-md mx-auto md:mx-0 mb-4 md:mb-0"
         >
-          <img 
-            src={profileImage} 
-            alt={user?.nama || 'Profile'} 
+          <img
+            src={profileImage}
+            alt={user?.nama || 'Profile'}
           />
         </ProfileImage>
-        
+
         <ProfileDetails>
           <div className="flex justify-between items-start mb-4">
             <div>
@@ -83,10 +83,10 @@ const ProfileCard = ({
                 {user?.role === 'pencari kerja' ? 'Pencari Kerja' : 'Recruiter'}
               </p>
             </div>
-            
+
             {onEdit && (
-              <Button 
-                variant="outline" 
+              <Button
+                variant="primary"
                 onClick={onEdit}
                 className="ml-4"
               >
@@ -94,27 +94,27 @@ const ProfileCard = ({
               </Button>
             )}
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <InfoItem>
               <Mail size={18} />
               <span>{user?.email || 'email@example.com'}</span>
             </InfoItem>
-            
+
             {user?.alamat && (
               <InfoItem>
                 <MapPin size={18} />
                 <span>{user.alamat}</span>
               </InfoItem>
             )}
-            
+
             {user?.jenis_kelamin && (
               <InfoItem>
                 <User size={18} />
                 <span>{user.jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan'}</span>
               </InfoItem>
             )}
-            
+
             {user?.tanggal_lahir && (
               <InfoItem>
                 <Calendar size={18} />

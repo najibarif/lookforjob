@@ -39,6 +39,10 @@ const Button = ({
     secondary: "bg-secondary text-black",
     accent: "bg-accent text-white",
     outline: "bg-white text-black border-2 border-black",
+    success: "bg-gradient-to-r from-secondary to-emerald-400 text-black",
+    danger: "bg-gradient-to-r from-primary to-rose-500 text-white",
+    purple: "bg-gradient-to-r from-accent to-violet-500 text-white",
+    glass: "bg-white/10 backdrop-blur-md text-white border-2 border-white/20",
   };
 
   // Define shadow based on variant
@@ -87,7 +91,7 @@ const Button = ({
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(["primary", "secondary", "accent", "outline"]),
+  variant: PropTypes.oneOf(["primary", "secondary", "accent", "outline", "success", "danger", "purple", "glass"]),
   className: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,

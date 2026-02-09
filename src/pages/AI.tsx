@@ -4,19 +4,18 @@ import { cvAPI, jobsAPI } from '../services/api';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Loading from '../components/common/Loading';
-import { Sparkles, ArrowRight, Briefcase, Bot, User } from 'lucide-react';
-import { formatCurrency, truncateText } from '../utils/helpers';
+import { Sparkles, Briefcase, Bot, User } from 'lucide-react';
 import JobCard from '../components/jobs/JobCard';
 import { Link } from 'react-router-dom';
 
 const AI: React.FC = () => {
 
-    const [loading, setLoading] = useState(true);
-    const [cv, setCV] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [cv, setCV] = useState<any>(null);
 
   // State untuk matching job
   const [matchingLoading, setMatchingLoading] = useState(false);
-  const [matchedJobIds, setMatchedJobIds] = useState<number[]>([]);
+  const [_matchedJobIds, setMatchedJobIds] = useState<number[]>([]);
   const [matchedJobs, setMatchedJobs] = useState<any[]>([]);
   const [matchError, setMatchError] = useState<string | null>(null);
   const [jobsLoading, setJobsLoading] = useState(false);
@@ -34,7 +33,7 @@ const AI: React.FC = () => {
   // State untuk chat AI
   const [chatInput, setChatInput] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
-  const [chatHistory, setChatHistory] = useState<{role: 'user'|'ai', message: string}[]>([]);
+  const [chatHistory, setChatHistory] = useState<{ role: 'user' | 'ai', message: string }[]>([]);
 
   useEffect(() => {
     const fetchCV = async () => {
@@ -112,7 +111,28 @@ const AI: React.FC = () => {
           setAnalyzeText('');
         }
         // Masukkan hasil analisis ke chat awal
-        setChatHistory([{ role: 'ai', message: typeof res.data.analysis === 'string' ? res.data.analysis : JSON.stringify(res.data.analysis, null, 2) }]);
+        const formatAnalysisMessage = (analysis: any): string => {
+          if (typeof analysis === 'string') return analysis;
+
+          // Parse JSON if it's an object
+          try {
+            let message = '';
+            if (analysis.score !== undefined) {
+              message += `📊 Skor CV: ${analysis.score}/100\n\n`;
+            }
+            if (analysis.suggestions && Array.isArray(analysis.suggestions)) {
+              message += '💡 Saran Perbaikan:\n';
+              analysis.suggestions.forEach((suggestion: string, idx: number) => {
+                message += `${idx + 1}. ${suggestion}\n`;
+              });
+            }
+            return message || JSON.stringify(analysis, null, 2);
+          } catch (e) {
+            return JSON.stringify(analysis, null, 2);
+          }
+        };
+
+        setChatHistory([{ role: 'ai', message: formatAnalysisMessage(res.data.analysis) }]);
       } else {
         setAnalyzeError('Tidak ada hasil analisis yang diterima.');
       }
@@ -250,7 +270,7 @@ const AI: React.FC = () => {
               {/* Chat dengan AI */}
               <div className="mt-8">
                 <h4 className="font-bold mb-2">Tanya AI seputar hasil analisis CV Anda</h4>
-                <div className="space-y-2 max-h-64 overflow-y-auto bg-gray-50 rounded p-3 border border-gray-200">
+                <div className="space-y-2 max-h-64 overflow-y-auto bg-gray-50 dark:bg-gray-800 rounded p-3 border border-gray-200 dark:border-gray-700">
                   <AnimatePresence>
                     {chatHistory.map((chat, idx) => (
                       <motion.div
@@ -269,7 +289,7 @@ const AI: React.FC = () => {
                                 <Bot size={16} className='text-white' />
                               )}
                             </div>
-                            <div className={`p-3 rounded-2xl border-2 border-black ${chat.role === 'user' ? 'bg-primary/10' : 'bg-accent/10'} shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)]`}>
+                            <div className={`p-3 rounded-2xl border-2 ${chat.role === 'user' ? 'bg-primary border-primary text-white' : 'bg-white border-gray-300 text-gray-900'} shadow-md`}>
                               <p className='text-sm whitespace-pre-wrap'>{chat.message}</p>
                             </div>
                           </div>
@@ -283,7 +303,7 @@ const AI: React.FC = () => {
                         <div className='w-8 h-8 rounded-full flex items-center justify-center bg-accent mr-2'>
                           <Bot size={16} className='text-white' />
                         </div>
-                        <div className='p-3 rounded-2xl border-2 border-black bg-accent/10 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)]'>
+                        <div className='p-3 rounded-2xl border-2 bg-white border-gray-300 shadow-md'>
                           <div className='flex space-x-2'>
                             <div className='w-2 h-2 bg-accent rounded-full animate-bounce' style={{ animationDelay: "0ms" }}></div>
                             <div className='w-2 h-2 bg-accent rounded-full animate-bounce' style={{ animationDelay: "300ms" }}></div>
@@ -297,7 +317,7 @@ const AI: React.FC = () => {
                 <div className="flex gap-2 mb-4">
                   <input
                     type="text"
-                    className="flex-1 min-w-0 border rounded px-3 py-2"
+                    className="flex-1 min-w-0 border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                     placeholder="Tulis pertanyaan..."
                     value={chatInput}
                     onChange={e => setChatInput(e.target.value)}

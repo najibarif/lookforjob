@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import JobFilter from '../components/jobs/JobFilter';
-import JobCard from '../components/jobs/JobCard';
-import { jobsAPI } from '../services/api';
+import { scrapedJobsAPI } from '../services/api';
 import Loading from '../components/common/Loading';
-import { ChevronLeft } from 'lucide-react';
-import { ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Jobs = () => {
   const [jobs, setJobs] = useState<any[]>([]);
@@ -19,7 +18,7 @@ const Jobs = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await jobsAPI.getJobs({ ...params, page });
+      const res = await scrapedJobsAPI.getJobs({ ...params, page });
       const data = res.data.data ? res.data.data : res.data;
       setJobs(data);
       setTotalPages(res.data.last_page || 1);
@@ -50,9 +49,9 @@ const Jobs = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="container mx-auto px-4 py-8"
+      className="page-container bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300"
     >
-      <h1 className="text-4xl font-bold mb-8">Daftar Lowongan</h1>
+      <h1 className="text-3xl font-bold mb-8">Cari Pekerjaan</h1>
       <div className="mb-8">
         <JobFilter onFilter={handleFilter} />
       </div>
@@ -70,10 +69,44 @@ const Jobs = () => {
             Tidak ada lowongan ditemukan.
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {jobs.map(job => (
-              <JobCard key={job.id} job={job} />
-            ))}
+          <div className="overflow-x-auto rounded-2xl shadow border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead className="bg-navy-50 dark:bg-gray-800">
+                <tr>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-navy-700 dark:text-gray-100 uppercase">Nama Posisi</th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-navy-700 dark:text-gray-100 uppercase">Perusahaan</th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-navy-700 dark:text-gray-100 uppercase">Lokasi</th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-navy-700 dark:text-gray-100 uppercase">Tipe</th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-navy-700 dark:text-gray-100 uppercase">Gaji</th>
+                  <th className="px-6 py-4"></th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                {jobs.map((job) => (
+                  <tr key={job.id} className="hover:bg-navy-50 dark:hover:bg-gray-700 transition">
+                    <td className="px-6 py-4 font-medium text-navy-900">
+                      <Link to={`/jobs/${job.id}`} className="hover:underline text-primary">
+                        {job.position}
+                      </Link>
+                    </td>
+                    <td className="px-6 py-4">{job.company}</td>
+                    <td className="px-6 py-4">{job.location}</td>
+                    <td className="px-6 py-4">{job.type || '-'}</td>
+                    <td className="px-6 py-4">{job.salary ? `Rp${job.salary.toLocaleString()}` : '-'}</td>
+                    <td className="px-6 py-4 text-right">
+                      <a
+                        href={job.jobUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block px-4 py-2 bg-primary text-white font-semibold rounded-xl border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-none transition-all whitespace-nowrap text-sm"
+                      >
+                        Lamar di Situs Asli
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
         {totalPages > 1 && (

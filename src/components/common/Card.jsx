@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 
 const StyledCard = styled(motion.div)`
   position: relative;
-  background-color: white;
-  border: 2px solid black;
   border-radius: 24px;
   overflow: hidden;
 `;
@@ -29,7 +27,7 @@ const Card = ({
 
   return (
     <StyledCard
-      className={`p-6 ${shadowSizes[shadowSize]} ${className}`}
+      className={`p-6 ${shadowSizes[shadowSize]} bg-white dark:bg-gray-800 border-2 border-black dark:border-gray-700 ${className}`}
       onClick={onClick}
       whileHover={
         hoverEffect

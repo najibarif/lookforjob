@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { Search, MapPin, Filter, X } from "lucide-react";
 import Button from "../common/Button";
-import { JOB_TYPES, COMMON_LOCATIONS } from "../../utils/constants";
+import { JOB_TYPES, COMMON_LOCATIONS } from "../../utils/constants.ts";
 
 const JobFilter = ({ onFilter, className = "" }) => {
   const [keyword, setKeyword] = useState("");

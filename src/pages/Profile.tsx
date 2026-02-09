@@ -298,7 +298,7 @@ const Profile: React.FC = () => {
               </h2>
 
               <Button
-                variant='outline'
+                variant='success'
                 className='px-3 py-2 flex items-center'
                 onClick={() => openExperienceModal()}
               >
@@ -386,7 +386,7 @@ const Profile: React.FC = () => {
               </h2>
 
               <Button
-                variant='outline'
+                variant='success'
                 className='px-3 py-2 flex items-center'
                 onClick={() => openEducationModal()}
               >
@@ -482,7 +482,7 @@ const Profile: React.FC = () => {
               </h2>
 
               <Button
-                variant='outline'
+                variant='success'
                 className='px-3 py-2 flex items-center'
                 onClick={() => openSkillModal()}
               >

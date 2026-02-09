@@ -3,8 +3,8 @@ import toast from 'react-hot-toast';
 
 // Create an axios instance
 const api = axios.create({
-  // baseURL: 'http://localhost:8000/api',
-  baseURL: 'https://api-lfj.naufalsidiq.xyz/api',
+  baseURL: 'http://localhost:8000/api',
+  // baseURL: 'https://api-lfj.naufalsidiq.xyz/api',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -32,7 +32,7 @@ api.interceptors.response.use(
   },
   (error) => {
     const { response } = error;
-    
+
     if (response && response.status === 401) {
       // Clear token and redirect to login if unauthorized
       localStorage.removeItem('token');
@@ -45,7 +45,7 @@ api.interceptors.response.use(
       // Show generic error message
       toast.error('An error occurred. Please try again.');
     }
-    
+
     return Promise.reject(error);
   }
 );
@@ -62,7 +62,7 @@ export const authAPI = {
 export const cvAPI = {
   getCV: () => api.get('/cv'),
   createUpdateCV: (data) => api.post('/cv', data),
-  generateCV: () => api.post('/cv/generate'),
+  generateCV: (data) => api.post('/cv/generate', data),
   exportCV: () => api.get('/cv/export', { responseType: 'blob' }),
   matchJobs: () => api.post('/cv/match-jobs'),
   analyzeUploadedCV: (file) => {
@@ -122,6 +122,11 @@ export const skillsAPI = {
 };
 
 export const jobsAPI = {
+  getJobs: (params) => api.get('/jobs', { params }),
+  getJob: (id) => api.get(`/jobs/${id}`),
+};
+
+export const scrapedJobsAPI = {
   getJobs: (params) => api.get('/jobs', { params }),
   getJob: (id) => api.get(`/jobs/${id}`),
 };

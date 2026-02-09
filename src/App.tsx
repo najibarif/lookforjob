@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Jobs from './pages/Jobs';
 import CV from './pages/CV';
 import AI from './pages/AI';
+import JobDetail from './pages/JobDetail';
 
 // Components
 import MainLayout from './components/layout/MainLayout';
@@ -27,6 +28,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="profile" element={<Profile />} />
           <Route path="jobs" element={<Jobs />} />
+          <Route path="jobs/:id" element={<JobDetail />} />
           <Route path="cv" element={<CV />} />
           <Route path="ai" element={<AI />} />
         </Route>
