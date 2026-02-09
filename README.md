@@ -316,10 +316,6 @@ Project ini dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE
 
 <div align="center">
 
-### ⭐ Jika project ini berguna, berikan star ya!
-
-Made with ❤️ by [Najib Arif](https://github.com/najibarif)
-
 [⬆ Kembali ke atas](#-lookforjob)
 
 </div>
