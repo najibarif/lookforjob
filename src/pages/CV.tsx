@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 import { cvAPI } from '../services/api.ts';
@@ -13,54 +14,57 @@ interface CVType {
 }
 
 const CV = () => {
-  const [cv, setCV] = useState<CVType | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const queryClient = useQueryClient();
+  const [cvLocal, setCVLocal] = useState<CVType | null>(null);
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
-  const [isLoadingPreview, setIsLoadingPreview] = useState(false);
   const pdfUrlRef = useRef<string | null>(null);
 
-  // Fetch CV data from backend
-  const fetchCV = async () => {
-    setLoading(true);
-    try {
-      const res = await cvAPI.getCV();
-      setCV(res.data.data);
-      // Fetch PDF preview jika CV tersedia
-      if (res.data.data) {
-        fetchPdfPreview();
-      } else {
-        setPdfUrl(null);
-      }
-    } catch (err) {
-      setCV(null);
-      setPdfUrl(null);
-    } finally {
-      setLoading(false);
+  // Fetch CV data
+  const { isLoading: loading } = useQuery(
+    'cv',
+    () => cvAPI.getCV(),
+    {
+      onSuccess: (res) => {
+        setCVLocal(res.data.data);
+      },
+      refetchOnWindowFocus: false,
     }
-  };
+  );
 
-  // Fetch PDF preview dari backend
-  const fetchPdfPreview = async () => {
-    setIsLoadingPreview(true);
-    try {
-      const response = await cvAPI.exportCV();
-      // Jika response berupa file blob
-      const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
-      setPdfUrl(url);
-      // Cleanup url lama
-      if (pdfUrlRef.current) {
-        window.URL.revokeObjectURL(pdfUrlRef.current);
-      }
-      pdfUrlRef.current = url;
-    } catch (err) {
-      setPdfUrl(null);
-    } finally {
-      setIsLoadingPreview(false);
+  // Fetch PDF preview
+  const { isLoading: isLoadingPreview, refetch: refetchPdfPreview } = useQuery(
+    'cv-pdf',
+    () => cvAPI.exportCV(),
+    {
+      enabled: !!cvLocal,
+      onSuccess: (response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+        setPdfUrl(url);
+        if (pdfUrlRef.current) {
+          window.URL.revokeObjectURL(pdfUrlRef.current);
+        }
+        pdfUrlRef.current = url;
+      },
+      refetchOnWindowFocus: false,
     }
-  };
+  );
 
-  // Cleanup url blob saat unmount
+  // Save CV mutation
+  const saveMutation = useMutation(
+    (data: { isi_cv: string }) => cvAPI.createUpdateCV(data),
+    {
+      onSuccess: () => {
+        toast.success('CV saved!');
+        queryClient.invalidateQueries('cv');
+        refetchPdfPreview();
+      },
+      onError: () => {
+        toast.error('Failed to save CV');
+      }
+    }
+  );
+
+  // Cleanup url blob
   useEffect(() => {
     return () => {
       if (pdfUrlRef.current) {
@@ -69,22 +73,8 @@ const CV = () => {
     };
   }, []);
 
-  useEffect(() => {
-    fetchCV();
-  }, []);
-
-  // Save CV (update)
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      await cvAPI.createUpdateCV({ isi_cv: cv?.isi_cv || '' });
-      toast.success('CV saved!');
-      fetchCV();
-    } catch (err) {
-      toast.error('Failed to save CV');
-    } finally {
-      setSaving(false);
-    }
+  const handleSave = () => {
+    saveMutation.mutate({ isi_cv: cvLocal?.isi_cv || '' });
   };
 
   return (
@@ -101,7 +91,7 @@ const CV = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column: Generator Controls */}
         <div className="lg:col-span-1">
-          <CVGenerator onPreviewCV={fetchCV} />
+          <CVGenerator onPreviewCV={() => queryClient.invalidateQueries('cv')} />
         </div>
 
         {/* Right Column: Preview & Editor */}
@@ -109,7 +99,7 @@ const CV = () => {
           <Card>
             {loading ? (
               <div className="py-16 flex justify-center"><Loading text="Memuat CV..." /></div>
-            ) : !cv ? (
+            ) : !cvLocal ? (
               <div className="py-16 text-center text-gray-500">CV belum tersedia. Silakan generate dengan AI atau isi data profil Anda.</div>
             ) : (
               <div className="">
@@ -119,13 +109,13 @@ const CV = () => {
                     <h2 className="text-2xl font-bold mb-4">Isi CV</h2>
                     <textarea
                       className="w-full min-h-[300px] rounded-xl border-2 border-gray-200 p-4 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-                      value={cv?.isi_cv || ''}
-                      onChange={e => setCV(cv ? { ...cv, isi_cv: e.target.value } : { isi_cv: e.target.value })}
+                      value={cvLocal?.isi_cv || ''}
+                      onChange={e => setCVLocal(cvLocal ? { ...cvLocal, isi_cv: e.target.value } : { isi_cv: e.target.value })}
                       placeholder="Tulis isi CV Anda di sini..."
                     />
                     <div className="flex justify-end gap-4 mt-4">
-                      <Button variant="primary" onClick={handleSave} disabled={saving}>
-                        {saving ? 'Menyimpan...' : 'Simpan CV'}
+                      <Button variant="primary" onClick={handleSave} disabled={saveMutation.isLoading}>
+                        {saveMutation.isLoading ? 'Menyimpan...' : 'Simpan CV'}
                       </Button>
                     </div>
                   </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useMutation } from "react-query";
 import { Sparkles, Briefcase, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Card from "../common/Card";
@@ -20,21 +21,16 @@ interface JobMatcherProps {
 }
 
 const JobMatcher = ({ className = "" }: JobMatcherProps) => {
-    const [isLoading, setIsLoading] = useState(false);
     const [matchedJobs, setMatchedJobs] = useState<MatchedJob[]>([]);
     const [error, setError] = useState<string | null>(null);
 
-    const handleMatchJobs = async () => {
-        try {
-            setIsLoading(true);
+    const matchMutation = useMutation(
+        async () => {
             setError(null);
             setMatchedJobs([]);
-
             const response = await cvAPI.matchJobs();
-            if (
-                response.data &&
-                (response.data.matched_job_ids || response.data.data)
-            ) {
+
+            if (response.data && (response.data.matched_job_ids || response.data.data)) {
                 const ids = response.data.matched_job_ids || response.data.data;
                 if (Array.isArray(ids) && ids.length > 0) {
                     const jobs = await Promise.all(
@@ -52,23 +48,30 @@ const JobMatcher = ({ className = "" }: JobMatcherProps) => {
                             }
                         })
                     );
-                    setMatchedJobs(jobs.filter((j): j is MatchedJob => j !== null));
-                } else {
-                    setMatchedJobs([]);
+                    return jobs.filter((j): j is MatchedJob => j !== null);
                 }
-            } else {
-                setMatchedJobs([]);
-                setError("Format response dari server tidak sesuai.");
             }
-        } catch (error) {
-            console.error("Job matching error:", error);
-            setError(
-                "Gagal matching pekerjaan. Pastikan CV dan profil Anda sudah lengkap."
-            );
-        } finally {
-            setIsLoading(false);
+            return [];
+        },
+        {
+            onSuccess: (data) => {
+                setMatchedJobs(data);
+                if (data.length === 0) {
+                    setError("Tidak ada pekerjaan yang cocok ditemukan.");
+                }
+            },
+            onError: (err: any) => {
+                console.error("Job matching error:", err);
+                setError("Gagal matching pekerjaan. Pastikan CV dan profil Anda sudah lengkap.");
+            }
         }
+    );
+
+    const handleMatchJobs = () => {
+        matchMutation.mutate();
     };
+
+    const isLoading = matchMutation.isLoading;
 
     return (
         <Card className={`${className}`}>

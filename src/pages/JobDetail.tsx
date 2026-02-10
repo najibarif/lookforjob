@@ -1,54 +1,25 @@
-import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import { scrapedJobsAPI } from '../services/api.ts';
 import Loading from '../components/common/Loading';
 import { Briefcase, MapPin, CreditCard, Calendar, ClipboardList } from 'lucide-react';
 
-const getAppliedJobs = () => {
-  const data = localStorage.getItem('appliedJobs');
-  return data ? JSON.parse(data) : [];
-};
-
-const setAppliedJobs = (jobs: number[]) => {
-  localStorage.setItem('appliedJobs', JSON.stringify(jobs));
-};
-
 const JobDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [job, setJob] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [applied, setApplied] = useState<number[]>(getAppliedJobs());
+  const { data: jobResponse, isLoading, error } = useQuery(
+    ['job', id],
+    () => scrapedJobsAPI.getJob(Number(id)),
+    {
+      enabled: !!id,
+      refetchOnWindowFocus: false,
+    }
+  );
 
-  useEffect(() => {
-    const fetchJob = async () => {
-      if (!id) {
-        setError('ID lowongan tidak valid.');
-        setLoading(false);
-        return;
-      }
+  const job = jobResponse?.data?.data || jobResponse?.data;
 
-      setLoading(true);
-      setError(null);
-      try {
-        const res = await scrapedJobsAPI.getJob(Number(id));
-        setJob(res.data.data ? res.data.data : res.data);
-      } catch (err) {
-        setError('Gagal memuat detail lowongan.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchJob();
-  }, [id]);
-
-  useEffect(() => {
-    setAppliedJobs(applied);
-  }, [applied]);
-
-  if (loading) return <div className="py-16 flex justify-center"><Loading text="Memuat detail lowongan..." /></div>;
-  if (error) return <div className="text-red-500 py-16 text-center">{error}</div>;
+  if (isLoading) return <div className="py-16 flex justify-center"><Loading text="Memuat detail lowongan..." /></div>;
+  if (error) return <div className="text-red-500 py-16 text-center">Gagal memuat detail lowongan.</div>;
   if (!job) return null;
 
   return (

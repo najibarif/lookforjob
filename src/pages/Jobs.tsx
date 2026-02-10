@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useQuery } from 'react-query';
 import JobFilter from '../components/jobs/JobFilter';
 import { scrapedJobsAPI } from '../services/api.ts';
 import Loading from '../components/common/Loading';
@@ -7,31 +8,20 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Jobs = () => {
-  const [jobs, setJobs] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<any>({});
   const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
 
-  const fetchJobs = async (params: any = {}) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await scrapedJobsAPI.getJobs({ ...params, page });
-      const data = res.data.data ? res.data.data : res.data;
-      setJobs(data);
-      setTotalPages(res.data.last_page || 1);
-    } catch (err) {
-      setError('Gagal memuat data lowongan');
-    } finally {
-      setLoading(false);
+  const { data: jobsResponse, isLoading, error } = useQuery(
+    ['jobs', filters, page],
+    () => scrapedJobsAPI.getJobs({ ...filters, page }),
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
-  };
+  );
 
-  useEffect(() => {
-    fetchJobs(filters);
-  }, [filters, page]);
+  const jobs = jobsResponse?.data?.data || jobsResponse?.data || [];
+  const totalPages = jobsResponse?.data?.last_page || 1;
 
   const handleFilter = (params: any) => {
     setPage(1);
@@ -56,12 +46,12 @@ const Jobs = () => {
         <JobFilter onFilter={handleFilter} />
       </div>
       <div>
-        {loading ? (
+        {isLoading ? (
           <div className="py-16 flex justify-center"><Loading text="Memuat Lowongan..." /></div>
         ) : error ? (
           <div className="flex flex-col items-center justify-center py-16 text-red-500">
             <span className="text-4xl mb-2">⚠️</span>
-            {error}
+            Gagal memuat data lowongan
           </div>
         ) : jobs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-gray-500">
@@ -82,7 +72,7 @@ const Jobs = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
-                {jobs.map((job) => (
+                {jobs.map((job: any) => (
                   <tr key={job.id} className="hover:bg-navy-50 dark:hover:bg-gray-700 transition">
                     <td className="px-6 py-4 font-medium text-navy-900">
                       <Link to={`/jobs/${job.id}`} className="hover:underline text-primary">
