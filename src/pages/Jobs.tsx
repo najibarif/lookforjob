@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import JobFilter from '../components/jobs/JobFilter';
-import { scrapedJobsAPI } from '../services/api';
+import { scrapedJobsAPI } from '../services/api.ts';
 import Loading from '../components/common/Loading';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { scrapedJobsAPI } from '../services/api';
+import { scrapedJobsAPI } from '../services/api.ts';
 import Loading from '../components/common/Loading';
 import { Briefcase, MapPin, CreditCard, Calendar, ClipboardList } from 'lucide-react';
 
@@ -23,10 +23,16 @@ const JobDetail = () => {
 
   useEffect(() => {
     const fetchJob = async () => {
+      if (!id) {
+        setError('ID lowongan tidak valid.');
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
       setError(null);
       try {
-        const res = await scrapedJobsAPI.getJob(id);
+        const res = await scrapedJobsAPI.getJob(Number(id));
         setJob(res.data.data ? res.data.data : res.data);
       } catch (err) {
         setError('Gagal memuat detail lowongan.');
@@ -40,16 +46,6 @@ const JobDetail = () => {
   useEffect(() => {
     setAppliedJobs(applied);
   }, [applied]);
-
-  const handleApply = () => {
-    if (!applied.includes(Number(id))) {
-      setApplied([...applied, Number(id)]);
-      // Simpan data job ke localStorage untuk Applications
-      const jobData = JSON.parse(localStorage.getItem('jobData') || '{}');
-      jobData[id] = job;
-      localStorage.setItem('jobData', JSON.stringify(jobData));
-    }
-  };
 
   if (loading) return <div className="py-16 flex justify-center"><Loading text="Memuat detail lowongan..." /></div>;
   if (error) return <div className="text-red-500 py-16 text-center">{error}</div>;
@@ -87,7 +83,7 @@ const JobDetail = () => {
             <h2 className="font-bold text-lg mb-2">Syarat & Kualifikasi</h2>
             <ul className="list-disc ml-6 text-gray-700 dark:text-gray-100">
               {Array.isArray(job.requirements)
-                ? job.requirements.map((req, idx) => <li key={idx}>{req}</li>)
+                ? job.requirements.map((req: string, idx: number) => <li key={idx}>{req}</li>)
                 : <li>{job.requirements}</li>}
             </ul>
           </div>

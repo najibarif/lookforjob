@@ -8,7 +8,7 @@ import {
   experienceAPI,
   educationAPI,
   skillsAPI,
-} from "../services/api";
+} from "../services/api.ts";
 
 import Button from "../components/common/Button";
 import Card from "../components/common/Card";

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
-import { cvAPI } from '../services/api';
+import { cvAPI } from '../services/api.ts';
 import Loading from '../components/common/Loading';
 import toast from 'react-hot-toast';
 import CVGenerator from '../components/ai/CVGenerator';

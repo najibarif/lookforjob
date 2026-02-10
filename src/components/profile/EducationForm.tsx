@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import Input from '../common/Input';
 import Button from '../common/Button';
-import { educationAPI } from '../../services/api';
+import { educationAPI } from '../../services/api.ts';
 import { EDUCATION_LEVELS } from '../../utils/constants';
 
 interface Education {

@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { FileUp, X } from 'lucide-react';
 import Input from '../common/Input';
 import Button from '../common/Button';
-import { skillsAPI } from '../../services/api';
+import { skillsAPI } from '../../services/api.ts';
 import { SKILL_LEVELS } from '../../utils/constants';
 
 interface Skill {
