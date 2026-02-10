@@ -1,6 +1,6 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { motion } from "framer-motion";
-import { QueryClient, useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 import { Plus, Briefcase, GraduationCap, LucideCode } from "lucide-react";
 import {
@@ -19,7 +19,7 @@ import PhotoUpload from "../components/profile/PhotoUpload";
 import ExperienceForm from "../components/profile/ExperienceForm";
 import EducationForm from "../components/profile/EducationForm";
 import SkillForm from "../components/profile/SkillForm";
-import { formatDate, timeAgo } from "../utils/helpers";
+import { formatDate } from "../utils/helpers.ts";
 import Input from "../components/common/Input";
 
 interface UserType {
@@ -36,8 +36,8 @@ interface ExperienceType {
   institusi: string;
   lokasi: string;
   tanggal_mulai: string;
-  tanggal_akhir?: string;
-  deskripsi?: string;
+  tanggal_akhir: string | null;
+  deskripsi: string;
 }
 
 interface EducationType {
@@ -47,9 +47,9 @@ interface EducationType {
   jurusan: string;
   lokasi: string;
   tanggal_mulai: string;
-  tanggal_akhir?: string;
-  ipk?: string;
-  deskripsi?: string;
+  tanggal_akhir: string | null;
+  ipk: number | null;
+  deskripsi: string;
 }
 
 interface SkillType {
@@ -273,11 +273,9 @@ const Profile: React.FC = () => {
         </h1>
       </div>
 
-      {/* Profile Card */}
       <section className='mb-10'>
         <ProfileCard
           user={userWithFotoUrl}
-          isLoading={profileLoading}
           onEdit={() => setIsEditModalOpen(true)}
         />
       </section>
@@ -298,7 +296,7 @@ const Profile: React.FC = () => {
               </h2>
 
               <Button
-                variant='success'
+                variant='primary'
                 className='px-3 py-2 flex items-center'
                 onClick={() => openExperienceModal()}
               >
@@ -386,7 +384,7 @@ const Profile: React.FC = () => {
               </h2>
 
               <Button
-                variant='success'
+                variant='primary'
                 className='px-3 py-2 flex items-center'
                 onClick={() => openEducationModal()}
               >
@@ -482,7 +480,7 @@ const Profile: React.FC = () => {
               </h2>
 
               <Button
-                variant='success'
+                variant='primary'
                 className='px-3 py-2 flex items-center'
                 onClick={() => openSkillModal()}
               >

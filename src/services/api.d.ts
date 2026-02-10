@@ -45,4 +45,9 @@ export declare const skillsAPI: {
 export declare const jobsAPI: {
   getJobs(params?: any): Promise<AxiosResponse<any>>;
   getJob(id: any): Promise<AxiosResponse<any>>;
+};
+
+export declare const scrapedJobsAPI: {
+  getJobs(params?: any): Promise<AxiosResponse<any>>;
+  getJob(id: any): Promise<AxiosResponse<any>>;
 }; 

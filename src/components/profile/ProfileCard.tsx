@@ -1,11 +1,9 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { User, MapPin, Mail, Phone, Calendar } from 'lucide-react';
+import { User, MapPin, Mail, Calendar } from 'lucide-react';
 import Card from '../common/Card';
 import Button from '../common/Button';
-import { formatDate } from '../../utils/helpers';
+import { formatDate } from '../../utils/helpers.ts';
 
 const ProfileImage = styled(motion.div)`
   width: 120px;
@@ -51,9 +49,26 @@ const InfoItem = styled.div`
   }
 `;
 
-const ProfileCard = ({
+interface ProfileCardProps {
+  user?: {
+    id?: number;
+    nama?: string;
+    email?: string;
+    role?: string;
+    alamat?: string;
+    tanggal_lahir?: string;
+    jenis_kelamin?: string;
+    foto?: string;
+    foto_url?: string;
+    created_at?: string;
+    updated_at?: string;
+  };
+  onEdit?: () => void;
+  className?: string;
+}
+
+const ProfileCard: React.FC<ProfileCardProps> = ({
   user,
-  isLoading = false,
   onEdit,
   className = ''
 }) => {
@@ -126,25 +141,6 @@ const ProfileCard = ({
       </ProfileInfo>
     </Card>
   );
-};
-
-ProfileCard.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    nama: PropTypes.string,
-    email: PropTypes.string,
-    role: PropTypes.string,
-    alamat: PropTypes.string,
-    tanggal_lahir: PropTypes.string,
-    jenis_kelamin: PropTypes.string,
-    foto: PropTypes.string,
-    foto_url: PropTypes.string,
-    created_at: PropTypes.string,
-    updated_at: PropTypes.string
-  }),
-  isLoading: PropTypes.bool,
-  onEdit: PropTypes.func,
-  className: PropTypes.string,
 };
 
 export default ProfileCard;
