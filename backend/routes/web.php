@@ -8,8 +8,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Temporary secret route to trigger scraping in production with nice UI
+// Step 1: Show the interactive "Searching" UI
 Route::get('/scrape-now', function () {
+    return view('scraping_progress');
+});
+
+// Step 2: The internal endpoint that actually runs the command
+Route::get('/api/internal-scrape', function () {
     Artisan::call('scrape:comprehensive --limit=50');
     $output = Artisan::output();
     return view('scrape_status', ['output' => $output]);
