@@ -8,8 +8,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Temporary secret route to trigger scraping in production
+// Temporary secret route to trigger scraping in production with nice UI
 Route::get('/scrape-now', function () {
-    Artisan::call('scrape:comprehensive --limit=20');
-    return "Scraping completed! Check /api/jobs again.";
+    Artisan::call('scrape:comprehensive --limit=50');
+    $output = Artisan::output();
+    return view('scrape_status', ['output' => $output]);
 });
