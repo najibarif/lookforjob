@@ -3,8 +3,7 @@ import toast from 'react-hot-toast';
 
 // Create an axios instance
 const api: AxiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api',
-    // baseURL: 'https://api-lfj.naufalsidiq.xyz/api',
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
