@@ -66,7 +66,6 @@ const LoginForm = () => {
                 <Input
                     label='Email'
                     type='email'
-                    name='email'
                     placeholder='your@email.com'
                     error={errors.email?.message}
                     required
@@ -81,7 +80,6 @@ const LoginForm = () => {
                         <input
                             type={showPassword ? "text" : "password"}
                             id='password'
-                            name='password'
                             placeholder='••••••••'
                             className={`w-full px-4 py-3 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] border-2 ${errors.password ? "border-primary" : "border-black"
                                 } focus:ring-2 focus:ring-accent focus:shadow-none disabled:opacity-70 disabled:cursor-not-allowed`}

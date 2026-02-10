@@ -114,7 +114,9 @@ const PhotoUpload = ({
     // Create preview
     const reader = new FileReader();
     reader.onload = (e) => {
-      setPreview(e.target.result as string);
+      if (e.target?.result) {
+        setPreview(e.target.result as string);
+      }
     };
     reader.readAsDataURL(file);
 

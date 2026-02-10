@@ -55,7 +55,6 @@ interface NavLinkItem {
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState<any>(null);
     const location = useLocation();
     const navigate = useNavigate();
     const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -71,7 +70,7 @@ const Navbar = () => {
             setIsLoggedIn(loggedIn);
 
             if (loggedIn) {
-                setUser(authService.getUser());
+                // authService.getUser() could be used here if needed
             }
         };
 
@@ -94,7 +93,6 @@ const Navbar = () => {
     const handleLogout = async () => {
         await authService.logout();
         setIsLoggedIn(false);
-        setUser(null);
         navigate("/login");
     };
 

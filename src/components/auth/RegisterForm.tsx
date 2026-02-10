@@ -112,7 +112,6 @@ const RegisterForm = () => {
                 <Input
                     label='Nama Lengkap'
                     type='text'
-                    name='nama'
                     placeholder='John Doe'
                     error={errors.nama?.message}
                     required
@@ -122,7 +121,6 @@ const RegisterForm = () => {
                 <Input
                     label='Email'
                     type='email'
-                    name='email'
                     placeholder='your@email.com'
                     error={errors.email?.message}
                     required
@@ -137,7 +135,6 @@ const RegisterForm = () => {
                         <input
                             type={showPassword ? "text" : "password"}
                             id='password'
-                            name='password'
                             placeholder='••••••••'
                             className={`w-full px-4 py-3 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] border-2 ${errors.password ? "border-primary" : "border-black"
                                 } focus:ring-2 focus:ring-accent focus:shadow-none disabled:opacity-70 disabled:cursor-not-allowed`}
@@ -174,7 +171,6 @@ const RegisterForm = () => {
                         <input
                             type={showConfirmPassword ? "text" : "password"}
                             id='password_confirmation'
-                            name='password_confirmation'
                             placeholder='••••••••'
                             className={`w-full px-4 py-3 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] border-2 ${errors.password_confirmation ? "border-primary" : "border-black"
                                 } focus:ring-2 focus:ring-accent focus:shadow-none disabled:opacity-70 disabled:cursor-not-allowed`}
@@ -205,7 +201,6 @@ const RegisterForm = () => {
                 <Input
                     label='Alamat'
                     type='text'
-                    name='alamat'
                     placeholder='Alamat (opsional)'
                     error={errors.alamat?.message}
                     {...register("alamat")}
@@ -214,7 +209,6 @@ const RegisterForm = () => {
                 <Input
                     label='Tanggal Lahir'
                     type='date'
-                    name='tanggal_lahir'
                     error={errors.tanggal_lahir?.message}
                     {...register("tanggal_lahir")}
                 />
@@ -222,7 +216,6 @@ const RegisterForm = () => {
                 <Input
                     label='Jenis Kelamin'
                     as='select'
-                    name='jenis_kelamin'
                     error={errors.jenis_kelamin?.message}
                     {...register("jenis_kelamin")}
                 >
