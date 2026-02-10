@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef, ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { Upload, X, Camera } from 'lucide-react';
 import Button from '../common/Button';
 
@@ -79,41 +78,52 @@ const DeleteButton = styled(motion.button)`
   z-index: 10;
 `;
 
-const PhotoUpload = ({ 
+interface PhotoUploadProps {
+  initialPhoto?: string | null;
+  onPhotoChange: (file: File | null) => void;
+  className?: string;
+}
+
+const PhotoUpload = ({
   initialPhoto = null,
   onPhotoChange,
   className = ''
-}) => {
-  const [preview, setPreview] = useState(initialPhoto);
-  const fileInputRef = useRef(null);
-  
-  const handleFileChange = (e) => {
+}: PhotoUploadProps) => {
+  const [preview, setPreview] = useState<string | null>(initialPhoto);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
     const file = e.target.files[0];
     if (!file) return;
-    
+
     // Check file type
     if (!file.type.match('image.*')) {
       alert('Please select an image file');
       return;
     }
-    
+
     // Check file size (max 2MB)
     if (file.size > 2 * 1024 * 1024) {
       alert('File size should not exceed 2MB');
       return;
     }
-    
+
     // Create preview
     const reader = new FileReader();
     reader.onload = (e) => {
-      setPreview(e.target.result);
+      setPreview(e.target.result as string);
     };
     reader.readAsDataURL(file);
-    
+
     // Pass file to parent component
-    onPhotoChange(file);
+    if (file) {
+      onPhotoChange(file);
+    }
   };
-  
+
   const handleRemove = () => {
     setPreview(null);
     if (fileInputRef.current) {
@@ -121,25 +131,25 @@ const PhotoUpload = ({
     }
     onPhotoChange(null);
   };
-  
+
   const triggerFileInput = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
-  
+
   return (
     <UploadContainer className={className}>
       {preview ? (
-        <PreviewContainer 
+        <PreviewContainer
           className="shadow-neo-md"
           whileHover={{ scale: 1.02 }}
         >
           <img src={preview} alt="Profile Preview" />
-          
+
           <div className="overlay">
-            <Button 
-              variant="secondary" 
+            <Button
+              variant="secondary"
               onClick={triggerFileInput}
               className="px-3 py-2"
             >
@@ -147,7 +157,7 @@ const PhotoUpload = ({
               Change
             </Button>
           </div>
-          
+
           <DeleteButton
             onClick={handleRemove}
             whileHover={{ scale: 1.1 }}
@@ -155,7 +165,7 @@ const PhotoUpload = ({
           >
             <X size={18} />
           </DeleteButton>
-          
+
           <input
             ref={fileInputRef}
             type="file"
@@ -173,7 +183,7 @@ const PhotoUpload = ({
           <Upload size={32} className="mb-2 text-gray-500" />
           <span className="text-sm font-medium text-gray-600">Upload Photo</span>
           <span className="text-xs text-gray-400 mt-1">JPG, PNG (Max 2MB)</span>
-          
+
           <input
             ref={fileInputRef}
             type="file"
@@ -184,12 +194,6 @@ const PhotoUpload = ({
       )}
     </UploadContainer>
   );
-};
-
-PhotoUpload.propTypes = {
-  initialPhoto: PropTypes.string,
-  onPhotoChange: PropTypes.func.isRequired,
-  className: PropTypes.string,
 };
 
 export default PhotoUpload;

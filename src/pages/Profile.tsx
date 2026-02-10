@@ -185,7 +185,7 @@ const Profile: React.FC = () => {
     setPasswordData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePhotoChange = (file: File) => {
+  const handlePhotoChange = (file: File | null) => {
     setPhotoFile(file);
   };
 
