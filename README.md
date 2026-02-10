@@ -66,7 +66,7 @@
 - 🎯 **Laravel 11** - PHP Framework
 - 🗄️ **MySQL/PostgreSQL** - Database
 - 🔐 **Laravel Sanctum** - API Authentication
-- 🤖 **Gemini AI Integration** - AI-powered features
+- 🤖 **GROQ AI Integration** - AI-powered features
 - 🕷️ **Web Scraping** - Job aggregation from multiple sources
 
 ---
@@ -131,15 +131,11 @@ Backend akan berjalan di `http://localhost:8000`
 Edit file `backend/.env` dan tambahkan:
 
 ```env
-# Gemini AI Configuration
-GEMINI_API_KEY=your_gemini_api_key_here
-
-# GROQ AI Configuration (optional)
+# GROQ AI Configuration
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
 > 💡 **Cara mendapatkan API Key:**
-> - Gemini AI: [https://makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey)
 > - GROQ AI: [https://console.groq.com/keys](https://console.groq.com/keys)
 
 ---
@@ -293,23 +289,12 @@ Project ini dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE
 
 ---
 
-## 👨‍💻 Author
-
-**Najib Arif**
-
-- 🌐 GitHub: [@najibarif](https://github.com/najibarif)
-- 📧 Email: najibarif@example.com
-- 💼 LinkedIn: [Najib Arif](https://linkedin.com/in/najibarif)
-
----
-
 ## 🙏 Acknowledgments
 
 - [React](https://reactjs.org/) - UI Library
 - [Laravel](https://laravel.com/) - Backend Framework
 - [Tailwind CSS](https://tailwindcss.com/) - CSS Framework
-- [Google Gemini AI](https://deepmind.google/technologies/gemini/) - AI Integration
-- [GROQ AI](https://groq.com/) - Alternative AI Provider
+- [GROQ AI](https://groq.com/) - AI Integration
 - [Lucide Icons](https://lucide.dev/) - Beautiful Icons
 
 ---

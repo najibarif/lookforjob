@@ -29,7 +29,7 @@
 
 ### Core Features
 - 🔐 **RESTful API** - Clean, versioned API architecture
-- 🤖 **AI Integration** - Gemini AI for CV generation and career advice
+- 🤖 **AI Integration** - GROQ AI for CV generation and career advice
 - 🕷️ **Job Scraping** - Multi-source real job scraping (7+ sources)
 - 🔑 **Authentication** - Laravel Sanctum for secure API tokens
 - 💾 **Database** - MySQL/PostgreSQL with comprehensive migrations
@@ -83,15 +83,11 @@ php artisan serve
 Add these to your `.env` file:
 
 ```env
-# Gemini AI (Required for CV generation)
-GEMINI_API_KEY=your_gemini_api_key_here
-
-# GROQ AI (Optional alternative)
+# GROQ AI (Required for CV generation)
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-**Get API Keys:**
-- 🔹 Gemini AI: https://makersuite.google.com/app/apikey
+**Get API Key:**
 - 🔹 GROQ AI: https://console.groq.com/keys
 
 ---
@@ -680,7 +676,6 @@ curl http://localhost:8000/api/profile \
 Critical variables:
 - `APP_KEY` - Application encryption key
 - `DB_PASSWORD` - Database password
-- `GEMINI_API_KEY` - AI API key
 - `GROQ_API_KEY` - AI API key
 
 ---
@@ -730,8 +725,7 @@ This project is licensed under the MIT License.
 ## 🙏 Acknowledgments
 
 - **Laravel** - The PHP framework
-- **Gemini AI** - AI-powered CV generation
-- **GROQ** - Alternative AI service
+- **GROQ AI** - AI-powered CV generation
 - Job boards for providing public data
 
 ---
