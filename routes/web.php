@@ -18,33 +18,32 @@ use App\Services\LinkedInService;
 |
 */
 
-// Route halaman utama
+// Halaman utama
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
-// Route dashboard (hanya untuk user yang sudah login dan terverifikasi)
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Halaman login
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
-// Route halaman daftar pekerjaan (frontend)
-Route::get('/jobs', [JobFrontendController::class, 'index']);
+// (Optional) Halaman register jika ada
+// Route::get('/register', function () {
+//     return view('auth.register');
+// })->name('register');
 
-// Route API - Ambil data pekerjaan (jika ada, tetap gunakan /api/jobs untuk API)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Halaman daftar pekerjaan (frontend)
+Route::get('/jobs', [JobFrontendController::class, 'index'])->name('jobs');
 
-// Route API - Ambil profil LinkedIn
+// Halaman CV builder
+Route::get('/cv', function () {
+    return view('cv');
+})->name('cv');
+
+// ----------------- API ROUTES -------------------
+
+// API: Ambil profil LinkedIn
 Route::get('/api/linkedin-profile', function (Request $request, LinkedInService $linkedInService) {
     $request->validate([
         'username' => 'required|string',
@@ -68,7 +67,7 @@ Route::get('/api/linkedin-profile', function (Request $request, LinkedInService 
     }
 });
 
-// Route API - Ambil pekerjaan dari LinkedIn
+// API: Ambil pekerjaan dari LinkedIn
 Route::get('/api/linkedin-jobs', function (Request $request, LinkedInService $linkedInService) {
     $request->validate([
         'keyword' => 'required|string',
@@ -95,7 +94,7 @@ Route::get('/api/linkedin-jobs', function (Request $request, LinkedInService $li
     }
 });
 
-// Route API - Ambil pekerjaan dari API umum
+// API: Ambil pekerjaan dari API umum
 Route::get('/api/jobs', function (Request $request, LinkedInService $linkedInService) {
     $request->validate([
         'keyword' => 'required|string',
@@ -126,17 +125,5 @@ Route::get('/api/jobs', function (Request $request, LinkedInService $linkedInSer
     }
 });
 
-// Route halaman CV
-Route::get('/cv', function () {
-    return view('cv');
-});
-
-// Route API - Generate CV dari input user
+// API: Generate CV dari input user
 Route::post('/api/generate-cv', [CVController::class, 'create']);
-
-// Route API - Simpan hasil edit CV
-Route::post('/api/save-cv', [CVController::class, 'save']);
-
-// Route preview dan save CV
-Route::get('/cv/preview', [CVController::class, 'preview'])->name('cv.preview');
-Route::post('/cv/save', [CVController::class, 'save'])->name('cv.save');
