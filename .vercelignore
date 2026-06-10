@@ -1,0 +1,7 @@
+/tests
+/.git
+/storage
+/node_modules
+/.env
+/.env.example
+/README.md
