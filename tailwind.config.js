@@ -16,6 +16,19 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            boxShadow: {
+                'brutal': '4px 4px 0px 0px rgba(0,0,0,1)',
+                'brutal-lg': '8px 8px 0px 0px rgba(0,0,0,1)',
+            },
+            colors: {
+                brutal: {
+                    yellow: '#F4E869',
+                    pink: '#FF74B1',
+                    blue: '#4D96FF',
+                    green: '#54BAB9',
+                    bg: '#FFF8E1'
+                }
+            }
         },
     },
 
