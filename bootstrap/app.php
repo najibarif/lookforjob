@@ -13,7 +13,9 @@ return Application::configure(
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // Tambahkan middleware global di sini jika diperlukan
+        $middleware->web(append: [
+            \App\Http\Middleware\LanguageMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         // Tambahkan konfigurasi penanganan exception di sini jika diperlukan

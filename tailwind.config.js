@@ -4,6 +4,7 @@ import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
@@ -18,9 +19,9 @@ export default {
             },
             colors: {
                 linear: {
-                    primary: '#5e6ad2',
-                    'primary-hover': '#828fff',
-                    'primary-focus': '#5e69d1',
+                    primary: '#10b981',
+                    'primary-hover': '#34d399',
+                    'primary-focus': '#059669',
                     ink: '#f7f8f8',
                     'ink-muted': '#d0d6e0',
                     'ink-subtle': '#8a8f98',
@@ -33,6 +34,25 @@ export default {
                     hairline: '#23252a',
                     'hairline-strong': '#34343a',
                     'hairline-tertiary': '#3e3e44',
+                }
+            },
+            animation: {
+                'fade-up': 'fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'float': 'float 6s ease-in-out infinite',
+                'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+                fadeUp: {
+                    '0%': { opacity: 0, transform: 'translateY(20px)' },
+                    '100%': { opacity: 1, transform: 'translateY(0)' },
+                },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-10px)' },
+                },
+                pulseGlow: {
+                    '0%, 100%': { opacity: 1 },
+                    '50%': { opacity: .5 },
                 }
             }
         },

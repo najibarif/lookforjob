@@ -5,6 +5,28 @@
 
 @section('content')
 <style>
+/* ===================== CSS VARIABLES ===================== */
+:root {
+    --linear-primary: #10b981;
+    --linear-ink: #0f172a;
+    --linear-ink-subtle: #64748b;
+    --linear-canvas: #f8fafc;
+    --linear-surface-1: #ffffff;
+    --linear-surface-2: #f1f5f9;
+    --linear-surface-3: #e2e8f0;
+    --linear-hairline: #e2e8f0;
+}
+.dark {
+    --linear-primary: #10b981;
+    --linear-ink: #f8fafc;
+    --linear-ink-subtle: #94a3b8;
+    --linear-canvas: #020617;
+    --linear-surface-1: #0f172a;
+    --linear-surface-2: #1e293b;
+    --linear-surface-3: #334155;
+    --linear-hairline: #334155;
+}
+
 /* ===================== PAGE LAYOUT ===================== */
 #cv-page { display: flex; min-height: calc(100vh - 64px); }
 
@@ -50,7 +72,7 @@
 
 /* ---- Preview ---- */
 #cv-preview-scroll { flex: 1; overflow-y: auto; padding: 24px; display: flex; justify-content: center; }
-#cv-preview-paper { width: 100%; max-width: 800px; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.05); border border-linear-hairline; border-radius: 4px; min-height: 700px; }
+#cv-preview-paper { width: 100%; max-width: 800px; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.05); border border-slate-200 dark:border-slate-700; border-radius: 4px; min-height: 700px; }
 /* Classic & Minimal: add padding via the element itself (they have their own padding in tpl-* CSS) */
 /* Modern & Creative: full-bleed header, so no extra wrapper padding */
 #cv-preview-content { width: 100%; box-sizing: border-box; word-break: break-word; overflow-wrap: break-word; }
@@ -59,7 +81,7 @@
 #cv-wysiwyg-editor {
     width: 100%; max-width: 800px;
     background: #fff;
-    box-shadow: 0 4px 24px rgba(0,0,0,.05); border border-linear-hairline;
+    box-shadow: 0 4px 24px rgba(0,0,0,.05); border border-slate-200 dark:border-slate-700;
     border-radius: 4px; min-height: 700px;
     outline: none;
     padding: 0;
@@ -115,10 +137,10 @@
 .tpl-minimal ul li::before { content: "— "; color: #d1d5db; }
 
 .tpl-creative { font-family: 'Inter', sans-serif; color: #1e293b; background: #fff; padding: 0; }
-.tpl-creative-header-wrap { background: linear-gradient(135deg, #5e6ad2, #4754c0); padding: 48px 60px 36px; color: #fff; }
+.tpl-creative-header-wrap { background: linear-gradient(135deg, #10b981, #059669); padding: 48px 60px 36px; color: #fff; }
 .tpl-creative-body-wrap { padding: 36px 60px 60px; }
 .tpl-creative h1 { font-size: 2.1em; font-weight: 800; color: #fff; margin-bottom: 4px; }
-.tpl-creative h2 { font-size: .9em; font-weight: 700; color: #5e6ad2; margin-top: 26px; margin-bottom: 8px; padding-left: 10px; border-left: 4px solid #5e6ad2; }
+.tpl-creative h2 { font-size: .9em; font-weight: 700; color: #10b981; margin-top: 26px; margin-bottom: 8px; padding-left: 10px; border-left: 4px solid #10b981; }
 .tpl-creative p, .tpl-creative li { font-size: .9em; line-height: 1.75; }
 .tpl-creative ul { padding-left: 20px; }
 
@@ -142,16 +164,16 @@
     <div id="cv-left-panel">
 
         {{-- Header --}}
-        <div class="px-5 py-4 border-b border-linear-hairline flex-shrink-0">
+        <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-700 flex-shrink-0">
             <div class="flex items-center gap-4">
-                <div class="w-10 h-10 rounded-xl bg-linear-surface-2 border border-linear-hairline flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5 text-linear-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <div class="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-sm font-extrabold text-linear-ink leading-tight">Generator CV AI</h1>
-                    <p class="text-[11px] text-linear-ink-subtle">Isi data · AI susun · Download PDF</p>
+                    <h1 class="text-sm font-extrabold text-slate-900 dark:text-white leading-tight">Generator CV AI</h1>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400">Isi data · AI susun · Download PDF</p>
                 </div>
             </div>
         </div>
@@ -163,13 +185,13 @@
             <div class="form-section">
                 <button type="button" class="form-section-header w-full flex items-center justify-between py-2.5 group" data-target="sec-personal">
                     <div class="flex items-center gap-4">
-                        <div class="w-7 h-7 rounded-lg bg-linear-primary/10 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-4 h-4 text-linear-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                        <div class="w-7 h-7 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                         </div>
-                        <span class="text-sm font-bold text-linear-ink">Data Diri</span>
-                        <span class="text-[10px] text-linear-primary bg-linear-primary/10 px-1.5 py-0.5 rounded font-semibold ml-1">Wajib</span>
+                        <span class="text-sm font-bold text-slate-900 dark:text-white">Data Diri</span>
+                        <span class="text-[10px] text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded font-semibold ml-1">Wajib</span>
                     </div>
-                    <svg class="w-4 h-4 text-linear-ink-subtle transition-transform rotate-180" id="arrow-sec-personal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    <svg class="w-4 h-4 text-slate-500 dark:text-slate-400 transition-transform rotate-180" id="arrow-sec-personal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div class="form-section-body space-y-3 pb-3" id="sec-personal" style="max-height:400px;">
                     <div class="grid grid-cols-1 gap-3">
@@ -195,7 +217,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-linear-hairline my-1"></div>
+            <div class="border-t border-slate-200 dark:border-slate-700 my-1"></div>
 
             {{-- Profil Singkat --}}
             <div class="form-section">
@@ -204,16 +226,16 @@
                         <div class="w-7 h-7 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
                             <svg class="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
                         </div>
-                        <span class="text-sm font-bold text-linear-ink">Profil Singkat</span>
+                        <span class="text-sm font-bold text-slate-900 dark:text-white">Profil Singkat</span>
                     </div>
-                    <svg class="w-4 h-4 text-linear-ink-subtle transition-transform" id="arrow-sec-summary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    <svg class="w-4 h-4 text-slate-500 dark:text-slate-400 transition-transform" id="arrow-sec-summary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div class="form-section-body collapsed pb-3" id="sec-summary" style="max-height:0;">
                     <textarea id="summary" class="cv-input" rows="3" placeholder="Singkat tentang passion, kepribadian, atau tujuan karir Anda..."></textarea>
                 </div>
             </div>
 
-            <div class="border-t border-linear-hairline my-1"></div>
+            <div class="border-t border-slate-200 dark:border-slate-700 my-1"></div>
 
             {{-- Pendidikan --}}
             <div class="form-section">
@@ -222,16 +244,16 @@
                         <div class="w-7 h-7 rounded-lg bg-violet-500/10 flex items-center justify-center flex-shrink-0">
                             <svg class="w-4 h-4 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
                         </div>
-                        <span class="text-sm font-bold text-linear-ink">Pendidikan</span>
+                        <span class="text-sm font-bold text-slate-900 dark:text-white">Pendidikan</span>
                     </div>
-                    <svg class="w-4 h-4 text-linear-ink-subtle transition-transform" id="arrow-sec-edu" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    <svg class="w-4 h-4 text-slate-500 dark:text-slate-400 transition-transform" id="arrow-sec-edu" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div class="form-section-body collapsed pb-3" id="sec-edu" style="max-height:0;">
                     <textarea id="education" class="cv-input" rows="3" placeholder="Contoh: S1 Sistem Informasi, Univ. Indonesia (2018-2022), IPK 3.8"></textarea>
                 </div>
             </div>
 
-            <div class="border-t border-linear-hairline my-1"></div>
+            <div class="border-t border-slate-200 dark:border-slate-700 my-1"></div>
 
             {{-- Pengalaman --}}
             <div class="form-section">
@@ -240,16 +262,16 @@
                         <div class="w-7 h-7 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0">
                             <svg class="w-4 h-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         </div>
-                        <span class="text-sm font-bold text-linear-ink">Pengalaman Kerja</span>
+                        <span class="text-sm font-bold text-slate-900 dark:text-white">Pengalaman Kerja</span>
                     </div>
-                    <svg class="w-4 h-4 text-linear-ink-subtle transition-transform" id="arrow-sec-exp" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    <svg class="w-4 h-4 text-slate-500 dark:text-slate-400 transition-transform" id="arrow-sec-exp" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div class="form-section-body collapsed pb-3" id="sec-exp" style="max-height:0;">
                     <textarea id="experience" class="cv-input" rows="4" placeholder="Jabatan, Perusahaan (Tahun - Tahun) — Deskripsi singkat tugas dan pencapaian..."></textarea>
                 </div>
             </div>
 
-            <div class="border-t border-linear-hairline my-1"></div>
+            <div class="border-t border-slate-200 dark:border-slate-700 my-1"></div>
 
             {{-- Keahlian --}}
             <div class="form-section">
@@ -258,9 +280,9 @@
                         <div class="w-7 h-7 rounded-lg bg-rose-500/10 flex items-center justify-center flex-shrink-0">
                             <svg class="w-4 h-4 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                         </div>
-                        <span class="text-sm font-bold text-linear-ink">Keahlian</span>
+                        <span class="text-sm font-bold text-slate-900 dark:text-white">Keahlian</span>
                     </div>
-                    <svg class="w-4 h-4 text-linear-ink-subtle transition-transform" id="arrow-sec-skills" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    <svg class="w-4 h-4 text-slate-500 dark:text-slate-400 transition-transform" id="arrow-sec-skills" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div class="form-section-body collapsed pb-3" id="sec-skills" style="max-height:0;">
                     <input type="text" id="skills" class="cv-input" placeholder="HTML, CSS, JavaScript, Komunikasi, Analisis...">
@@ -269,9 +291,9 @@
         </div>
 
         {{-- Footer CTA --}}
-        <div class="px-5 py-4 border-t border-linear-hairline space-y-2 flex-shrink-0">
+        <div class="px-5 py-4 border-t border-slate-200 dark:border-slate-700 space-y-2 flex-shrink-0">
             <button type="button" id="generate-cv-btn"
-                class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-bold text-white bg-linear-primary hover:bg-linear-primary-hover rounded-xl shadow-none transition-all duration-200 active:scale-95">
+                class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-500-hover rounded-xl shadow-none transition-all duration-200 active:scale-95">
                 <svg id="btn-icon-sparkle" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
                 </svg>
@@ -283,17 +305,17 @@
             </button>
             <div class="grid grid-cols-2 gap-2">
                 <button type="button" id="save-cv-btn"
-                    class="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-linear-ink bg-linear-surface-2 hover:bg-linear-surface-3 border border-linear-hairline rounded-xl transition">
+                    class="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl transition">
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
                     Simpan CV
                 </button>
                 <button type="button" id="download-pdf-btn"
-                    class="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-linear-primary bg-linear-primary/10 hover:bg-linear-primary/20 border border-transparent rounded-xl transition">
+                    class="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-emerald-500 bg-emerald-500/10 hover:bg-emerald-500/20 border border-transparent rounded-xl transition">
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Download PDF
                 </button>
             </div>
-            <div id="save-feedback" class="hidden text-center text-xs font-semibold text-linear-primary py-1 rounded-lg bg-linear-primary/10">
+            <div id="save-feedback" class="hidden text-center text-xs font-semibold text-emerald-500 py-1 rounded-lg bg-emerald-500/10">
                 CV berhasil disimpan!
             </div>
         </div>
@@ -313,7 +335,7 @@
 
                     {{-- Classic --}}
                     <div class="tpl-card active" data-template="classic" title="Classic">
-                        <div class="tpl-card-thumb bg-linear-surface-1">
+                        <div class="tpl-card-thumb bg-white dark:bg-slate-900">
                             <div style="padding:6px 6px 0; border-bottom:2px solid #5e6ad2; margin-bottom:3px;">
                                 <div style="height:5px;background:#111827;border-radius:2px;width:70%;margin-bottom:2px;"></div>
                             </div>
@@ -323,7 +345,7 @@
                                 <div style="height:3px;background:#d1d5db;border-radius:2px;margin:2px 0;width:90%;"></div>
                             </div>
                         </div>
-                        <p class="text-center text-[11px] font-semibold text-linear-ink mt-1">Classic</p>
+                        <p class="text-center text-[11px] font-semibold text-slate-900 dark:text-white mt-1">Classic</p>
                     </div>
 
                     {{-- Modern --}}
@@ -340,40 +362,40 @@
                                 <div style="height:2px;background:#d1d5db;border-radius:1px;margin:2px 0;width:85%;"></div>
                             </div>
                         </div>
-                        <p class="text-center text-[11px] font-semibold text-linear-ink mt-1">Modern</p>
+                        <p class="text-center text-[11px] font-semibold text-slate-900 dark:text-white mt-1">Modern</p>
                     </div>
 
                     {{-- Minimal --}}
                     <div class="tpl-card" data-template="minimal" title="Minimal">
-                        <div class="tpl-card-thumb bg-linear-surface-1" style="padding:6px 6px;">
+                        <div class="tpl-card-thumb bg-white dark:bg-slate-900" style="padding:6px 6px;">
                             <div style="height:8px;background:#111;border-radius:1px;width:60%;margin-bottom:6px;"></div>
                             <div style="height:2px;background:#e5e7eb;border-radius:1px;margin:2px 0;width:100%;"></div>
                             <div style="height:2px;background:#e5e7eb;border-radius:1px;margin:2px 0;width:90%;"></div>
                             <div style="height:2px;background:#e5e7eb;border-radius:1px;margin:2px 0;width:80%;"></div>
                         </div>
-                        <p class="text-center text-[11px] font-semibold text-linear-ink mt-1">Minimal</p>
+                        <p class="text-center text-[11px] font-semibold text-slate-900 dark:text-white mt-1">Minimal</p>
                     </div>
 
                     {{-- Creative --}}
                     <div class="tpl-card" data-template="creative" title="Creative">
                         <div class="tpl-card-thumb">
-                            <div style="background:linear-gradient(135deg,#5e6ad2,#4754c0);padding:6px 6px;height:22px;display:flex;align-items:center;">
+                            <div style="background:linear-gradient(135deg,#10b981,#059669);padding:6px 6px;height:22px;display:flex;align-items:center;">
                                 <div style="height:5px;background:rgba(255,255,255,.8);border-radius:1px;width:60%;"></div>
                             </div>
                             <div style="padding:4px 6px;">
-                                <div style="height:3px;background:#5e6ad2;border-radius:1px;width:4px;float:left;margin-right:3px;margin-top:2px;"></div>
+                                <div style="height:3px;background:#10b981;border-radius:1px;width:4px;float:left;margin-right:3px;margin-top:2px;"></div>
                                 <div style="height:2px;background:#d1d5db;border-radius:1px;margin:2px 0 2px 7px;"></div>
                                 <div style="height:2px;background:#d1d5db;border-radius:1px;margin:2px 0;width:85%;clear:both;"></div>
                             </div>
                         </div>
-                        <p class="text-center text-[11px] font-semibold text-linear-ink mt-1">Creative</p>
+                        <p class="text-center text-[11px] font-semibold text-slate-900 dark:text-white mt-1">Creative</p>
                     </div>
 
                 </div>
             </div>
 
             {{-- View Toggle --}}
-            <div class="flex bg-linear-surface-2 border border-linear-hairline rounded-full p-1 flex-shrink-0 gap-0.5">
+            <div class="flex bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full p-1 flex-shrink-0 gap-0.5">
                 <button id="tab-preview" class="tab-pill active flex items-center gap-1.5">
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                     Preview
@@ -391,13 +413,13 @@
             {{-- PREVIEW PAPER --}}
             <div id="cv-preview-paper">
                 <div id="cv-empty-state" @if(Auth::user()->cv_html) style="display:none" @endif>
-                    <div class="w-20 h-20 rounded-2xl bg-linear-surface-1 border border-linear-hairline flex items-center justify-center mb-5 shadow-lg">
-                        <svg class="w-10 h-10 text-linear-ink-subtle" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <div class="w-20 h-20 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center mb-5 shadow-lg">
+                        <svg class="w-10 h-10 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
                     </div>
-                    <p class="text-base font-semibold text-linear-ink mb-1">CV Anda akan tampil di sini</p>
-                    <p class="text-sm text-linear-ink-subtle">Isi data di panel kiri lalu klik Generate</p>
+                    <p class="text-base font-semibold text-slate-900 dark:text-white mb-1">CV Anda akan tampil di sini</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Isi data di panel kiri lalu klik Generate</p>
                 </div>
 
                 <div id="cv-loading" class="hidden p-10 space-y-3">

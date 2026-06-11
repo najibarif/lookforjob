@@ -20,8 +20,27 @@ use App\Services\LinkedInService;
 
 // Halaman utama
 Route::get('/', function () {
-    return view('home');
+    $featuredJobs = \App\Models\JobListing::inRandomOrder()->limit(3)->get();
+    return view('home', compact('featuredJobs'));
 })->name('home');
+
+// Language Switcher
+Route::get('/lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'id'])) {
+        session()->put('locale', $locale);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
+// Halaman Perusahaan
+Route::get('/companies', function () {
+    return view('companies');
+})->name('companies');
+
+// Halaman About
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
 
 // Halaman login
 Route::get('/login', function () {
@@ -50,6 +69,27 @@ Route::get('/jobs/detail', function (Request $request) {
 
 // ----------------- API ROUTES -------------------
 
+// API: Cron endpoint untuk mengambil pekerjaan setiap hari
+Route::get('/api/cron/fetch-jobs', function (Request $request, \App\Services\JobAggregatorService $jobAggregatorService) {
+    // Keamanan: Cek CRON_SECRET dari Vercel
+    $expectedSecret = env('CRON_SECRET');
+    $authHeader = $request->header('Authorization');
+
+    if ($expectedSecret && $authHeader !== "Bearer {$expectedSecret}") {
+        return response()->json(['error' => 'Unauthorized'], 401);
+    }
+
+    try {
+        $jobs = $jobAggregatorService->fetchAndStore('developer', '', true);
+        return response()->json([
+            'success' => true,
+            'message' => 'Successfully fetched and stored ' . count($jobs) . ' job(s).'
+        ]);
+    } catch (\Exception $e) {
+        Log::error('Error in cron job:', ['error' => $e->getMessage()]);
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+});
 
 
 // API: Ambil pekerjaan dari LinkedIn

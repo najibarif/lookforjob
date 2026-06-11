@@ -11,7 +11,7 @@ class LinkedInService
         $url = 'https://jobs-search-api.p.rapidapi.com/getjobs';
         Log::info('Fetching jobs from URL:', ['url' => $url]);
 
-        $response = Http::withHeaders([
+        $response = Http::timeout(10)->withHeaders([
             'X-RapidAPI-Key' => env('RAPIDAPI_KEY'),
             'X-RapidAPI-Host' => env('RAPIDAPI_HOST'),
             'Content-Type' => 'application/json',

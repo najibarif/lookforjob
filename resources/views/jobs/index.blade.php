@@ -1,28 +1,28 @@
 @extends('layouts.main')
 
-@section('title', 'Cari Lowongan Kerja - Look For Job')
+@section('title', __('Search Jobs') . ' - Look For Job')
 
 @section('content')
-<div class="bg-linear-canvas min-h-screen py-10">
+<div class="bg-slate-50 dark:bg-slate-950 min-h-screen py-10 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Page Header -->
-        <div class="bg-linear-surface-1 rounded-3xl p-8 mb-8 border border-linear-hairline relative overflow-hidden">
-            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-linear-primary/10 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 mb-8 border border-slate-200 dark:border-slate-800 relative overflow-hidden transition-colors">
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
             <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 class="text-3xl font-extrabold text-linear-ink mb-2">Temukan Lowongan <span class="text-linear-primary">Terbaik</span></h1>
-                    <p class="text-linear-ink-muted">Menampilkan hasil untuk pencarian Anda.</p>
+                    <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-2 transition-colors">{{ __('Find Your') }} <span class="text-emerald-500">{{ __('Dream Job') }}</span></h1>
+                    <p class="text-slate-500 dark:text-slate-400">{{ __('Showing results for your search.') }}</p>
                 </div>
                 
                 <form method="GET" action="{{ url('/jobs') }}" class="flex-1 max-w-xl flex gap-3" onsubmit="this.location.value = document.getElementById('sidebar-location').value">
                     <!-- Pertahankan lokasi saat mencari dari bar atas -->
                     <input type="hidden" name="location" value="{{ $location }}">
                     <div class="flex-1 relative">
-                        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-linear-ink-subtle"></i>
-                        <input type="text" name="keyword" id="top-keyword" value="{{ $keyword }}" placeholder="Cari posisi..." class="w-full pl-11 pr-4 py-3 bg-linear-surface-2 border-transparent rounded-2xl focus:bg-linear-surface-3 focus:ring-1 focus:ring-linear-primary focus:border-linear-primary text-linear-ink text-sm transition-all">
+                        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 dark:text-slate-500"></i>
+                        <input type="text" name="keyword" id="top-keyword" value="{{ $keyword }}" placeholder="{{ __('Search position...') }}" class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-transparent rounded-2xl focus:bg-slate-100 dark:focus:bg-slate-700 focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all">
                     </div>
-                    <button type="submit" class="bg-linear-primary hover:bg-linear-primary-hover text-white px-6 py-3 rounded-2xl font-semibold transition-all">Cari</button>
+                    <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-2xl font-semibold transition-all">{{ __('Search') }}</button>
                 </form>
             </div>
         </div>
@@ -30,10 +30,10 @@
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Sidebar Filter -->
             <aside class="w-full lg:w-72 flex-shrink-0">
-                <div class="bg-linear-surface-1 rounded-3xl p-6 border border-linear-hairline sticky top-28">
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 sticky top-28 transition-colors">
                     <div class="flex items-center justify-between mb-6">
-                        <h3 class="font-bold text-linear-ink text-lg">Filter Pencarian</h3>
-                        <a href="{{ url('/jobs') }}" class="text-sm text-linear-primary hover:text-linear-primary-hover font-medium">Reset</a>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">{{ __('Search Filters') }}</h3>
+                        <a href="{{ url('/jobs') }}" class="text-sm text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium">{{ __('Reset') }}</a>
                     </div>
                     
                     <form method="GET" action="{{ url('/jobs') }}" class="space-y-6" onsubmit="this.keyword.value = document.getElementById('top-keyword').value">
@@ -41,24 +41,24 @@
                         
                         <!-- Location Dropdown (Negara -> Kota) -->
                         <div x-data="locationDropdown('{{ addslashes($location) }}')">
-                            <h4 class="font-semibold text-linear-ink text-sm mb-3">Lokasi</h4>
+                            <h4 class="font-semibold text-slate-900 dark:text-white text-sm mb-3">{{ __('Location') }}</h4>
                             
                             <div class="space-y-3">
                                 <!-- Select Negara (Custom Searchable Dropdown) -->
                                 <div class="relative" x-data="{ openCountry: false, searchCountry: '' }" @click.away="openCountry = false">
-                                    <div @click="if(!isLoading) openCountry = !openCountry" class="w-full pl-9 pr-8 py-2.5 bg-linear-surface-2 border border-transparent rounded-xl focus:bg-linear-surface-3 focus:ring-1 focus:ring-linear-primary cursor-pointer flex items-center justify-between" :class="isLoading ? 'opacity-50 cursor-not-allowed' : ''">
-                                        <i data-lucide="globe" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-linear-ink-subtle"></i>
-                                        <span class="text-sm truncate" :class="selectedCountry ? 'text-linear-ink' : 'text-linear-ink-subtle'" x-text="isLoading ? 'Memuat Negara...' : (selectedCountry ? selectedCountry : 'Semua Lokasi')"></span>
-                                        <i data-lucide="chevron-down" class="w-4 h-4 text-linear-ink-subtle"></i>
+                                    <div @click="if(!isLoading) openCountry = !openCountry" class="w-full pl-9 pr-8 py-2.5 bg-slate-50 dark:bg-slate-800 border border-transparent rounded-xl focus:bg-slate-100 dark:focus:bg-slate-700 focus:ring-1 focus:ring-emerald-500 cursor-pointer flex items-center justify-between transition-colors" :class="isLoading ? 'opacity-50 cursor-not-allowed' : ''">
+                                        <i data-lucide="globe" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-500"></i>
+                                        <span class="text-sm truncate" :class="selectedCountry ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500'" x-text="isLoading ? '{{ __('Loading Countries...') }}' : (selectedCountry ? selectedCountry : '{{ __('All Locations') }}')"></span>
+                                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 dark:text-slate-500"></i>
                                     </div>
-                                    <div x-show="openCountry" style="display: none;" class="absolute z-50 w-full mt-2 bg-linear-surface-2 border border-linear-hairline rounded-xl shadow-xl max-h-60 overflow-y-auto" x-transition>
-                                        <div class="p-2 sticky top-0 bg-linear-surface-2 border-b border-linear-hairline">
-                                            <input type="text" x-model="searchCountry" placeholder="Cari negara..." class="w-full px-3 py-2 bg-linear-surface-3 border-transparent focus:border-linear-primary focus:ring-1 focus:ring-linear-primary rounded-lg text-sm text-linear-ink placeholder-linear-ink-subtle" @click.stop>
+                                    <div x-show="openCountry" style="display: none;" class="absolute z-50 w-full mt-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl max-h-60 overflow-y-auto" x-transition>
+                                        <div class="p-2 sticky top-0 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+                                            <input type="text" x-model="searchCountry" placeholder="{{ __('Search country...') }}" class="w-full px-3 py-2 bg-slate-100 dark:bg-slate-900 border-transparent focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500" @click.stop>
                                         </div>
                                         <div class="p-1">
-                                            <div @click="selectedCountry = ''; updateCities(); openCountry = false" class="px-3 py-2 hover:bg-linear-surface-3 rounded-lg cursor-pointer text-sm text-linear-ink font-medium">Semua Lokasi</div>
+                                            <div @click="selectedCountry = ''; updateCities(); openCountry = false" class="px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg cursor-pointer text-sm text-slate-900 dark:text-white font-medium">{{ __('All Locations') }}</div>
                                             <template x-for="country in countriesList.filter(c => c.toLowerCase().includes(searchCountry.toLowerCase()))" :key="country">
-                                                <div @click="selectedCountry = country; updateCities(); openCountry = false" class="px-3 py-2 hover:bg-linear-surface-3 rounded-lg cursor-pointer text-sm text-linear-ink" x-text="country"></div>
+                                                <div @click="selectedCountry = country; updateCities(); openCountry = false" class="px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg cursor-pointer text-sm text-slate-900 dark:text-white" x-text="country"></div>
                                             </template>
                                         </div>
                                     </div>
@@ -66,19 +66,19 @@
 
                                 <!-- Select Kota (Custom Searchable Dropdown) -->
                                 <div class="relative" x-show="selectedCountry" x-transition x-data="{ openCity: false, searchCity: '' }" @click.away="openCity = false">
-                                    <div @click="openCity = !openCity" class="w-full pl-9 pr-8 py-2.5 bg-linear-surface-2 border border-transparent rounded-xl focus:bg-linear-surface-3 focus:ring-1 focus:ring-linear-primary cursor-pointer flex items-center justify-between">
-                                        <i data-lucide="map-pin" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-linear-ink-subtle"></i>
-                                        <span class="text-sm truncate" :class="selectedCity ? 'text-linear-ink' : 'text-linear-ink-subtle'" x-text="selectedCity ? selectedCity : 'Semua Kota'"></span>
-                                        <i data-lucide="chevron-down" class="w-4 h-4 text-linear-ink-subtle"></i>
+                                    <div @click="openCity = !openCity" class="w-full pl-9 pr-8 py-2.5 bg-slate-50 dark:bg-slate-800 border border-transparent rounded-xl focus:bg-slate-100 dark:focus:bg-slate-700 focus:ring-1 focus:ring-emerald-500 cursor-pointer flex items-center justify-between transition-colors">
+                                        <i data-lucide="map-pin" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-500"></i>
+                                        <span class="text-sm truncate" :class="selectedCity ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500'" x-text="selectedCity ? selectedCity : '{{ __('All Cities') }}'"></span>
+                                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 dark:text-slate-500"></i>
                                     </div>
-                                    <div x-show="openCity" style="display: none;" class="absolute z-50 w-full mt-2 bg-linear-surface-2 border border-linear-hairline rounded-xl shadow-xl max-h-60 overflow-y-auto" x-transition>
-                                        <div class="p-2 sticky top-0 bg-linear-surface-2 border-b border-linear-hairline">
-                                            <input type="text" x-model="searchCity" placeholder="Cari kota..." class="w-full px-3 py-2 bg-linear-surface-3 border-transparent focus:border-linear-primary focus:ring-1 focus:ring-linear-primary rounded-lg text-sm text-linear-ink placeholder-linear-ink-subtle" @click.stop>
+                                    <div x-show="openCity" style="display: none;" class="absolute z-50 w-full mt-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl max-h-60 overflow-y-auto" x-transition>
+                                        <div class="p-2 sticky top-0 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+                                            <input type="text" x-model="searchCity" placeholder="{{ __('Search city...') }}" class="w-full px-3 py-2 bg-slate-100 dark:bg-slate-900 border-transparent focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500" @click.stop>
                                         </div>
                                         <div class="p-1">
-                                            <div @click="selectedCity = ''; openCity = false" class="px-3 py-2 hover:bg-linear-surface-3 rounded-lg cursor-pointer text-sm text-linear-ink font-medium">Semua Kota di <span x-text="selectedCountry"></span></div>
+                                            <div @click="selectedCity = ''; openCity = false" class="px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg cursor-pointer text-sm text-slate-900 dark:text-white font-medium">{{ __('All Cities in') }} <span x-text="selectedCountry"></span></div>
                                             <template x-for="city in availableCities.filter(c => c.toLowerCase().includes(searchCity.toLowerCase()))" :key="city">
-                                                <div @click="selectedCity = city; openCity = false" class="px-3 py-2 hover:bg-linear-surface-3 rounded-lg cursor-pointer text-sm text-linear-ink" x-text="city"></div>
+                                                <div @click="selectedCity = city; openCity = false" class="px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg cursor-pointer text-sm text-slate-900 dark:text-white" x-text="city"></div>
                                             </template>
                                         </div>
                                     </div>
@@ -89,8 +89,8 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full mt-4 bg-linear-surface-2 text-linear-ink hover:bg-linear-primary hover:text-white border border-linear-hairline font-semibold py-2.5 rounded-xl transition-colors">
-                            Terapkan Filter
+                        <button type="submit" class="w-full mt-4 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 border border-slate-200 dark:border-slate-700 font-semibold py-2.5 rounded-xl transition-colors">
+                            {{ __('Apply Filters') }}
                         </button>
                     </form>
                 </div>
@@ -99,19 +99,19 @@
             <!-- Job List -->
             <div class="flex-1">
                 @if (isset($error))
-                    <div class="rounded-2xl border border-red-500/20 bg-red-500/10 p-6 text-sm font-semibold text-red-500 mb-6 flex items-start gap-3">
+                    <div class="rounded-2xl border border-red-500/20 bg-red-500/10 p-6 text-sm font-semibold text-red-500 dark:text-red-400 mb-6 flex items-start gap-3">
                         <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0 mt-0.5"></i>
-                        <span>{{ $error }}</span>
+                        <span>{{ __($error) }}</span>
                     </div>
                 @endif
 
                 @if ($jobs->isNotEmpty())
                     <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <p class="text-sm font-medium text-linear-ink-subtle">Menampilkan <span class="font-bold text-linear-ink">{{ $jobs->firstItem() }}&ndash;{{ $jobs->lastItem() }}</span> dari <span class="font-bold text-linear-ink">{{ $jobs->total() }}</span> lowongan</p>
+                        <p class="text-sm font-medium text-slate-400 dark:text-slate-500">{!! str_replace(['{first}', '{last}', '{total}'], ['<span class="font-bold text-slate-900 dark:text-white">' . $jobs->firstItem() . '</span>', '<span class="font-bold text-slate-900 dark:text-white">' . $jobs->lastItem() . '</span>', '<span class="font-bold text-slate-900 dark:text-white">' . $jobs->total() . '</span>'], __('Showing {first}-{last} of {total} jobs')) !!}</p>
                         <div class="flex items-center gap-3">
-                            <span class="text-xs text-linear-ink-muted">Update: {{ $lastRefreshedAt ?? now()->format('H:i') }}</span>
-                            <a href="{{ url('/jobs') }}?keyword={{ urlencode($keyword) }}&location={{ urlencode($location) }}&refresh=1" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-linear-surface-1 border border-linear-hairline text-xs font-semibold text-linear-ink hover:bg-linear-surface-2 transition-colors">
-                                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
+                            <span class="text-xs text-slate-500 dark:text-slate-400">{{ __('Update') }}: {{ $lastRefreshedAt ?? now()->format('H:i') }}</span>
+                            <a href="{{ url('/jobs') }}?keyword={{ urlencode($keyword) }}&location={{ urlencode($location) }}&refresh=1" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> {{ __('Refresh') }}
                             </a>
                         </div>
                     </div>
@@ -120,20 +120,20 @@
                         @include('jobs.partials.job-cards', ['jobs' => $jobs, 'offset' => $jobs->firstItem() - 1])
                     </div>
 
-                    <div id="job-loader" class="mt-8 hidden items-center justify-center p-6 text-linear-primary font-medium">
-                        <i data-lucide="loader-2" class="w-6 h-6 animate-spin mr-2"></i> Memuat lebih banyak...
+                    <div id="job-loader" class="mt-8 hidden items-center justify-center p-6 text-emerald-500 font-medium">
+                        <i data-lucide="loader-2" class="w-6 h-6 animate-spin mr-2"></i> {{ __('Loading more...') }}
                     </div>
                     <div id="infinite-sentinel" class="mt-8 h-2"></div>
 
                 @else
-                    <div class="bg-linear-surface-1 rounded-3xl border border-linear-hairline p-12 text-center">
-                        <div class="w-20 h-20 bg-linear-surface-2 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i data-lucide="search-x" class="w-10 h-10 text-linear-ink-subtle"></i>
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-12 text-center transition-colors">
+                        <div class="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-lucide="search-x" class="w-10 h-10 text-slate-400 dark:text-slate-500"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-linear-ink mb-2">Tidak ada lowongan</h3>
-                        <p class="text-linear-ink-subtle max-w-md mx-auto mb-6">Kami tidak dapat menemukan pekerjaan yang cocok dengan kriteria Anda. Coba ubah kata kunci atau lokasi.</p>
-                        <a href="{{ url('/jobs') }}?refresh=1" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-primary text-white font-semibold hover:bg-linear-primary-hover transition-colors">
-                            <i data-lucide="refresh-cw" class="w-4 h-4"></i> Refresh Data
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">{{ __('No jobs found') }}</h3>
+                        <p class="text-slate-400 dark:text-slate-500 max-w-md mx-auto mb-6">{{ __('We couldn\'t find any jobs matching your criteria. Try changing the keyword or location.') }}</p>
+                        <a href="{{ url('/jobs') }}?refresh=1" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i> {{ __('Refresh Data') }}
                         </a>
                     </div>
                 @endif
@@ -175,7 +175,7 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error('Gagal memuat data.');
+                    throw new Error('{{ __("Failed to load data.") }}');
                 }
 
                 const data = await response.json();
@@ -251,7 +251,7 @@
                     localStorage.setItem('world_countries_data', JSON.stringify(formatted));
                     this.setupInitial(initialLocation);
                 } catch (e) {
-                    console.error('Gagal mengambil data negara:', e);
+                    console.error('{{ __("Failed to fetch country data:") }}', e);
                     // Fallback
                     this.countries = { 'Indonesia': ['Jakarta', 'Bandung', 'Surabaya'] };
                     this.countriesList = ['Indonesia'];
