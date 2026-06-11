@@ -42,9 +42,9 @@ Langsung berikan hasil HTML-nya saja.
 EOT;
 
         $payload = [
-            'model' => 'command-xlarge',
-            'prompt' => $prompt,
-            'max_tokens' => 500,
+            'model' => 'command-r-08-2024',
+            'message' => $prompt,
+            'max_tokens' => 1000,
             'temperature' => 0.7,
         ];
 
@@ -53,7 +53,8 @@ EOT;
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiKey,
             'Content-Type' => 'application/json',
-        ])->post('https://api.cohere.ai/v2/generate', $payload);
+            'Accept' => 'application/json',
+        ])->post('https://api.cohere.ai/v1/chat', $payload);
 
         if ($response->failed()) {
             Log::error('Cohere API Error:', ['response' => $response->body()]);
@@ -63,6 +64,6 @@ EOT;
         $responseData = $response->json();
         Log::info('Response from Cohere API:', $responseData);
 
-        return $responseData['generations'][0]['text'] ?? 'No CV generated.';
+        return $responseData['text'] ?? 'No CV generated.';
     }
 }

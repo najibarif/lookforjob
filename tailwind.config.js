@@ -14,19 +14,25 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            },
-            boxShadow: {
-                'brutal': '4px 4px 0px 0px rgba(0,0,0,1)',
-                'brutal-lg': '8px 8px 0px 0px rgba(0,0,0,1)',
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                brutal: {
-                    yellow: '#F4E869',
-                    pink: '#FF74B1',
-                    blue: '#4D96FF',
-                    green: '#54BAB9',
-                    bg: '#FFF8E1'
+                linear: {
+                    primary: '#5e6ad2',
+                    'primary-hover': '#828fff',
+                    'primary-focus': '#5e69d1',
+                    ink: '#f7f8f8',
+                    'ink-muted': '#d0d6e0',
+                    'ink-subtle': '#8a8f98',
+                    'ink-tertiary': '#62666d',
+                    canvas: '#010102',
+                    'surface-1': '#0f1011',
+                    'surface-2': '#141516',
+                    'surface-3': '#18191a',
+                    'surface-4': '#191a1b',
+                    hairline: '#23252a',
+                    'hairline-strong': '#34343a',
+                    'hairline-tertiary': '#3e3e44',
                 }
             }
         },

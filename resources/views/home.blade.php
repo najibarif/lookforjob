@@ -1,88 +1,163 @@
 @extends('layouts.main')
 
-@section('title', 'Look For Job - Temukan Karir Impian & Buat CV Profesional')
-@section('meta_description', 'Temukan lowongan kerja impianmu dengan mudah dan buat CV profesional berbasis AI hanya dalam beberapa klik di Look For Job.')
+@section('title', 'Look For Job - Temukan Karier Impian Anda')
 
 @section('content')
-<div class="relative overflow-hidden bg-slate-50 min-h-[calc(100vh-14rem)] flex flex-col justify-center py-12 sm:py-24">
-    <!-- Background Gradient Accents -->
-    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-indigo-200/40 blur-3xl"></div>
-        <div class="absolute top-1/2 -left-40 w-96 h-96 rounded-full bg-violet-200/30 blur-3xl"></div>
-    </div>
-
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <!-- Hero Header -->
-        <div class="max-w-3xl mx-auto space-y-6">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-none">
-                Selamat Datang di
-                <span class="block mt-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-violet-600 bg-clip-text text-transparent">
-                    Look For Job
-                </span>
+<!-- Hero Section -->
+<section class="relative bg-linear-canvas pt-20 pb-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-primary/10 border border-linear-primary/20 text-linear-primary text-sm font-medium mb-8">
+                <span class="flex w-2 h-2 rounded-full bg-linear-primary animate-pulse"></span>
+                Lebih dari 10.000+ lowongan aktif bulan ini
+            </div>
+            <h1 class="text-5xl md:text-6xl font-extrabold text-linear-ink tracking-tight mb-6 leading-tight">
+                Temukan Karier Impian <br class="hidden md:block" />
+                <span class="text-linear-primary">Masa Depan Anda</span>
             </h1>
-            <p class="text-lg sm:text-xl text-slate-700 font-medium max-w-2xl mx-auto leading-relaxed">
-                Platform cerdas untuk menemukan peluang karir terbaik dan menyusun CV profesional berbasis AI dalam sekejap.
+            <p class="text-lg md:text-xl text-linear-ink-muted mb-10 max-w-2xl mx-auto leading-relaxed">
+                Platform terpercaya yang menghubungkan talenta terbaik dengan perusahaan impian. Temukan peluang yang sesuai dengan potensi Anda.
             </p>
-            
-            <div class="pt-6 flex flex-wrap justify-center gap-4">
-                @auth
-                    <a href="{{ route('jobs') }}" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 transform hover:-translate-y-0.5">
-                        Cari Lowongan
-                    </a>
-                    <a href="{{ route('cv') }}" class="inline-flex items-center justify-center px-6 py-3 border border-slate-300 text-base font-semibold rounded-lg text-slate-700 bg-white hover:bg-slate-50 shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 transform hover:-translate-y-0.5">
-                        Generate CV
-                    </a>
-                @else
-                    <a href="{{ route('login') }}" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 transform hover:-translate-y-0.5">
-                        Mulai Cari Lowongan
-                    </a>
-                    <a href="{{ route('login') }}" class="inline-flex items-center justify-center px-6 py-3 border border-slate-300 text-base font-semibold rounded-lg text-slate-700 bg-white hover:bg-slate-50 shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 transform hover:-translate-y-0.5">
-                        Mulai Buat CV
-                    </a>
-                @endauth
-            </div>
-        </div>
 
-        <!-- Features Grid -->
-        <div class="mt-20 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-            <!-- Feature 1: Search Jobs -->
-            <div class="relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-md hover:border-slate-300/80 transition-all duration-300 group">
-                <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
+            <!-- Search Form -->
+            <form action="{{ route('jobs') }}" method="GET" class="bg-linear-surface-1 p-3 md:p-4 rounded-3xl border border-linear-hairline flex flex-col md:flex-row gap-3 max-w-4xl mx-auto relative z-20">
+                <div class="flex-1 flex items-center bg-linear-surface-2 rounded-2xl px-4 py-3 border border-transparent focus-within:border-linear-primary transition-all">
+                    <i data-lucide="search" class="w-5 h-5 text-linear-ink-subtle"></i>
+                    <input type="text" name="keyword" placeholder="Posisi pekerjaan, kata kunci..." class="w-full bg-transparent border-none focus:ring-0 text-linear-ink placeholder-linear-ink-subtle text-sm md:text-base px-3">
                 </div>
-                <h2 class="text-xl font-bold text-slate-900 mb-3">Cari Lowongan Cepat</h2>
-                <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                    Akses ribuan data lowongan pekerjaan terkini dari berbagai industri dan kota di Indonesia secara langsung dan praktis.
-                </p>
-                <a href="{{ route('jobs') }}" class="inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-sm">
-                    Mulai mencari
-                    <svg class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </a>
-            </div>
+                <div class="flex-1 flex items-center bg-linear-surface-2 rounded-2xl px-4 py-3 border border-transparent focus-within:border-linear-primary transition-all">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-linear-ink-subtle"></i>
+                    <input type="text" name="location" placeholder="Lokasi (mis. Jakarta, Remote)" class="w-full bg-transparent border-none focus:ring-0 text-linear-ink placeholder-linear-ink-subtle text-sm md:text-base px-3">
+                </div>
+                <button type="submit" class="bg-linear-primary hover:bg-linear-primary-hover text-white font-semibold py-3 md:py-4 px-8 rounded-2xl transition-all flex items-center justify-center gap-2">
+                    <span>Cari</span>
+                </button>
+            </form>
 
-            <!-- Feature 2: CV Generator -->
-            <div class="relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/60 shadow-sm hover:shadow-md hover:border-slate-300/80 transition-all duration-300 group">
-                <div class="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center text-violet-600 mb-6 group-hover:bg-violet-600 group-hover:text-white transition-all duration-300">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
+            <!-- Stats -->
+            <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-16">
+                <div class="text-center">
+                    <p class="text-3xl font-extrabold text-linear-ink">10k+</p>
+                    <p class="text-sm font-medium text-linear-ink-subtle mt-1">Lowongan Tersedia</p>
                 </div>
-                <h2 class="text-xl font-bold text-slate-900 mb-3">Generator CV AI</h2>
-                <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                    Masukkan detail pengalaman Anda secara kasual, dan AI kami akan menyusun resume terstruktur dan profesional dalam format HTML siap pakai.
-                </p>
-                <a href="{{ route('cv') }}" class="inline-flex items-center text-sm font-semibold text-violet-600 hover:text-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 rounded-sm">
-                    Mulai buat CV
-                    <svg class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </a>
+                <div class="hidden sm:block w-px bg-linear-hairline"></div>
+                <div class="text-center">
+                    <p class="text-3xl font-extrabold text-linear-ink">2.5k+</p>
+                    <p class="text-sm font-medium text-linear-ink-subtle mt-1">Perusahaan Mitra</p>
+                </div>
+                <div class="hidden sm:block w-px bg-linear-hairline"></div>
+                <div class="text-center">
+                    <p class="text-3xl font-extrabold text-linear-ink">50k+</p>
+                    <p class="text-sm font-medium text-linear-ink-subtle mt-1">Pencari Kerja Aktif</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Popular Jobs Section (Mockup) -->
+<section class="py-20 bg-linear-canvas border-t border-linear-hairline">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between mb-12">
+            <div>
+                <h2 class="text-3xl font-bold text-linear-ink mb-2">Lowongan Populer</h2>
+                <p class="text-linear-ink-muted">Peluang terbaru yang mungkin cocok untuk Anda.</p>
+            </div>
+            <a href="{{ route('jobs') }}" class="hidden sm:inline-flex items-center gap-2 text-linear-primary font-semibold hover:text-linear-primary-hover transition-colors">
+                Lihat Semua <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Job Card 1 -->
+            <div class="bg-linear-surface-1 rounded-[1.5rem] p-6 border border-linear-hairline hover:border-linear-primary/50 transition-all duration-300 group hover:-translate-y-1">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-linear-surface-2 flex items-center justify-center border border-linear-hairline">
+                        <i data-lucide="code" class="w-6 h-6 text-linear-primary"></i>
+                    </div>
+                    <span class="bg-linear-primary/10 text-linear-primary text-xs font-bold px-3 py-1 rounded-lg">Full Time</span>
+                </div>
+                <h3 class="text-xl font-bold text-linear-ink mb-1 group-hover:text-linear-primary transition-colors">Senior Frontend Developer</h3>
+                <p class="text-linear-ink-subtle text-sm mb-4">Tech Innovators Inc.</p>
+                <div class="flex items-center gap-4 text-sm text-linear-ink-subtle mb-6">
+                    <div class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4"></i> Jakarta Selatan</div>
+                    <div class="flex items-center gap-1.5"><i data-lucide="banknote" class="w-4 h-4"></i> Rp 15-20 Jt</div>
+                </div>
+                <div class="border-t border-linear-hairline pt-5">
+                    <a href="{{ route('jobs') }}" class="w-full inline-flex items-center justify-center py-2.5 px-4 bg-linear-surface-2 text-linear-ink font-semibold rounded-xl hover:bg-linear-primary hover:text-white transition-colors">Lihat Detail</a>
+                </div>
+            </div>
+            
+            <!-- Job Card 2 -->
+            <div class="bg-linear-surface-1 rounded-[1.5rem] p-6 border border-linear-hairline hover:border-linear-primary/50 transition-all duration-300 group hover:-translate-y-1">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-linear-surface-2 flex items-center justify-center border border-linear-hairline">
+                        <i data-lucide="pie-chart" class="w-6 h-6 text-linear-primary"></i>
+                    </div>
+                    <span class="bg-linear-primary/10 text-linear-primary text-xs font-bold px-3 py-1 rounded-lg">Remote</span>
+                </div>
+                <h3 class="text-xl font-bold text-linear-ink mb-1 group-hover:text-linear-primary transition-colors">Data Analyst</h3>
+                <p class="text-linear-ink-subtle text-sm mb-4">Global Analytics Corp</p>
+                <div class="flex items-center gap-4 text-sm text-linear-ink-subtle mb-6">
+                    <div class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4"></i> Remote (ID)</div>
+                    <div class="flex items-center gap-1.5"><i data-lucide="banknote" class="w-4 h-4"></i> Rp 8-12 Jt</div>
+                </div>
+                <div class="border-t border-linear-hairline pt-5">
+                    <a href="{{ route('jobs') }}" class="w-full inline-flex items-center justify-center py-2.5 px-4 bg-linear-surface-2 text-linear-ink font-semibold rounded-xl hover:bg-linear-primary hover:text-white transition-colors">Lihat Detail</a>
+                </div>
+            </div>
+
+            <!-- Job Card 3 -->
+            <div class="bg-linear-surface-1 rounded-[1.5rem] p-6 border border-linear-hairline hover:border-linear-primary/50 transition-all duration-300 group hover:-translate-y-1">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-linear-surface-2 flex items-center justify-center border border-linear-hairline">
+                        <i data-lucide="pen-tool" class="w-6 h-6 text-linear-primary"></i>
+                    </div>
+                    <span class="bg-linear-primary/10 text-linear-primary text-xs font-bold px-3 py-1 rounded-lg">Full Time</span>
+                </div>
+                <h3 class="text-xl font-bold text-linear-ink mb-1 group-hover:text-linear-primary transition-colors">UI/UX Designer</h3>
+                <p class="text-linear-ink-subtle text-sm mb-4">Creative Studio Jkt</p>
+                <div class="flex items-center gap-4 text-sm text-linear-ink-subtle mb-6">
+                    <div class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4"></i> Jakarta Pusat</div>
+                    <div class="flex items-center gap-1.5"><i data-lucide="banknote" class="w-4 h-4"></i> Rp 10-15 Jt</div>
+                </div>
+                <div class="border-t border-linear-hairline pt-5">
+                    <a href="{{ route('jobs') }}" class="w-full inline-flex items-center justify-center py-2.5 px-4 bg-linear-surface-2 text-linear-ink font-semibold rounded-xl hover:bg-linear-primary hover:text-white transition-colors">Lihat Detail</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 text-center sm:hidden">
+            <a href="{{ route('jobs') }}" class="inline-flex items-center gap-2 text-linear-primary font-semibold hover:text-linear-primary-hover transition-colors">
+                Lihat Semua <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Top Companies Section -->
+<section class="py-20 bg-linear-canvas border-t border-linear-hairline">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-linear-ink mb-4">Perusahaan Pilihan Terbaik</h2>
+            <p class="text-linear-ink-muted max-w-2xl mx-auto">Kami bekerjasama dengan perusahaan terkemuka yang siap mendukung perkembangan karier Anda menuju level berikutnya.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            @for ($i = 1; $i <= 4; $i++)
+            <div class="bg-linear-surface-1 rounded-[1.5rem] p-6 flex flex-col items-center justify-center text-center border border-linear-hairline hover:border-linear-primary/50 hover:bg-linear-surface-2 transition-all duration-300">
+                <div class="w-16 h-16 rounded-2xl bg-linear-surface-3 shadow-sm flex items-center justify-center mb-4 border border-linear-hairline">
+                    <i data-lucide="building-2" class="w-8 h-8 text-linear-ink-subtle"></i>
+                </div>
+                <h4 class="font-bold text-linear-ink mb-1">Company {{ $i }}</h4>
+                <div class="flex items-center gap-1 text-amber-400 text-sm mb-3">
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <span class="text-linear-ink-subtle font-medium">4.{{ 8 - $i }}</span>
+                </div>
+                <span class="text-xs font-semibold text-linear-primary bg-linear-primary/10 px-3 py-1 rounded-full">{{ 15 + ($i * 5) }} Lowongan</span>
+            </div>
+            @endfor
+        </div>
+    </div>
+</section>
 @endsection

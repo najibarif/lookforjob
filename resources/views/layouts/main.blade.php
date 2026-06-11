@@ -1,171 +1,164 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- SEO Meta Tags -->
-    <title>@yield('title', 'Look For Job - Temukan Karir Impian & Buat CV Profesional')</title>
-    <meta name="description" content="@yield('meta_description', 'Cari lowongan pekerjaan impian Anda dan buat CV profesional berbasis AI dengan mudah di Look For Job.')">
-    <meta name="keywords" content="@yield('meta_keywords', 'lowongan kerja, cari kerja, cv maker, cv builder, generator cv AI, template resume, lamar pekerjaan')">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{{ url()->current() }}">
+    <title>@yield('title', 'Look For Job - Temukan Karier Impian Anda')</title>
+    <meta name="description" content="@yield('meta_description', 'Platform pencarian kerja modern untuk menemukan lowongan dan membangun karier impian Anda.')">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('title', 'Look For Job - Temukan Karir Impian & Buat CV Profesional')">
-    <meta property="og:description" content="@yield('meta_description', 'Cari lowongan pekerjaan impian Anda dan buat CV profesional berbasis AI dengan mudah di Look For Job.')">
-    <meta property="og:image" content="{{ asset('favicon.ico') }}">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ url()->current() }}">
-    <meta property="twitter:title" content="@yield('title', 'Look For Job - Temukan Karir Impian & Buat CV Profesional')">
-    <meta property="twitter:description" content="@yield('meta_description', 'Cari lowongan pekerjaan impian Anda dan buat CV profesional berbasis AI dengan mudah di Look For Job.')">
-    <meta property="twitter:image" content="{{ asset('favicon.ico') }}">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Preconnect Fonts for Performance -->
-    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
-
-    <!-- Vite Assets (Local Compilation) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <!-- Livewire Styles -->
     @livewireStyles
 </head>
-<body class="font-sans antialiased text-gray-900 bg-slate-50 h-full flex flex-col">
-    <!-- Skip to Content Link for Accessibility -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-indigo-600 text-white px-4 py-2 rounded-md shadow-lg z-50 transition duration-150">
-        Skip to main content
-    </a>
-
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 border-b border-slate-200/60" x-data="{ mobileMenuOpen: false }">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main Navigation">
-            <div class="flex justify-between h-16">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('home') }}" class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-md py-1" aria-label="Look For Job Home">
-                        Look For Job
-                    </a>
+<body class="font-sans antialiased text-linear-ink bg-linear-canvas flex flex-col min-h-screen">
+    
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 w-full bg-linear-canvas/80 backdrop-blur-xl border-b border-linear-hairline transition-all duration-300" x-data="{ mobileMenuOpen: false }">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex-shrink-0 flex items-center gap-2">
+                <div class="w-10 h-10 rounded-xl bg-linear-primary flex items-center justify-center shadow-lg shadow-linear-primary/20">
+                    <i data-lucide="briefcase" class="text-white w-5 h-5"></i>
                 </div>
+                <a href="{{ route('home') }}" class="text-2xl font-bold tracking-tight text-linear-ink">
+                    LookFor<span class="text-linear-primary">Job</span>
+                </a>
+            </div>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex md:space-x-8 md:items-center">
-                    <a href="{{ route('jobs') }}" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 {{ request()->routeIs('jobs') ? 'border-indigo-600 text-slate-900' : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700' }} focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-sm">
-                        Cari Lowongan
-                    </a>
-                    <a href="{{ route('cv') }}" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 {{ request()->routeIs('cv') ? 'border-indigo-600 text-slate-900' : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700' }} focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-sm">
-                        Generate CV
-                    </a>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="{{ route('home') }}" class="text-sm font-medium {{ request()->routeIs('home') ? 'text-linear-primary' : 'text-linear-ink-subtle hover:text-linear-ink' }} transition-colors">Beranda</a>
+                <a href="{{ route('jobs') }}" class="text-sm font-medium {{ request()->routeIs('jobs') ? 'text-linear-primary' : 'text-linear-ink-subtle hover:text-linear-ink' }} transition-colors">Lowongan</a>
+                <a href="{{ route('cv') }}" class="text-sm font-medium {{ request()->routeIs('cv') ? 'text-linear-primary' : 'text-linear-ink-subtle hover:text-linear-ink' }} transition-colors">Buat CV</a>
+            </div>
 
-                    <!-- Auth Dropdown / Actions -->
-                    @auth
-                        <div class="relative ml-3" x-data="{ dropdownOpen: false }">
-                            <button @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" type="button" class="inline-flex items-center gap-2 px-3 py-2 border border-slate-200 rounded-full text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <span class="max-w-[120px] truncate">{{ Auth::user()->name }}</span>
-                                <svg class="w-4 h-4 text-slate-400 transition" :class="{'rotate-180': dropdownOpen}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </button>
-                            <!-- Dropdown Menu -->
-                            <div x-show="dropdownOpen" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" style="display: none;">
-                                <form method="POST" action="{{ route('logout') }}" role="none">
-                                    @csrf
-                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 focus:bg-slate-100 focus:outline-none" role="menuitem">
-                                        Logout
-                                    </button>
-                                </form>
+            <!-- Desktop Auth -->
+            <div class="hidden md:flex items-center gap-4">
+                @auth
+                    <a href="{{ route('saved-jobs.index') }}" class="text-sm font-semibold {{ request()->routeIs('saved-jobs.index') ? 'text-linear-primary' : 'text-linear-ink-subtle hover:text-linear-primary' }} transition-colors mr-2">Tersimpan</a>
+                    <a href="{{ route('applications.index') }}" class="text-sm font-semibold {{ request()->routeIs('applications.index') ? 'text-linear-primary' : 'text-linear-ink-subtle hover:text-linear-primary' }} transition-colors mr-2">Lamaran Saya</a>
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" @click.away="open = false" class="flex items-center gap-3 hover:bg-linear-surface-1 p-2 rounded-full transition-colors">
+                            <div class="w-9 h-9 rounded-full bg-linear-primary/20 text-linear-primary flex items-center justify-center font-bold text-sm">
+                                {{ substr(Auth::user()->name, 0, 1) }}
                             </div>
+                            <span class="text-sm font-medium text-linear-ink">{{ Auth::user()->name }}</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-linear-ink-subtle"></i>
+                        </button>
+                        <div x-show="open" class="absolute right-0 mt-2 w-48 bg-linear-surface-1 rounded-2xl shadow-xl border border-linear-hairline py-2 hidden" :class="{'hidden': !open}">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="w-full text-left px-4 py-2 text-sm text-[#e5484d] hover:bg-[#e5484d]/10 font-medium transition-colors rounded-xl">
+                                    Logout
+                                </button>
+                            </form>
                         </div>
-                    @else
-                        <a href="{{ route('login') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">
-                            Login
-                        </a>
-                    @endauth
-                </div>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="text-sm font-semibold text-linear-ink hover:text-linear-primary transition-colors">Masuk</a>
+                    <!-- Use simple a tag with # if register doesn't exist to prevent route not found -->
+                    <a href="{{ Route::has('register') ? route('register') : '#' }}" class="text-sm font-semibold text-white bg-linear-primary hover:bg-linear-primary-hover px-5 py-2.5 rounded-full transition-all hover:-translate-y-0.5">Daftar</a>
+                @endauth
+            </div>
 
-                <!-- Mobile menu button -->
-                <div class="flex items-center md:hidden">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset-2 focus:ring-indigo-500" aria-controls="mobile-menu" :aria-expanded="mobileMenuOpen.toString()">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="h-6 h-6" :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <svg class="h-6 h-6" :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: none;">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-linear-ink-subtle hover:text-linear-primary transition-colors p-2">
+                    <i data-lucide="menu" class="w-6 h-6" x-show="!mobileMenuOpen"></i>
+                    <i data-lucide="x" class="w-6 h-6 hidden" x-show="mobileMenuOpen" :class="{'hidden': !mobileMenuOpen}"></i>
+                </button>
             </div>
         </nav>
 
         <!-- Mobile Menu -->
-        <div class="md:hidden" id="mobile-menu" x-show="mobileMenuOpen" style="display: none;">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-b border-slate-200">
-                <a href="{{ route('jobs') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('jobs') ? 'bg-indigo-50 text-indigo-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700' }}">
-                    Cari Lowongan
-                </a>
-                <a href="{{ route('cv') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('cv') ? 'bg-indigo-50 text-indigo-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700' }}">
-                    Generate CV
-                </a>
-                <div class="border-t border-slate-200 my-2 pt-2">
+        <div class="md:hidden bg-linear-surface-1 border-t border-linear-hairline hidden" x-show="mobileMenuOpen" :class="{'hidden': !mobileMenuOpen}">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="{{ route('home') }}" class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->routeIs('home') ? 'bg-linear-primary/10 text-linear-primary' : 'text-linear-ink-subtle hover:bg-linear-surface-2 hover:text-linear-ink' }}">Beranda</a>
+                <a href="{{ route('jobs') }}" class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->routeIs('jobs') ? 'bg-linear-primary/10 text-linear-primary' : 'text-linear-ink-subtle hover:bg-linear-surface-2 hover:text-linear-ink' }}">Lowongan</a>
+                <a href="{{ route('cv') }}" class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->routeIs('cv') ? 'bg-linear-primary/10 text-linear-primary' : 'text-linear-ink-subtle hover:bg-linear-surface-2 hover:text-linear-ink' }}">Buat CV</a>
+                
+                <div class="border-t border-linear-hairline mt-4 pt-4">
                     @auth
-                        <div class="px-3 py-2 text-sm text-slate-600 font-medium truncate">
-                            Login sebagai: {{ Auth::user()->name }}
-                        </div>
+                        <a href="{{ route('saved-jobs.index') }}" class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->routeIs('saved-jobs.index') ? 'bg-linear-primary/10 text-linear-primary' : 'text-linear-ink-subtle hover:bg-linear-surface-2 hover:text-linear-ink' }}">Tersimpan</a>
+                        <a href="{{ route('applications.index') }}" class="block px-4 py-3 rounded-xl text-base font-medium {{ request()->routeIs('applications.index') ? 'bg-linear-primary/10 text-linear-primary' : 'text-linear-ink-subtle hover:bg-linear-surface-2 hover:text-linear-ink' }}">Lamaran Saya</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-600 hover:bg-red-50 hover:text-red-700">
-                                Logout
-                            </button>
+                            <button type="submit" class="w-full text-left px-4 py-3 rounded-xl text-base font-medium text-[#e5484d] hover:bg-[#e5484d]/10">Logout</button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="block px-3 py-2 rounded-md text-base font-medium text-indigo-600 hover:bg-slate-50">
-                            Login
-                        </a>
+                        <a href="{{ route('login') }}" class="block px-4 py-3 rounded-xl text-base font-medium text-linear-ink hover:bg-linear-surface-2 hover:text-linear-ink mb-2">Masuk</a>
+                        <a href="{{ Route::has('register') ? route('register') : '#' }}" class="block px-4 py-3 rounded-xl text-base font-medium text-center text-white bg-linear-primary hover:bg-linear-primary-hover">Daftar</a>
                     @endauth
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Area -->
-    <main id="main-content" class="flex-grow focus:outline-none" tabindex="-1">
+    <!-- Main Content -->
+    <main class="flex-grow">
         @yield('content')
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h2 class="text-white font-bold text-lg mb-4">Look For Job</h2>
-                    <p class="text-sm">Asisten digital Anda untuk menemukan lowongan kerja impian dan menyusun resume terbaik yang didukung teknologi cerdas.</p>
+    <footer class="bg-linear-canvas pt-20 pb-10 border-t border-linear-hairline relative overflow-hidden">
+        <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-linear-primary/50 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-8 h-8 rounded-lg bg-linear-primary flex items-center justify-center">
+                            <i data-lucide="briefcase" class="text-white w-4 h-4"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">LookFor<span class="text-linear-primary">Job</span></span>
+                    </div>
+                    <p class="text-linear-ink-muted text-sm leading-relaxed max-w-sm mb-8">Platform pencarian kerja modern dan terpercaya. Temukan karier impianmu bersama ribuan perusahaan terbaik di Indonesia.</p>
+
                 </div>
                 <div>
-                    <h2 class="text-white font-bold text-lg mb-4">Tautan Cepat</h2>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="{{ route('jobs') }}" class="hover:text-white transition">Cari Lowongan Kerja</a></li>
-                        <li><a href="{{ route('cv') }}" class="hover:text-white transition">Generator CV AI</a></li>
+                    <h3 class="text-linear-ink font-semibold mb-6">Pencari Kerja</h3>
+                    <ul class="space-y-4 text-sm text-linear-ink-subtle">
+                        <li><a href="{{ route('jobs') }}" class="hover:text-linear-primary transition-colors">Cari Lowongan</a></li>
+                        <li><a href="#" class="hover:text-linear-primary transition-colors">Perusahaan Terbaik</a></li>
+                        <li><a href="{{ route('cv') }}" class="hover:text-linear-primary transition-colors">Buat CV Online</a></li>
+                        <li><a href="#" class="hover:text-linear-primary transition-colors">Tips Karier</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h2 class="text-white font-bold text-lg mb-4">Kontak & Bantuan</h2>
-                    <p class="text-sm mb-2">Punya pertanyaan atau masukan? Hubungi kami.</p>
-                    <p class="text-sm text-white font-medium">support@lookforjob.id</p>
+                    <h3 class="text-linear-ink font-semibold mb-6">Perusahaan</h3>
+                    <ul class="space-y-4 text-sm text-linear-ink-subtle">
+                        <li><a href="#" class="hover:text-linear-primary transition-colors">Pasang Lowongan</a></li>
+                        <li><a href="#" class="hover:text-linear-primary transition-colors">Cari Kandidat</a></li>
+                        <li><a href="#" class="hover:text-linear-primary transition-colors">Produk & Harga</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="border-t border-slate-800 mt-8 pt-8 text-center text-xs">
-                <p>&copy; {{ date('Y') }} Look For Job. Hak Cipta Dilindungi Undang-Undang.</p>
+            <div class="border-t border-linear-hairline pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-linear-ink-subtle text-sm">&copy; {{ date('Y') }} LookForJob. Hak Cipta Dilindungi.</p>
+                <div class="flex gap-6 text-sm text-linear-ink-subtle">
+                    <a href="#" class="hover:text-linear-primary transition-colors">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-linear-primary transition-colors">Syarat & Ketentuan</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Livewire Scripts -->
+    <!-- Initialize Lucide Icons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
     @livewireScripts
 </body>
 </html>

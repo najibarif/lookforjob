@@ -1,89 +1,100 @@
-## Look for Job
+# LookForJob - Job Finder Platform
 
-Proyek ini adalah aplikasi berbasis Laravel yang dirancang untuk membantu pengguna mencari dan melamar pekerjaan. Aplikasi ini memungkinkan pencari kerja untuk membuat dan mengelola profil, mencari pekerjaan, dan melamar pekerjaan dengan mudah.
+LookForJob adalah platform pencarian kerja modern dan terintegrasi yang dibangun menggunakan **Laravel 11**, **Tailwind CSS**, dan arsitektur *Service-Oriented*. Aplikasi ini memudahkan pencari kerja untuk menemukan lowongan terbaik dari berbagai sumber secara terpusat, dengan antarmuka (UI) gaya SaaS 2026 yang premium, responsif, dan *user-friendly*.
 
-Daftar Isi:
+## Fitur Utama
 
-- [Instalasi](#Instalasi).
-- [Konfigurasi](#Konfigurasi).
-- [Penggunaan](#Penggunaan)
-- [Kontribusi](#Kontribusi)
-- [Lisensi](#Lisensi)
-- [Detail .gitignore](#Detail)
+- **Agregator Lowongan Terpusat**: Terintegrasi langsung dengan API eksternal (seperti LinkedIn, Remotive, dan ArbeitNow) untuk menyajikan ribuan data lowongan secara *real-time*.
+- **Modern UI/UX**: Desain bergaya SaaS 2026 yang dioptimalkan dengan *Tailwind CSS* (palet Emerald), efek *glassmorphism*, dan animasi yang halus.
+- **Pencarian & Filter Cerdas**: Pencarian berdasarkan kata kunci (keyword), lokasi, sistem kerja (Remote/Full Time), dan tingkat pengalaman kerja.
+- **Console Command Otomatis**: Fitur CLI `jobs:fetch` bagi *developer* atau *Cron Job* untuk melakukan *fetching* data lowongan dari berbagai API ke database secara berkala dengan mudah.
+- **Integrasi API**: Menyediakan *REST API Endpoint* yang siap digunakan oleh klien (mobile, web app lain) untuk mengambil data pekerjaan dan memproses API AI.
+- **AI CV Builder**: Terhubung dengan layanan Cohere AI untuk menghasilkan rangkuman profil LinkedIn, pembuatan CV cerdas, serta Saran Perbaikan berdasarkan kriteria pekerjaan.
 
-## Instalasi
+## Tech Stack & Best Practices
 
-1. Clone repositori:
-   git clone https://github.com/username/look-for-job.git
+- **Backend**: Laravel 11.x, PHP 8.2+
+- **Frontend**: Blade Templating, Tailwind CSS v3, Alpine.js, Lucide Icons
+- **Database**: MySQL / MariaDB
+- **Arsitektur Kode (Best Practice)**: Menerapkan pola *Service Pattern* (contoh: `JobAggregatorService`, `LinkedInService`, `CohereService`) untuk memisahkan logika bisnis yang kompleks dari Controller agar kode lebih modular, mudah di-test, dan mudah di-maintain.
+- **Asset Bundler**: Vite (untuk kompilasi instan Tailwind CSS dan build production yang sangat ringan)
+- **Clean Codebase**: Repositori telah dibersihkan dari *file views* bawaan yang tidak terpakai seperti `welcome.blade.php` atau layout *dashboard* default sehingga aplikasi lebih rapi.
 
-2. Masuk ke direktori proyek:
-   cd look-for-job
+## Instalasi (Local Development)
 
-3. Install dependensi:
+Ikuti langkah-langkah di bawah ini untuk menjalankan proyek ini di *local environment* Anda:
+
+1. **Clone repository:**
+   ```bash
+   git clone https://github.com/username/LookForJob.git
+   cd LookForJob
+   ```
+
+2. **Install dependensi PHP & Node.js:**
+   ```bash
    composer install
+   npm install
+   ```
 
-4. Salin file .env:
+3. **Salin file environment & konfigurasi:**
+   ```bash
    cp .env.example .env
+   ```
 
-5. Generate kunci aplikasi:
+4. **Konfigurasi Database & API Keys (di `.env`):**
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=lookforjob
+   DB_USERNAME=root
+   DB_PASSWORD=
+
+   # Konfigurasi API Eksternal
+   RAPIDAPI_KEY=your_rapid_api_key_here
+   COHERE_API_KEY=your_cohere_api_key_here
+   ```
+
+5. **Generate Application Key:**
+   ```bash
    php artisan key:generate
+   ```
 
-6. Sesuaikan konfigurasi .env (lihat bagian konfigurasi)
-
-7. Jalankan migrasi:
+6. **Migrasi Database:**
+   ```bash
    php artisan migrate
+   ```
 
-8. Jalankan server:
+7. **Compile Asset Frontend (Wajib):**
+   ```bash
+   npm run build
+   # atau untuk mode development live-reload: npm run dev
+   ```
+
+8. **Jalankan Local Server:**
+   ```bash
    php artisan serve
+   ```
+   Aplikasi dapat diakses di browser melalui `http://127.0.0.1:8000`
 
-Aplikasi akan berjalan di http://localhost:8000.
+## Manajemen Data Lowongan (Khusus Developer)
 
-## Konfigurasi
+Sebagai alternatif dan metode paling optimal untuk manajemen database, Anda dapat mengambil data terbaru dari berbagai API secara massal menggunakan *Artisan Console Command* yang telah disediakan secara khusus untuk memudahkan proses simpan-otomatis (*updateOrCreate*).
 
-Sesuaikan file .env dengan konfigurasi lokal, seperti:
+```bash
+# Mengambil lowongan (default keyword: developer, semua lokasi)
+php artisan jobs:fetch
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=look_for_job
-DB_USERNAME=root
-DB_PASSWORD=
+# Mengambil lowongan dengan spesifikasi (keyword, lokasi)
+php artisan jobs:fetch "laravel" "jakarta"
+```
+Praktik Terbaik (*Best Practice*): Anda dapat menjadwalkan perintah ini di dalam file penjadwalan Laravel (`routes/console.php` untuk Laravel 11) menggunakan metode cron job standar untuk memperbarui lowongan setiap hari secara otomatis di latar belakang server.
 
-Untuk email, antrean, dan cache, sesuaikan juga bagian terkait di file .env.
+## Struktur API Endpoints (Referensi)
 
-## Penggunaan
+- `GET /api/jobs` - Mengambil data lowongan dari database atau trigger sinkronisasi API.
+- `GET /api/linkedin-profile` - Mengambil profil LinkedIn kandidat berdasarkan *username*.
+- `POST /api/generate-cv` - Memproses AI CV Generator.
 
-Setelah aplikasi berjalan, pengguna dapat:
-- Membuat dan mengedit profil
-- Mencari dan melamar pekerjaan
-- Melihat status lamaran
-
-## Kontribusi
-
-Kami terbuka terhadap kontribusi:
-1. Fork repo ini
-2. Buat branch baru
-3. Lakukan perubahan dan commit
-4. Push ke repo Anda dan buat Pull Request
-
-Pastikan mengikuti standar PSR-12 dan menambahkan pengujian bila perlu.
-
-## Lisensi
-
-Proyek ini dilisensikan dengan Lisensi MIT. Silakan lihat file LICENSE untuk informasi selengkapnya.
-
-## Detail
-
-Beberapa file diabaikan dalam git karena alasan keamanan atau dapat dihasilkan ulang:
-
-- .env: berisi konfigurasi sensitif
-- /vendor/: hasil composer install
-- /node_modules/: hasil npm install
-- /storage/: data upload, log, cache
-- /public/storage/: symlink ke storage/app/public
-
-Pastikan untuk menjalankan:
-- composer install
-- npm install
-- php artisan storage:link
-Setelah mengatur .env, jalankan php artisan migrate dan php artisan serve.
+---
+*Proyek LookForJob dikembangkan dengan standar "Clean Architecture", memprioritaskan skalabilitas komponen, modularitas Service, serta berfokus kepada UI/UX premium masa depan.*

@@ -36,36 +36,21 @@ Route::get('/login', function () {
 // Halaman daftar pekerjaan (frontend)
 Route::get('/jobs', [JobFrontendController::class, 'index'])->name('jobs');
 
-// Halaman CV builder
-Route::get('/cv', function () {
-    return view('cv');
-})->name('cv');
+// Halaman CV builder dipindahkan ke dalam auth middleware
+
+// Halaman Detail Lowongan
+Route::get('/jobs/detail', function (Request $request) {
+    return view('jobs.detail', [
+        'url' => $request->query('url'),
+        'title' => $request->query('title', 'Senior Frontend Developer'),
+        'company' => $request->query('company', 'Tech Innovators Inc.'),
+        'location' => $request->query('location', 'Jakarta Selatan'),
+    ]);
+})->name('jobs.detail');
 
 // ----------------- API ROUTES -------------------
 
-// API: Ambil profil LinkedIn
-Route::get('/api/linkedin-profile', function (Request $request, LinkedInService $linkedInService) {
-    $request->validate([
-        'username' => 'required|string',
-    ]);
 
-    try {
-        $data = $linkedInService->getProfileTopPosition($request->input('username'));
-
-        $headquarter = $data['data']['headquarter'] ?? [];
-        $formattedData = [
-            'name' => $data['data']['name'] ?? 'N/A',
-            'position' => $data['data']['position'] ?? 'N/A',
-            'company' => $data['data']['company'] ?? 'N/A',
-            'location' => ($headquarter['city'] ?? 'Unknown') . ', ' . ($headquarter['country'] ?? 'N/A'),
-        ];
-
-        return response()->json($formattedData);
-    } catch (\Exception $e) {
-        Log::error('Error fetching LinkedIn profile:', ['error' => $e->getMessage()]);
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
-});
 
 // API: Ambil pekerjaan dari LinkedIn
 Route::get('/api/linkedin-jobs', function (Request $request, LinkedInService $linkedInService) {
@@ -94,36 +79,26 @@ Route::get('/api/linkedin-jobs', function (Request $request, LinkedInService $li
     }
 });
 
-// API: Ambil pekerjaan dari API umum
-Route::get('/api/jobs', function (Request $request, LinkedInService $linkedInService) {
-    $request->validate([
-        'keyword' => 'required|string',
-        'location' => 'required|string',
-    ]);
+// API: Ambil pekerjaan dari API umum (dari database, otomatis memperbarui jika belum ada)
+Route::get('/api/jobs', [JobController::class, 'getJobs'])->name('api.jobs');
 
-    try {
-        $data = $linkedInService->getJobs($request->input('keyword'), $request->input('location'));
+// Rute yang membutuhkan login
+Route::middleware(['auth'])->group(function () {
+    // Halaman CV builder
+    Route::get('/cv', function () {
+        return view('cv');
+    })->name('cv');
 
-        $formattedJobs = collect($data['jobs'] ?? [])->map(function ($job) {
-            return [
-                'id' => $job['id'] ?? 'N/A',
-                'title' => $job['title'] ?? 'N/A',
-                'company' => $job['company'] ?? 'N/A',
-                'location' => $job['location'] ?? 'N/A',
-                'date_posted' => $job['date_posted'] ?? 'N/A',
-                'url' => $job['job_url'] ?? 'N/A',
-                'company_url' => $job['company_url'] ?? 'N/A',
-                'description' => $job['description'] ?? 'N/A',
-                'is_remote' => $job['is_remote'] ?? 'N/A',
-            ];
-        });
+    // API: Generate CV dari input user
+    Route::post('/api/generate-cv', [CVController::class, 'create']);
 
-        return response()->json($formattedJobs, 200, [], JSON_PRETTY_PRINT);
-    } catch (\Exception $e) {
-        Log::error('Error fetching jobs:', ['error' => $e->getMessage()]);
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
+    // Proses melamar pekerjaan
+    Route::post('/jobs/apply', [JobFrontendController::class, 'apply'])->name('jobs.apply');
+
+    // Halaman dasbor pelacakan lamaran
+    Route::get('/my-applications', [JobFrontendController::class, 'myApplications'])->name('applications.index');
+
+    // Halaman dan toggle simpan lowongan
+    Route::get('/saved-jobs', [\App\Http\Controllers\SavedJobController::class, 'index'])->name('saved-jobs.index');
+    Route::post('/saved-jobs/toggle', [\App\Http\Controllers\SavedJobController::class, 'toggle'])->name('saved-jobs.toggle');
 });
-
-// API: Generate CV dari input user
-Route::post('/api/generate-cv', [CVController::class, 'create']);

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\JobScraper;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class JobController extends Controller
 {
@@ -17,21 +16,12 @@ class JobController extends Controller
 
         $keyword = $request->query('keyword');
         $location = $request->query('location');
-        $page = $request->query('page', 1);
-        $perPage = $request->query('per_page', 10);
+        $refresh = $request->boolean('refresh', false);
 
         try {
-            $jobs = $scraper->scrapeIndeed($keyword, $location);
+            $jobs = $scraper->scrapeIndeed($keyword, $location, $refresh);
 
-            $paginatedJobs = new LengthAwarePaginator(
-                array_slice($jobs, ($page - 1) * $perPage, $perPage),
-                count($jobs),
-                $perPage,
-                $page,
-                ['path' => $request->url(), 'query' => $request->query()]
-            );
-
-            return response()->json($paginatedJobs);
+            return response()->json(['data' => $jobs]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
