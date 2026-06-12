@@ -47,7 +47,7 @@ class SalaryInsightsController extends Controller
                     'medium' => strtolower($salaryData['market_demand'] ?? '') === 'sedang' ? 60 : 30,
                     'low' => strtolower($salaryData['market_demand'] ?? '') === 'rendah' ? 80 : 20,
                 ],
-                'top_skills' => $salaryData['top_skills'] ?? ['Communication', 'Teamwork'],
+                'top_skills' => isset($salaryData['top_skills']) && is_array($salaryData['top_skills']) ? $salaryData['top_skills'] : ['Communication', 'Teamwork'],
                 'job_growth' => 'Berdasarkan tren AI',
             ];
 
@@ -55,7 +55,7 @@ class SalaryInsightsController extends Controller
                 'success' => true,
                 'data' => $formattedData,
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             \Log::error('Cohere API Error: ' . $e->getMessage());
             
             // Fallback to static calculation if AI fails
