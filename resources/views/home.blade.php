@@ -257,7 +257,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">{{ __('AI Resume Builder') }}</h3>
                     <p class="text-slate-500 dark:text-slate-400 mb-8 max-w-sm">{{ __('Create a professional, ATS-friendly resume in minutes with our AI-powered tool.') }}</p>
-                    <a href="{{ route('career-tools.resume-builder') }}" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+                    <a href="{{ route('cv') }}" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                         {{ __('Build Resume') }} <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                 </div>
