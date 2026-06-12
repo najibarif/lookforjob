@@ -7,7 +7,7 @@
 <!-- Hero Section -->
 <section class="relative bg-gradient-to-br from-emerald-50 dark:from-emerald-950/40 via-white dark:via-slate-950 to-teal-50 dark:to-teal-950/40 min-h-[90vh] flex items-center overflow-hidden transition-colors duration-300">
     <!-- Subtle Background Glow -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-400/20 dark:bg-emerald-500/10 rounded-full blur-3xl opacity-60 animate-pulse-glow pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-400/20 dark:bg-emerald-600/10 rounded-full blur-3xl opacity-60 animate-pulse-glow pointer-events-none"></div>
     <div class="absolute -top-32 -right-32 w-[600px] h-[600px] bg-teal-400/10 dark:bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-20">
@@ -31,15 +31,15 @@
                 <!-- Search Box -->
                 <form action="{{ route('jobs') }}" method="GET" class="bg-white dark:bg-slate-900 p-2 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-2 mb-12 relative z-20 transition-all">
                     <div class="flex-1 flex items-center bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 border border-transparent focus-within:border-emerald-300 dark:focus-within:border-emerald-500 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all">
-                        <i data-lucide="search" class="w-5 h-5 text-slate-400 dark:text-slate-500" aria-hidden="true"></i>
+                        <i data-lucide="search" class="w-5 h-5 text-slate-500 dark:text-slate-400" aria-hidden="true"></i>
                         <input type="text" name="keyword" aria-label="{{ __('Job title, keywords...') }}" placeholder="{{ __('Job title, keywords...') }}" class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 px-3">
                     </div>
                     <div class="hidden sm:block w-px bg-slate-200 dark:bg-slate-700 my-2"></div>
                     <div class="flex-1 flex items-center bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 border border-transparent focus-within:border-emerald-300 dark:focus-within:border-emerald-500 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all">
-                        <i data-lucide="map-pin" class="w-5 h-5 text-slate-400 dark:text-slate-500" aria-hidden="true"></i>
+                        <i data-lucide="map-pin" class="w-5 h-5 text-slate-500 dark:text-slate-400" aria-hidden="true"></i>
                         <input type="text" name="location" aria-label="{{ __('Location') }}" placeholder="{{ __('Location') }}" class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 px-3">
                     </div>
-                    <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-8 rounded-xl transition-all shadow-md shadow-emerald-500/20 whitespace-nowrap">
+                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-600 text-white font-semibold py-3 px-8 rounded-xl transition-all shadow-md shadow-emerald-500/20 whitespace-nowrap">
                         {{ __('Search Jobs') }}
                     </button>
                 </form>
@@ -95,7 +95,7 @@
                         <div class="space-y-4">
                             <!-- Job 1 -->
                             <div class="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700/50 transition-all hover:scale-[1.02]">
-                                <div class="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center text-white shrink-0 shadow-lg shadow-emerald-500/30">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-emerald-500/30">
                                     <i data-lucide="code" class="w-6 h-6"></i>
                                 </div>
                                 <div class="flex-1">
@@ -158,7 +158,7 @@
             @foreach($featuredJobs as $job)
             <div class="group bg-white dark:bg-slate-900 rounded-[24px] p-6 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="absolute top-0 left-0 w-full h-1 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                    <div class="absolute top-0 left-0 w-full h-1 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                     <div class="flex justify-between items-start mb-6">
                         <div class="w-14 h-14 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 flex items-center justify-center group-hover:scale-110 transition-transform">
                             <i data-lucide="briefcase" class="w-7 h-7 text-emerald-600 dark:text-emerald-400"></i>
@@ -212,7 +212,7 @@
                             @endif
                         </span>
                     </div>
-                    <button class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors relative z-10" aria-label="{{ __('Save job') }}">
+                    <button class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors relative z-10" aria-label="{{ __('Save job') }}">
                         <i data-lucide="heart" class="w-5 h-5" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -383,19 +383,19 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             <div class="text-center">
                 <p class="text-5xl font-extrabold text-emerald-400 mb-2 tracking-tight">10k+</p>
-                <p class="text-slate-400 font-medium">{{ __('Successful Hires') }}</p>
+                <p class="text-slate-500 font-medium">{{ __('Successful Hires') }}</p>
             </div>
             <div class="text-center">
                 <p class="text-5xl font-extrabold text-white mb-2 tracking-tight">2.5k</p>
-                <p class="text-slate-400 font-medium">{{ __('Partner Companies') }}</p>
+                <p class="text-slate-500 font-medium">{{ __('Partner Companies') }}</p>
             </div>
             <div class="text-center">
                 <p class="text-5xl font-extrabold text-white mb-2 tracking-tight">15k+</p>
-                <p class="text-slate-400 font-medium">{{ __('Active Jobs') }}</p>
+                <p class="text-slate-500 font-medium">{{ __('Active Jobs') }}</p>
             </div>
             <div class="text-center">
                 <p class="text-5xl font-extrabold text-white mb-2 tracking-tight">98%</p>
-                <p class="text-slate-400 font-medium">{{ __('User Satisfaction') }}</p>
+                <p class="text-slate-500 font-medium">{{ __('User Satisfaction') }}</p>
             </div>
         </div>
     </div>

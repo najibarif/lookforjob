@@ -14,8 +14,6 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest" defer></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -29,14 +27,14 @@
         }
     </script>
 </head>
-<body class="font-sans antialiased text-slate-900 bg-slate-50 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen selection:bg-emerald-500/30">
+<body class="font-sans antialiased text-slate-900 bg-slate-50 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen selection:bg-emerald-600/30">
     
     <!-- Navbar -->
     <header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300" x-data="{ mobileMenuOpen: false }">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <!-- Logo -->
             <div class="flex-shrink-0 flex items-center gap-2">
-                <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
                     <i data-lucide="briefcase" class="text-white w-5 h-5"></i>
                 </div>
                 <a href="{{ route('home') }}" class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -103,7 +101,7 @@
                       </div>
                   @else
                       <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-900 dark:text-white hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors">{{ __('Login') }}</a>
-                      <a href="{{ Route::has('register') ? route('register') : '#' }}" class="text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 px-5 py-2.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-emerald-500/20">{{ __('Sign Up') }}</a>
+                      <a href="{{ Route::has('register') ? route('register') : '#' }}" class="text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-600 px-5 py-2.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md shadow-emerald-500/20">{{ __('Sign Up') }}</a>
                   @endauth
             </div>
 
@@ -134,7 +132,7 @@
                         </form>
                     @else
                         <a href="{{ route('login') }}" class="block px-4 py-3 rounded-xl text-base font-medium text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 mb-2">{{ __('Login') }}</a>
-                        <a href="{{ Route::has('register') ? route('register') : '#' }}" class="block px-4 py-3 rounded-xl text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600 shadow-sm">{{ __('Sign Up') }}</a>
+                        <a href="{{ Route::has('register') ? route('register') : '#' }}" class="block px-4 py-3 rounded-xl text-base font-medium text-center text-white bg-emerald-600 hover:bg-emerald-600 shadow-sm">{{ __('Sign Up') }}</a>
                     @endauth
                 </div>
             </div>
@@ -145,7 +143,7 @@
     <main class="flex-grow">
         <!-- Global Flash Messages -->
         @if(session('success'))
-            <div x-data="{ show: true }" x-show="show" x-transition.opacity.duration.300ms x-init="setTimeout(() => show = false, 5000)" class="fixed top-24 right-4 z-50 bg-emerald-500 text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-3">
+            <div x-data="{ show: true }" x-show="show" x-transition.opacity.duration.300ms x-init="setTimeout(() => show = false, 5000)" class="fixed top-24 right-4 z-50 bg-emerald-600 text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-3">
                 <i data-lucide="check-circle" class="w-5 h-5"></i>
                 <span class="font-medium">{{ session('success') }}</span>
                 <button @click="show = false" class="ml-4 text-emerald-100 hover:text-white" aria-label="Close notification"><i data-lucide="x" class="w-4 h-4"></i></button>
@@ -170,7 +168,7 @@
                 <!-- Branding -->
                 <div class="md:col-span-1">
                     <div class="flex items-center gap-2 mb-6">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center">
                             <i data-lucide="briefcase" class="text-white w-4 h-4"></i>
                         </div>
                         <span class="text-xl font-bold text-slate-900 dark:text-white transition-colors">LookFor<span class="text-emerald-500">Job</span></span>
@@ -227,14 +225,6 @@
         </div>
     </footer>
 
-    <!-- Initialize Lucide Icons -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-        });
-    </script>
     @livewireScripts
 </body>
 </html>

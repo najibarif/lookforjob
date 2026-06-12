@@ -43,17 +43,17 @@
                     </div>
                     
                     @if(isset($job['is_remote']) && $job['is_remote'])
-                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 text-xs font-bold whitespace-nowrap self-start">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-600/10 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 text-xs font-bold whitespace-nowrap self-start">
                             {{ __('Remote') }}
                         </span>
                     @else
-                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 text-xs font-bold whitespace-nowrap self-start">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-600/10 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 text-xs font-bold whitespace-nowrap self-start">
                             {{ __('Full Time') }}
                         </span>
                     @endif
                 </div>
 
-                <div class="flex flex-wrap items-center gap-4 text-sm text-slate-400 dark:text-slate-500 mb-4">
+                <div class="flex flex-wrap items-center gap-4 text-sm text-slate-500 dark:text-slate-400 mb-4">
                     <div class="flex items-center gap-1.5">
                         <i data-lucide="map-pin" class="w-4 h-4"></i>
                         {{ $job['location_text'] }}
@@ -73,12 +73,12 @@
                 </p>
                 
                 <div class="flex items-center gap-3 relative z-20">
-                    <a href="{{ route('jobs.detail', ['title' => $cleanTitle, 'company' => $job['company'], 'location' => $job['location_text'], 'url' => $job['url']]) }}" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold text-sm hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 transition-colors">
+                    <a href="{{ route('jobs.detail', ['title' => $cleanTitle, 'company' => $job['company'], 'location' => $job['location_text'], 'url' => $job['url']]) }}" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold text-sm hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-600 transition-colors">
                         {{ __('View Details') }}
                     </a>
                     
                     @if (!empty($job['company_url']))
-                        <a href="{{ $job['company_url'] }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors tooltip-trigger" title="{{ __('Company Website') }}">
+                        <a href="{{ $job['company_url'] }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors tooltip-trigger" title="{{ __('Company Website') }}">
                             <i data-lucide="external-link" class="w-4 h-4"></i>
                         </a>
                     @endif
