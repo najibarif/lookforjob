@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobFrontendController;
 use App\Http\Controllers\CVController;
-use App\Http\Controllers\ResumeBuilderController;
-use App\Http\Controllers\ApplicationTrackerController;
 use App\Http\Controllers\InterviewPrepController;
 use App\Http\Controllers\SalaryInsightsController;
 use App\Services\LinkedInService;
@@ -145,14 +143,6 @@ Route::middleware(['auth'])->group(function () {
     // Halaman dan toggle simpan lowongan
     Route::get('/saved-jobs', [\App\Http\Controllers\SavedJobController::class, 'index'])->name('saved-jobs.index');
     Route::post('/saved-jobs/toggle', [\App\Http\Controllers\SavedJobController::class, 'toggle'])->name('saved-jobs.toggle');
-
-    // Career Tools - Resume Builder
-    Route::get('/career-tools/resume-builder', [ResumeBuilderController::class, 'index'])->name('career-tools.resume-builder');
-    Route::post('/ajax/generate-resume', [ResumeBuilderController::class, 'generate']);
-
-    // Career Tools - Application Tracker
-    Route::get('/career-tools/application-tracker', [ApplicationTrackerController::class, 'index'])->name('career-tools.application-tracker');
-    Route::post('/ajax/applications/{applicationId}/status', [ApplicationTrackerController::class, 'updateStatus']);
 
     // Career Tools - Interview Prep
     Route::get('/interview-prep', [InterviewPrepController::class, 'index'])->name('career-tools.interview-prep');
