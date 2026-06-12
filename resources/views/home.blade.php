@@ -156,7 +156,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($featuredJobs as $job)
-            <a href="{{ route('jobs.detail', ['title' => $job->title, 'company' => $job->company, 'location' => $job->location, 'url' => $job->url]) }}" class="group bg-white dark:bg-slate-900 rounded-[24px] p-6 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+            <div class="group bg-white dark:bg-slate-900 rounded-[24px] p-6 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                 <div>
                     <div class="absolute top-0 left-0 w-full h-1 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                     <div class="flex justify-between items-start mb-6">
@@ -188,7 +188,9 @@
                         $cleanTitle = explode(' (', $cleanTitle)[0];
                         $cleanTitle = trim($cleanTitle);
                     @endphp
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">{{ $cleanTitle }}</h3>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
+                        <a href="{{ route('jobs.detail', ['title' => $job->title, 'company' => $job->company, 'location' => $job->location, 'url' => $job->url]) }}" class="before:absolute before:inset-0">{{ $cleanTitle }}</a>
+                    </h3>
                     <p class="text-slate-500 dark:text-slate-400 mb-6 font-medium line-clamp-1">{{ $job->company }} • {{ $job->location }}</p>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span class="px-3 py-1 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm rounded-lg font-medium">{{ __('Full Time') }}</span>
@@ -210,11 +212,11 @@
                             @endif
                         </span>
                     </div>
-                    <button class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors" aria-label="{{ __('Save job') }}">
+                    <button class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors relative z-10" aria-label="{{ __('Save job') }}">
                         <i data-lucide="heart" class="w-5 h-5" aria-hidden="true"></i>
                     </button>
                 </div>
-            </a>
+            </div>
             @endforeach
         </div>
     </div>
