@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -63,14 +63,15 @@
                 <div class="hidden md:flex items-center gap-2 border-r border-slate-200 dark:border-slate-700 pr-4 mr-1" x-data="{ darkMode: document.documentElement.classList.contains('dark') }">
                     <!-- Theme Toggle -->
                     <button @click="darkMode = !darkMode; if(darkMode) { document.documentElement.classList.add('dark'); localStorage.theme = 'dark'; } else { document.documentElement.classList.remove('dark'); localStorage.theme = 'light'; }" 
-                            class="p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+                            class="p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                            aria-label="{{ __('Toggle dark mode') }}">
                         <i x-show="!darkMode" data-lucide="moon" class="w-5 h-5"></i>
                         <i x-show="darkMode" data-lucide="sun" class="w-5 h-5 hidden" :class="{'hidden': !darkMode}"></i>
                     </button>
                     
                     <!-- Lang Toggle -->
                     <div class="relative" x-data="{ openLang: false }">
-                        <button @click="openLang = !openLang" @click.away="openLang = false" class="flex items-center gap-1 p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors font-medium text-sm">
+                        <button @click="openLang = !openLang" @click.away="openLang = false" class="flex items-center gap-1 p-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors font-medium text-sm" aria-label="{{ __('Toggle language') }}">
                             {{ strtoupper(app()->getLocale()) }}
                             <i data-lucide="chevron-down" class="w-3 h-3"></i>
                         </button>
@@ -107,7 +108,7 @@
 
             <!-- Mobile Menu Button -->
             <div class="md:hidden flex items-center">
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-500 hover:text-emerald-500 transition-colors p-2">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-slate-500 hover:text-emerald-500 transition-colors p-2" aria-label="{{ __('Toggle navigation menu') }}">
                     <i data-lucide="menu" class="w-6 h-6" x-show="!mobileMenuOpen"></i>
                     <i data-lucide="x" class="w-6 h-6 hidden" x-show="mobileMenuOpen" :class="{'hidden': !mobileMenuOpen}"></i>
                 </button>
@@ -146,7 +147,7 @@
             <div x-data="{ show: true }" x-show="show" x-transition.opacity.duration.300ms x-init="setTimeout(() => show = false, 5000)" class="fixed top-24 right-4 z-50 bg-emerald-500 text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-3">
                 <i data-lucide="check-circle" class="w-5 h-5"></i>
                 <span class="font-medium">{{ session('success') }}</span>
-                <button @click="show = false" class="ml-4 text-emerald-100 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
+                <button @click="show = false" class="ml-4 text-emerald-100 hover:text-white" aria-label="Close notification"><i data-lucide="x" class="w-4 h-4"></i></button>
             </div>
         @endif
 
@@ -154,7 +155,7 @@
             <div x-data="{ show: true }" x-show="show" x-transition.opacity.duration.300ms x-init="setTimeout(() => show = false, 7000)" class="fixed top-24 right-4 z-50 bg-red-500 text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-3">
                 <i data-lucide="alert-circle" class="w-5 h-5"></i>
                 <span class="font-medium">{{ session('error') }}</span>
-                <button @click="show = false" class="ml-4 text-red-100 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
+                <button @click="show = false" class="ml-4 text-red-100 hover:text-white" aria-label="Close error message"><i data-lucide="x" class="w-4 h-4"></i></button>
             </div>
         @endif
 
@@ -177,9 +178,9 @@
                         Empowering professionals to discover their dream careers and modern companies to hire top-tier talent.
                     </p>
                     <div class="flex gap-4">
-                        <a href="#" class="text-slate-400 dark:text-slate-500 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                        <a href="#" class="text-slate-400 dark:text-slate-500 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                        <a href="#" class="text-slate-400 dark:text-slate-500 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                        <a href="#" aria-label="Twitter" class="text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                        <a href="#" aria-label="LinkedIn" class="text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="#" aria-label="GitHub" class="text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
                     </div>
                 </div>
 
@@ -217,9 +218,9 @@
             </div>
             
             <div class="border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-slate-400 dark:text-slate-500 text-sm">&copy; {{ date('Y') }} LookForJob Inc. All rights reserved.</p>
-                <div class="flex items-center gap-2 text-sm text-slate-400 dark:text-slate-500">
-                    <span>Designed by <a href="https://instagram.com/nnajibba" target="_blank" class="text-emerald-500 dark:text-emerald-400">@nnajibba</a></span>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">&copy; {{ date('Y') }} LookForJob Inc. All rights reserved.</p>
+                <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                    <span>Designed by <a href="https://instagram.com/nnajibba" target="_blank" rel="noopener noreferrer" class="text-emerald-600 dark:text-emerald-400 hover:underline">@nnajibba</a></span>
                 </div>
             </div>
         </div>

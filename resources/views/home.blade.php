@@ -31,13 +31,13 @@
                 <!-- Search Box -->
                 <form action="{{ route('jobs') }}" method="GET" class="bg-white dark:bg-slate-900 p-2 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-2 mb-12 relative z-20 transition-all">
                     <div class="flex-1 flex items-center bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 border border-transparent focus-within:border-emerald-300 dark:focus-within:border-emerald-500 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all">
-                        <i data-lucide="search" class="w-5 h-5 text-slate-400 dark:text-slate-500"></i>
-                        <input type="text" name="keyword" placeholder="{{ __('Job title, keywords...') }}" class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 px-3">
+                        <i data-lucide="search" class="w-5 h-5 text-slate-400 dark:text-slate-500" aria-hidden="true"></i>
+                        <input type="text" name="keyword" aria-label="{{ __('Job title, keywords...') }}" placeholder="{{ __('Job title, keywords...') }}" class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 px-3">
                     </div>
                     <div class="hidden sm:block w-px bg-slate-200 dark:bg-slate-700 my-2"></div>
                     <div class="flex-1 flex items-center bg-slate-50 dark:bg-slate-800 rounded-xl px-4 py-3 border border-transparent focus-within:border-emerald-300 dark:focus-within:border-emerald-500 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all">
-                        <i data-lucide="map-pin" class="w-5 h-5 text-slate-400 dark:text-slate-500"></i>
-                        <input type="text" name="location" placeholder="{{ __('Location') }}" class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 px-3">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-slate-400 dark:text-slate-500" aria-hidden="true"></i>
+                        <input type="text" name="location" aria-label="{{ __('Location') }}" placeholder="{{ __('Location') }}" class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 px-3">
                     </div>
                     <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-8 rounded-xl transition-all shadow-md shadow-emerald-500/20 whitespace-nowrap">
                         {{ __('Search Jobs') }}
@@ -210,8 +210,8 @@
                             @endif
                         </span>
                     </div>
-                    <button class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">
-                        <i data-lucide="heart" class="w-5 h-5"></i>
+                    <button class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors" aria-label="{{ __('Save job') }}">
+                        <i data-lucide="heart" class="w-5 h-5" aria-hidden="true"></i>
                     </button>
                 </div>
             </a>
