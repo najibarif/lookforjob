@@ -7,7 +7,7 @@
 <!-- Hero Section -->
 <section class="relative bg-gradient-to-br from-emerald-50 dark:from-emerald-950/40 via-white dark:via-slate-950 to-teal-50 dark:to-teal-950/40 min-h-[90vh] flex items-center overflow-hidden transition-colors duration-300">
     <!-- Subtle Background Glow -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-400/20 dark:bg-emerald-600/10 rounded-full blur-3xl opacity-60 animate-pulse-glow pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-400/20 dark:bg-emerald-700/10 rounded-full blur-3xl opacity-60 animate-pulse-glow pointer-events-none"></div>
     <div class="absolute -top-32 -right-32 w-[600px] h-[600px] bg-teal-400/10 dark:bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-20">
@@ -39,7 +39,7 @@
                         <i data-lucide="map-pin" class="w-5 h-5 text-slate-500 dark:text-slate-400" aria-hidden="true"></i>
                         <input type="text" name="location" aria-label="{{ __('Location') }}" placeholder="{{ __('Location') }}" class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 px-3">
                     </div>
-                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-600 text-white font-semibold py-3 px-8 rounded-xl transition-all shadow-md shadow-emerald-500/20 whitespace-nowrap">
+                    <button type="submit" class="bg-emerald-700 hover:bg-emerald-700 text-white font-semibold py-3 px-8 rounded-xl transition-all shadow-md shadow-emerald-500/20 whitespace-nowrap">
                         {{ __('Search Jobs') }}
                     </button>
                 </form>
@@ -76,7 +76,7 @@
                         <!-- Top header -->
                         <div class="flex items-center justify-between mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center text-emerald-700 dark:text-emerald-400">
                                     <i data-lucide="search" class="w-5 h-5"></i>
                                 </div>
                                 <div>
@@ -95,13 +95,13 @@
                         <div class="space-y-4">
                             <!-- Job 1 -->
                             <div class="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700/50 transition-all hover:scale-[1.02]">
-                                <div class="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-emerald-500/30">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-700 flex items-center justify-center text-white shrink-0 shadow-lg shadow-emerald-500/30">
                                     <i data-lucide="code" class="w-6 h-6"></i>
                                 </div>
                                 <div class="flex-1">
                                     <div class="flex justify-between items-center mb-1">
                                         <p class="text-sm font-bold text-slate-800 dark:text-white">{{ __('Software Engineer') }}</p>
-                                        <span class="px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold rounded-full">NEW</span>
+                                        <span class="px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold rounded-full">NEW</span>
                                     </div>
                                     <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">{{ __('Jakarta') }} &bull; {{ __('Full Time') }}</p>
                                 </div>
@@ -149,7 +149,7 @@
                 <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">{{ __('Featured Opportunities') }}</h2>
                 <p class="text-slate-600 dark:text-slate-400 text-lg">{{ __('Hand-picked jobs from top tech companies.') }}</p>
             </div>
-            <a href="{{ route('jobs') }}" class="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+            <a href="{{ route('jobs') }}" class="inline-flex items-center gap-2 text-emerald-700 dark:text-emerald-400 font-semibold hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                 {{ __('View All Jobs') }} <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </a>
         </div>
@@ -158,13 +158,13 @@
             @foreach($featuredJobs as $job)
             <div class="group bg-white dark:bg-slate-900 rounded-[24px] p-6 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="absolute top-0 left-0 w-full h-1 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                    <div class="absolute top-0 left-0 w-full h-1 bg-emerald-700 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                     <div class="flex justify-between items-start mb-6">
                         <div class="w-14 h-14 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i data-lucide="briefcase" class="w-7 h-7 text-emerald-600 dark:text-emerald-400"></i>
+                            <i data-lucide="briefcase" class="w-7 h-7 text-emerald-700 dark:text-emerald-400"></i>
                         </div>
                         @if($loop->first)
-                        <span class="bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">NEW</span>
+                        <span class="bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">NEW</span>
                         @endif
                     </div>
                     @php
@@ -188,7 +188,7 @@
                         $cleanTitle = explode(' (', $cleanTitle)[0];
                         $cleanTitle = trim($cleanTitle);
                     @endphp
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
                         <a href="{{ route('jobs.detail', ['title' => $job->title, 'company' => $job->company, 'location' => $job->location, 'url' => $job->url]) }}" class="before:absolute before:inset-0">{{ $cleanTitle }}</a>
                     </h3>
                     <p class="text-slate-500 dark:text-slate-400 mb-6 font-medium line-clamp-1">{{ $job->company }} • {{ $job->location }}</p>
@@ -242,7 +242,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">{{ __('AI Resume Builder') }}</h3>
                     <p class="text-slate-500 dark:text-slate-400 mb-8 max-w-sm">{{ __('Create a professional, ATS-friendly resume in minutes with our AI-powered tool.') }}</p>
-                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                         {{ __('Build Resume') }} <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                 </div>
@@ -259,7 +259,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">{{ __('Application Tracking') }}</h3>
                     <p class="text-slate-500 dark:text-slate-400 mb-8 max-w-sm">{{ __('Keep track of all your job applications, interview stages, and offers in one place.') }}</p>
-                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                         {{ __('View Dashboard') }} <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                 </div>
@@ -276,7 +276,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">{{ __('Interview Prep') }}</h3>
                     <p class="text-slate-500 dark:text-slate-400 mb-8 max-w-sm">{{ __('Practice with AI-generated questions tailored to the specific role you\'re applying for.') }}</p>
-                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                         {{ __('Start Practice') }} <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                 </div>
@@ -293,7 +293,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">{{ __('Salary Insights') }}</h3>
                     <p class="text-slate-500 dark:text-slate-400 mb-8 max-w-sm">{{ __('Discover real-time compensation data to help you negotiate your worth confidently.') }}</p>
-                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                         {{ __('View Insights') }} <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                 </div>
@@ -323,7 +323,7 @@
                         S
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-900 dark:text-white">Sarah Jenkins</h4>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Sarah Jenkins</h3>
                         <p class="text-sm text-slate-500 dark:text-slate-400">{{ __('Product Manager @ Stripe') }}</p>
                     </div>
                 </div>
@@ -344,7 +344,7 @@
                         M
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-900 dark:text-white">Michael Chen</h4>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Michael Chen</h3>
                         <p class="text-sm text-slate-500 dark:text-slate-400">{{ __('Frontend Engineer @ Linear') }}</p>
                     </div>
                 </div>
@@ -365,7 +365,7 @@
                         A
                     </div>
                     <div>
-                        <h4 class="font-bold text-slate-900 dark:text-white">Amanda Putri</h4>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Amanda Putri</h3>
                         <p class="text-sm text-slate-500 dark:text-slate-400">{{ __('Data Analyst @ Goto') }}</p>
                     </div>
                 </div>
@@ -406,7 +406,7 @@
     <div class="max-w-3xl mx-auto">
         <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">{{ __('Ready for Your Next Career Move?') }}</h2>
         <p class="text-emerald-50 text-xl mb-10 max-w-2xl mx-auto">{{ __('Join thousands of professionals finding their dream jobs on our premium platform.') }}</p>
-        <a href="{{ route('jobs') }}" class="inline-block bg-white text-emerald-600 font-bold text-lg py-4 px-10 rounded-full shadow-xl shadow-emerald-900/20 hover:scale-105 hover:shadow-2xl transition-all duration-300">
+        <a href="{{ route('jobs') }}" class="inline-block bg-white text-emerald-700 font-bold text-lg py-4 px-10 rounded-full shadow-xl shadow-emerald-900/20 hover:scale-105 hover:shadow-2xl transition-all duration-300">
             {{ __('Start Searching Jobs') }}
         </a>
     </div>

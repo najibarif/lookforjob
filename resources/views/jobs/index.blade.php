@@ -8,7 +8,7 @@
         
         <!-- Page Header -->
         <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 mb-8 border border-slate-200 dark:border-slate-800 relative overflow-hidden transition-colors">
-            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-emerald-600/10 dark:bg-emerald-500/5 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-emerald-700/10 dark:bg-emerald-500/5 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
             <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                     <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-2 transition-colors">{{ __('Find Your') }} <span class="text-emerald-500">{{ __('Dream Job') }}</span></h1>
@@ -22,7 +22,7 @@
                         <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 dark:text-slate-400" aria-hidden="true"></i>
                         <input type="text" name="keyword" id="top-keyword" aria-label="{{ __('Search position...') }}" value="{{ $keyword }}" placeholder="{{ __('Search position...') }}" class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-transparent rounded-2xl focus:bg-slate-100 dark:focus:bg-slate-700 focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm transition-all">
                     </div>
-                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-600 text-white px-6 py-3 rounded-2xl font-semibold transition-all">{{ __('Search') }}</button>
+                    <button type="submit" class="bg-emerald-700 hover:bg-emerald-700 text-white px-6 py-3 rounded-2xl font-semibold transition-all">{{ __('Search') }}</button>
                 </form>
             </div>
         </div>
@@ -33,7 +33,7 @@
                 <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 sticky top-28 transition-colors">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="font-bold text-slate-900 dark:text-white text-lg">{{ __('Search Filters') }}</h3>
-                        <a href="{{ url('/jobs') }}" class="text-sm text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium">{{ __('Reset') }}</a>
+                        <a href="{{ url('/jobs') }}" class="text-sm text-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400 font-medium">{{ __('Reset') }}</a>
                     </div>
                     
                     <form method="GET" action="{{ url('/jobs') }}" class="space-y-6" onsubmit="this.keyword.value = document.getElementById('top-keyword').value">
@@ -89,7 +89,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full mt-4 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-600 border border-slate-200 dark:border-slate-700 font-semibold py-2.5 rounded-xl transition-colors">
+                        <button type="submit" class="w-full mt-4 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-700 hover:text-white dark:hover:bg-emerald-700 border border-slate-200 dark:border-slate-700 font-semibold py-2.5 rounded-xl transition-colors">
                             {{ __('Apply Filters') }}
                         </button>
                     </form>
@@ -132,7 +132,7 @@
                         </div>
                         <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">{{ __('No jobs found') }}</h3>
                         <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-6">{{ __('We couldn\'t find any jobs matching your criteria. Try changing the keyword or location.') }}</p>
-                        <a href="{{ url('/jobs') }}?refresh=1" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-600 transition-colors">
+                        <a href="{{ url('/jobs') }}?refresh=1" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-700 text-white font-semibold hover:bg-emerald-700 transition-colors">
                             <i data-lucide="refresh-cw" class="w-4 h-4"></i> {{ __('Refresh Data') }}
                         </a>
                     </div>
