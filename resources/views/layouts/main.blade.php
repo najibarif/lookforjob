@@ -16,18 +16,7 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 
 
-    @if(app()->environment('production') && file_exists(public_path('build/manifest.json')))
-        @php
-            $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
-            if (isset($manifest['resources/css/app.css'])) {
-                $cssFile = $manifest['resources/css/app.css']['file'];
-                echo '<style>' . file_get_contents(public_path('build/' . $cssFile)) . '</style>';
-            }
-        @endphp
-        @vite(['resources/js/app.js'])
-    @else
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @endif
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script>
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
