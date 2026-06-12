@@ -225,6 +225,19 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const initIcons = () => {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                } else {
+                    setTimeout(initIcons, 50);
+                }
+            };
+            initIcons();
+        });
+    </script>
     @livewireScripts
 </body>
 </html>
