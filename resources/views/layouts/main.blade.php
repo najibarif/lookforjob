@@ -225,12 +225,11 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const initIcons = () => {
-                if (typeof lucide !== 'undefined') {
-                    lucide.createIcons();
+                if (typeof window.lucide !== 'undefined') {
+                    window.lucide.createIcons();
                 } else {
                     setTimeout(initIcons, 50);
                 }
@@ -238,7 +237,5 @@
             initIcons();
         });
     </script>
-    <!-- Alpine.js for lightweight interactions -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
