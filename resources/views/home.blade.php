@@ -257,7 +257,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">{{ __('AI Resume Builder') }}</h3>
                     <p class="text-slate-500 dark:text-slate-400 mb-8 max-w-sm">{{ __('Create a professional, ATS-friendly resume in minutes with our AI-powered tool.') }}</p>
-                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+                    <a href="{{ route('career-tools.resume-builder') }}" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                         {{ __('Build Resume') }} <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                 </div>
@@ -291,7 +291,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">{{ __('Interview Prep') }}</h3>
                     <p class="text-slate-500 dark:text-slate-400 mb-8 max-w-sm">{{ __('Practice with AI-generated questions tailored to the specific role you\'re applying for.') }}</p>
-                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+                    <a href="{{ route('career-tools.interview-prep') }}" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                         {{ __('Start Practice') }} <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                 </div>
@@ -308,7 +308,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">{{ __('Salary Insights') }}</h3>
                     <p class="text-slate-500 dark:text-slate-400 mb-8 max-w-sm">{{ __('Discover real-time compensation data to help you negotiate your worth confidently.') }}</p>
-                    <a href="#" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
+                    <a href="{{ route('career-tools.salary-insights') }}" class="inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                         {{ __('View Insights') }} <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                 </div>
