@@ -96,7 +96,7 @@
             const newStatus = e.target.value;
 
             try {
-                const response = await fetch(`/api/applications/${appId}/status`, {
+                const response = await fetch(`/ajax/applications/${appId}/status`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -148,7 +148,7 @@
                         formData.append('language', interviewLang);
 
                         try {
-                            const response = await fetch('/api/interview/transcribe', {
+                            const response = await fetch('/ajax/interview/transcribe', {
                                 method: 'POST',
                                 headers: {
                                     'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
@@ -218,7 +218,7 @@
         document.getElementById('statusText').innerText = "AI is thinking...";
         
         try {
-            const response = await fetch('/api/interview/chat', {
+            const response = await fetch('/ajax/interview/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

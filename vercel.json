@@ -15,6 +15,13 @@
             "dest": "/$1/$2"
         },
         {
+            "src": "/(favicon\\.svg|favicon\\.ico|robots\\.txt)",
+            "headers": {
+                "Cache-Control": "public, max-age=86400"
+            },
+            "dest": "/$1"
+        },
+        {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }

@@ -233,7 +233,7 @@ class CVBuilder {
         this.showLoading();
 
         try {
-            const response = await fetch('/api/generate-cv', {
+            const response = await fetch('/ajax/generate-cv', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -320,7 +320,7 @@ class CVBuilder {
         }
 
         try {
-            await fetch('/api/generate-cv', {
+            await fetch('/ajax/generate-cv', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -78,7 +78,7 @@
         submitBtn.disabled = true;
 
         try {
-            const response = await fetch('/api/salary-data', {
+            const response = await fetch('/ajax/salary-data', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

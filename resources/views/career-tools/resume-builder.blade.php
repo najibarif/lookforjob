@@ -103,7 +103,7 @@
         const data = Object.fromEntries(formData);
 
         try {
-            const response = await fetch('/api/generate-resume', {
+            const response = await fetch('/ajax/generate-resume', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

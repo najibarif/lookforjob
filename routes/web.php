@@ -97,7 +97,7 @@ Route::get('/api/cron/fetch-jobs', function (Request $request, \App\Services\Job
 
 
 // API: Ambil pekerjaan dari LinkedIn
-Route::get('/api/linkedin-jobs', function (Request $request, LinkedInService $linkedInService) {
+Route::get('/ajax/linkedin-jobs', function (Request $request, LinkedInService $linkedInService) {
     $request->validate([
         'keyword' => 'required|string',
         'location' => 'required|string',
@@ -124,7 +124,7 @@ Route::get('/api/linkedin-jobs', function (Request $request, LinkedInService $li
 });
 
 // API: Ambil pekerjaan dari API umum (dari database, otomatis memperbarui jika belum ada)
-Route::get('/api/jobs', [JobController::class, 'getJobs'])->name('api.jobs');
+Route::get('/ajax/jobs', [JobController::class, 'getJobs'])->name('api.jobs');
 
 // Rute yang membutuhkan login
 Route::middleware(['auth'])->group(function () {
@@ -134,7 +134,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('cv');
 
     // API: Generate CV dari input user
-    Route::post('/api/generate-cv', [CVController::class, 'create']);
+    Route::post('/ajax/generate-cv', [CVController::class, 'create']);
 
     // Proses melamar pekerjaan
     Route::post('/jobs/apply', [JobFrontendController::class, 'apply'])->name('jobs.apply');
@@ -148,19 +148,19 @@ Route::middleware(['auth'])->group(function () {
 
     // Career Tools - Resume Builder
     Route::get('/career-tools/resume-builder', [ResumeBuilderController::class, 'index'])->name('career-tools.resume-builder');
-    Route::post('/api/generate-resume', [ResumeBuilderController::class, 'generate']);
+    Route::post('/ajax/generate-resume', [ResumeBuilderController::class, 'generate']);
 
     // Career Tools - Application Tracker
     Route::get('/career-tools/application-tracker', [ApplicationTrackerController::class, 'index'])->name('career-tools.application-tracker');
-    Route::post('/api/applications/{applicationId}/status', [ApplicationTrackerController::class, 'updateStatus']);
+    Route::post('/ajax/applications/{applicationId}/status', [ApplicationTrackerController::class, 'updateStatus']);
 
     // Career Tools - Interview Prep
     Route::get('/interview-prep', [InterviewPrepController::class, 'index'])->name('career-tools.interview-prep');
-    Route::post('/api/interview-questions', [InterviewPrepController::class, 'generateQuestions']);
-    Route::post('/api/interview/chat', [InterviewPrepController::class, 'processVoice']);
-    Route::post('/api/interview/transcribe', [InterviewPrepController::class, 'transcribe']);
+    Route::post('/ajax/interview-questions', [InterviewPrepController::class, 'generateQuestions']);
+    Route::post('/ajax/interview/chat', [InterviewPrepController::class, 'processVoice']);
+    Route::post('/ajax/interview/transcribe', [InterviewPrepController::class, 'transcribe']);
 
     // Career Tools - Salary Insights
     Route::get('/salary-insights', [SalaryInsightsController::class, 'index'])->name('career-tools.salary-insights');
-    Route::post('/api/salary-data', [SalaryInsightsController::class, 'getSalaryData']);
+    Route::post('/ajax/salary-data', [SalaryInsightsController::class, 'getSalaryData']);
 });
