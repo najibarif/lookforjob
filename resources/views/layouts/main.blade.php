@@ -190,7 +190,7 @@
                     </button>
                     <div x-show="openCareerTools" class="pl-4 space-y-2">
                         @auth
-                        <a href="{{ route('career-tools.resume-builder') }}" class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">{{ __('Resume Builder') }}</a>
+                        <a href="{{ route('cv') }}" class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">{{ __('Resume Builder') }}</a>
                         <a href="{{ route('career-tools.interview-prep') }}" class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">{{ __('Interview Prep') }}</a>
                         <a href="{{ route('career-tools.salary-insights') }}" class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">{{ __('Salary Insights') }}</a>
                         @else
