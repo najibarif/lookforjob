@@ -229,7 +229,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const initIcons = () => {
                 if (typeof window.lucide !== 'undefined') {
-                    window.lucide.createIcons();
+                    window.lucide.createIcons({ icons: window.lucide.icons });
                 } else {
                     setTimeout(initIcons, 50);
                 }

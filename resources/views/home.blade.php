@@ -13,7 +13,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-20">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
             
-            <div class="max-w-2xl animate-fade-up">
+            <div class="max-w-2xl">
                 <div class="mb-8">
                     <h2 class="inline-flex items-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300 font-black uppercase tracking-[0.25em] text-xs sm:text-sm drop-shadow-sm border-l-4 border-emerald-500 pl-4 py-1">
                         {{ __('The #1 Job Search Platform in Indonesia') }}
