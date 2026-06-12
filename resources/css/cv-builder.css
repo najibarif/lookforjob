@@ -1,0 +1,654 @@
+/* ===================== CV BUILDER STYLESHEET ===================== */
+
+/* ===================== CSS VARIABLES ===================== */
+:root {
+    --linear-primary: #10b981;
+    --linear-ink: #0f172a;
+    --linear-ink-subtle: #64748b;
+    --linear-canvas: #f8fafc;
+    --linear-surface-1: #ffffff;
+    --linear-surface-2: #f1f5f9;
+    --linear-surface-3: #e2e8f0;
+    --linear-hairline: #e2e8f0;
+}
+
+.dark {
+    --linear-primary: #10b981;
+    --linear-ink: #f8fafc;
+    --linear-ink-subtle: #94a3b8;
+    --linear-canvas: #020617;
+    --linear-surface-1: #0f172a;
+    --linear-surface-2: #1e293b;
+    --linear-surface-3: #334155;
+    --linear-hairline: #334155;
+}
+
+/* ===================== PAGE LAYOUT ===================== */
+#cv-page {
+    display: flex;
+    min-height: calc(100vh - 64px);
+}
+
+/* ---- Left Panel ---- */
+#cv-left-panel {
+    width: 400px;
+    min-width: 360px;
+    max-width: 440px;
+    background: var(--linear-surface-1);
+    border-right: 1px solid var(--linear-hairline);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 64px);
+}
+
+#cv-left-panel::-webkit-scrollbar {
+    width: 4px;
+}
+
+#cv-left-panel::-webkit-scrollbar-thumb {
+    background: var(--linear-hairline);
+    border-radius: 2px;
+}
+
+/* ---- Right Panel ---- */
+#cv-right-panel {
+    flex: 1;
+    background: var(--linear-canvas);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ---- Accordion ---- */
+.form-section-body {
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+}
+
+.form-section-body.collapsed {
+    max-height: 0 !important;
+    opacity: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* ---- Inputs ---- */
+.cv-input {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--linear-hairline);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--linear-ink);
+    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    outline: none;
+    background: var(--linear-surface-2);
+    line-height: 1.5;
+    resize: vertical;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+textarea.cv-input {
+    resize: vertical;
+    min-height: 80px;
+    border-radius: 8px !important;
+}
+
+/* Override browser autofill background/text color */
+.cv-input:-webkit-autofill,
+.cv-input:-webkit-autofill:hover,
+.cv-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--linear-ink);
+    -webkit-box-shadow: 0 0 0px 1000px var(--linear-surface-2) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.dark .cv-input:-webkit-autofill,
+.dark .cv-input:-webkit-autofill:hover,
+.dark .cv-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #f8fafc;
+    -webkit-box-shadow: 0 0 0px 1000px #060b14 inset;
+}
+
+.cv-input::placeholder {
+    color: var(--linear-ink-subtle);
+    opacity: 0.6;
+}
+
+.cv-input:focus::placeholder {
+    opacity: 0.4;
+}
+
+.cv-input:focus {
+    border-color: var(--linear-primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    background: var(--linear-surface-2);
+    color: var(--linear-ink);
+}
+
+/* Dark mode explicit input overrides */
+.dark .cv-input {
+    background: #060b14;
+    color: #f1f5f9;
+    border-color: #1e293b;
+}
+
+.dark .cv-input:focus {
+    background: #060b14;
+    color: #f1f5f9;
+    border-color: var(--linear-primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* Tailwind preflight resets textarea border-radius to 0 — force it back */
+textarea.cv-input {
+    border-radius: 8px !important;
+    resize: vertical;
+}
+
+.cv-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+}
+
+/* ---- Form Sections ---- */
+.form-section {
+    margin-bottom: 0;
+}
+
+.form-section-header {
+    cursor: pointer;
+    user-select: none;
+    border-radius: 8px;
+    transition: background-color 0.15s ease;
+}
+
+.form-section-header:hover {
+    background-color: var(--linear-surface-2);
+}
+
+/* ---- Template Cards ---- */
+.tpl-card {
+    border: 1px solid var(--linear-hairline);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 4px;
+    background: var(--linear-surface-2);
+    width: 92px;
+    flex-shrink: 0;
+}
+
+.tpl-card:hover {
+    border-color: var(--linear-primary);
+    transform: translateY(-1px);
+    background: var(--linear-surface-3);
+}
+
+.tpl-card.active {
+    border-color: var(--linear-primary);
+    box-shadow: 0 0 0 3px rgba(94, 106, 210, 0.15);
+    background: var(--linear-surface-3);
+}
+
+.tpl-card-thumb {
+    height: 52px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 3px;
+    border: 1px solid var(--linear-hairline);
+    background: var(--linear-surface-1);
+}
+
+.tpl-card p {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    width: 100%;
+    text-align: center;
+}
+
+/* ---- Tabs ---- */
+.tab-pill {
+    transition: all 0.15s;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    color: #64748b;
+}
+
+.tab-pill.active {
+    background: var(--linear-primary);
+    color: #fff;
+}
+
+/* ---- Toolbar ---- */
+#cv-toolbar {
+    background: var(--linear-surface-1);
+    border-bottom: 1px solid var(--linear-hairline);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+/* ---- Preview ---- */
+#cv-preview-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+#cv-preview-paper {
+    width: 100%;
+    max-width: 800px;
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    min-height: 700px;
+}
+
+#cv-preview-content {
+    width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* ---- WYSIWYG Editor ---- */
+#cv-wysiwyg-editor {
+    width: 100%;
+    max-width: 800px;
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    min-height: 700px;
+    outline: none;
+    padding: 0;
+}
+
+#cv-wysiwyg-editor:focus-within {
+    box-shadow: 0 0 0 2px #5e6ad2, 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* WYSIWYG toolbar */
+#wysiwyg-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #1e293b;
+    color: #fff;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    border-radius: 4px 4px 0 0;
+}
+
+.wysiwyg-btn {
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: #cbd5e1;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.wysiwyg-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.wysiwyg-sep {
+    width: 1px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.12);
+    margin: 0 4px;
+}
+
+#cv-wysiwyg-content {
+    min-height: 650px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#cv-wysiwyg-content:focus {
+    outline: none;
+}
+
+/* ---- Templates ---- */
+/* Note: padding on tpl-* is used inside WYSIWYG editor; in preview the wrapper adds padding */
+.tpl-classic {
+    font-family: 'Georgia', serif;
+    color: #1a1a1a;
+    background: #fff;
+    padding: 60px 72px;
+}
+
+.tpl-classic h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #111827;
+    border-bottom: 3px solid #5e6ad2;
+    padding-bottom: 8px;
+    margin-bottom: 6px;
+}
+
+.tpl-classic h2 {
+    font-size: 0.95em;
+    font-weight: bold;
+    border-bottom: 1px solid #d1d5db;
+    padding-bottom: 4px;
+    margin-top: 22px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #374151;
+}
+
+.tpl-classic p,
+.tpl-classic li {
+    font-size: 0.9em;
+    line-height: 1.75;
+    margin-bottom: 4px;
+}
+
+.tpl-classic ul {
+    padding-left: 18px;
+}
+
+.tpl-modern {
+    font-family: 'Inter', sans-serif;
+    color: #1e293b;
+    background: #fff;
+    display: flex;
+    min-height: 600px;
+}
+
+.tpl-modern-sidebar {
+    background: #1e293b;
+    color: #fff;
+    width: 220px;
+    min-width: 220px;
+    padding: 40px 24px;
+    flex-shrink: 0;
+}
+
+.tpl-modern-main {
+    padding: 40px 48px;
+    flex: 1;
+}
+
+.tpl-modern-sidebar h1 {
+    font-size: 1.4em;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 6px;
+}
+
+.tpl-modern-sidebar h2 {
+    font-size: 0.65em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #94a3b8;
+    margin-top: 20px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 3px;
+}
+
+.tpl-modern-sidebar p,
+.tpl-modern-sidebar li {
+    font-size: 0.8em;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.tpl-modern-sidebar ul {
+    padding-left: 14px;
+}
+
+.tpl-modern-main h1 {
+    color: #111827;
+    font-size: 1.9em;
+    font-weight: 800;
+}
+
+.tpl-modern-main h2 {
+    font-size: 0.75em;
+    font-weight: 700;
+    color: #5e6ad2;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 3px;
+    margin-top: 22px;
+    margin-bottom: 8px;
+}
+
+.tpl-modern-main p,
+.tpl-modern-main li {
+    font-size: 0.88em;
+    line-height: 1.7;
+}
+
+.tpl-modern-main ul {
+    padding-left: 16px;
+}
+
+.tpl-minimal {
+    font-family: 'Inter', sans-serif;
+    color: #374151;
+    background: #fff;
+    padding: 60px 72px;
+}
+
+.tpl-minimal h1 {
+    font-size: 2.4em;
+    font-weight: 200;
+    letter-spacing: -1.5px;
+    color: #111;
+    margin-bottom: 4px;
+}
+
+.tpl-minimal h2 {
+    font-size: 0.68em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #9ca3af;
+    margin-top: 32px;
+    margin-bottom: 10px;
+}
+
+.tpl-minimal p,
+.tpl-minimal li {
+    font-size: 0.9em;
+    line-height: 1.85;
+    color: #4b5563;
+}
+
+.tpl-minimal ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.tpl-minimal ul li::before {
+    content: '— ';
+    color: #d1d5db;
+}
+
+.tpl-creative {
+    font-family: 'Inter', sans-serif;
+    color: #1e293b;
+    background: #fff;
+    padding: 0;
+}
+
+.tpl-creative-header-wrap {
+    background: linear-gradient(135deg, #10b981, #059669);
+    padding: 48px 60px 36px;
+    color: #fff;
+}
+
+.tpl-creative-body-wrap {
+    padding: 36px 60px 60px;
+}
+
+.tpl-creative h1 {
+    font-size: 2.1em;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.tpl-creative h2 {
+    font-size: 0.9em;
+    font-weight: 700;
+    color: #10b981;
+    margin-top: 26px;
+    margin-bottom: 8px;
+    padding-left: 10px;
+    border-left: 4px solid #10b981;
+}
+
+.tpl-creative p,
+.tpl-creative li {
+    font-size: 0.9em;
+    line-height: 1.75;
+}
+
+.tpl-creative ul {
+    padding-left: 20px;
+}
+
+/* ---- Empty/Loading ---- */
+#cv-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 500px;
+    color: var(--linear-ink-subtle);
+}
+
+@keyframes shimmer {
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.9;
+    }
+}
+
+.shimmer-line {
+    animation: shimmer 1.5s ease-in-out infinite;
+    background: var(--linear-hairline);
+    border-radius: 4px;
+}
+
+/* ---- CV Entry Cards & Buttons ---- */
+.cv-entry-card {
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed var(--linear-hairline);
+}
+
+.cv-entry-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 12px;
+}
+
+.dark .cv-entry-card {
+    border-color: var(--linear-surface-3);
+}
+
+.cv-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--linear-primary);
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.cv-add-btn:hover {
+    background: rgba(16, 185, 129, 0.15);
+}
+
+.cv-remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+}
+
+.cv-remove-btn:hover {
+    opacity: 1;
+    background: rgba(239, 68, 68, 0.15);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    #cv-page {
+        flex-direction: column;
+    }
+
+    #cv-left-panel {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--linear-hairline);
+    }
+
+    #cv-right-panel {
+        height: 70vh;
+    }
+}

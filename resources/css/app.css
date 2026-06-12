@@ -3,9 +3,13 @@
 /* Self-hosted Inter variable font - eliminates Google Fonts 3rd-party connection */
 @import '@fontsource-variable/inter';
 
+/* CV Builder specific styles */
+@import './cv-builder.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 [x-cloak] {
     display: none;

@@ -6,3 +6,5 @@ Alpine.start();
 
 import { createIcons, icons } from 'lucide';
 window.lucide = { createIcons, icons };
+
+import './cv-builder';

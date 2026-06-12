@@ -170,20 +170,14 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-slate-900 dark:text-white">{{ $company }}</h4>
-                            <a href="#" class="text-sm text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline">{{ __('View full profile') }}</a>
+                            @if(isset($url) && $url)
+                            <a href="{{ $url }}" target="_blank" class="text-sm text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline">{{ __('View full profile') }}</a>
+                            @endif
                         </div>
                     </div>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
-                        {{ $company }} {{ __('is a growing company with a focus on innovation.') }}
+                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                        {{ __('Learn more about :company by visiting their official pages or viewing the full job post.', ['company' => $company]) }}
                     </p>
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
-                            <i data-lucide="users" class="w-4 h-4 text-slate-400 dark:text-slate-500"></i> 50 - 500 {{ __('Employees') }}
-                        </div>
-                        <div class="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
-                            <i data-lucide="globe" class="w-4 h-4 text-slate-400 dark:text-slate-500"></i> www.perusahaan.com
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

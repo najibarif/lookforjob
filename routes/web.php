@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobFrontendController;
 use App\Http\Controllers\CVController;
+use App\Http\Controllers\ResumeBuilderController;
+use App\Http\Controllers\ApplicationTrackerController;
+use App\Http\Controllers\InterviewPrepController;
+use App\Http\Controllers\SalaryInsightsController;
 use App\Services\LinkedInService;
 
 /*
@@ -61,9 +65,9 @@ Route::get('/jobs', [JobFrontendController::class, 'index'])->name('jobs');
 Route::get('/jobs/detail', function (Request $request) {
     return view('jobs.detail', [
         'url' => $request->query('url'),
-        'title' => $request->query('title', 'Senior Frontend Developer'),
-        'company' => $request->query('company', 'Tech Innovators Inc.'),
-        'location' => $request->query('location', 'Jakarta Selatan'),
+        'title' => $request->query('title', 'Position Unavailable'),
+        'company' => $request->query('company', 'Company Unavailable'),
+        'location' => $request->query('location') ?: 'Remote / Unspecified',
     ]);
 })->name('jobs.detail');
 
@@ -141,4 +145,22 @@ Route::middleware(['auth'])->group(function () {
     // Halaman dan toggle simpan lowongan
     Route::get('/saved-jobs', [\App\Http\Controllers\SavedJobController::class, 'index'])->name('saved-jobs.index');
     Route::post('/saved-jobs/toggle', [\App\Http\Controllers\SavedJobController::class, 'toggle'])->name('saved-jobs.toggle');
+
+    // Career Tools - Resume Builder
+    Route::get('/career-tools/resume-builder', [ResumeBuilderController::class, 'index'])->name('career-tools.resume-builder');
+    Route::post('/api/generate-resume', [ResumeBuilderController::class, 'generate']);
+
+    // Career Tools - Application Tracker
+    Route::get('/career-tools/application-tracker', [ApplicationTrackerController::class, 'index'])->name('career-tools.application-tracker');
+    Route::post('/api/applications/{applicationId}/status', [ApplicationTrackerController::class, 'updateStatus']);
+
+    // Career Tools - Interview Prep
+    Route::get('/interview-prep', [InterviewPrepController::class, 'index'])->name('career-tools.interview-prep');
+    Route::post('/api/interview-questions', [InterviewPrepController::class, 'generateQuestions']);
+    Route::post('/api/interview/chat', [InterviewPrepController::class, 'processVoice']);
+    Route::post('/api/interview/transcribe', [InterviewPrepController::class, 'transcribe']);
+
+    // Career Tools - Salary Insights
+    Route::get('/salary-insights', [SalaryInsightsController::class, 'index'])->name('career-tools.salary-insights');
+    Route::post('/api/salary-data', [SalaryInsightsController::class, 'getSalaryData']);
 });

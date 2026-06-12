@@ -20,9 +20,9 @@ class LanguageMiddleware
         if (Session::has('locale')) {
             App::setLocale(Session::get('locale'));
         } else {
-            // Default to id
-            App::setLocale('id');
-            Session::put('locale', 'id');
+            // Default to en
+            App::setLocale('en');
+            Session::put('locale', 'en');
         }
 
         return $next($request);

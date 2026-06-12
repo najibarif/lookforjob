@@ -1,18 +1,18 @@
-@extends('layouts.main')
 
-@section('title', 'AI Resume Builder - LookForJob')
-@section('meta_description', 'Create professional resumes in seconds with AI-powered resume builder from LookForJob.')
 
-@section('content')
+<?php $__env->startSection('title', 'AI Resume Builder - LookForJob'); ?>
+<?php $__env->startSection('meta_description', 'Create professional resumes in seconds with AI-powered resume builder from LookForJob.'); ?>
+
+<?php $__env->startSection('content'); ?>
 
 <div id="cv-page">
 
-    {{-- ============================================================ --}}
-    {{-- LEFT PANEL                                                    --}}
-    {{-- ============================================================ --}}
+    
+    
+    
     <div id="cv-left-panel">
 
-        {{-- Header --}}
+        
         <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-700 flex-shrink-0">
             <div class="flex items-center gap-4">
                 <div class="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0">
@@ -27,10 +27,10 @@
             </div>
         </div>
 
-        {{-- Form Sections --}}
+        
         <div class="flex-1 overflow-y-auto px-5 py-4 space-y-1">
 
-            {{-- Personal Information --}}
+            
             <div class="form-section">
                 <button type="button" class="form-section-header w-full flex items-center justify-between py-2.5 group" data-target="sec-personal">
                     <div class="flex items-center gap-4">
@@ -46,11 +46,11 @@
                     <div class="grid grid-cols-1 gap-3">
                         <div>
                             <label class="cv-label">Nama Lengkap</label>
-                            <input type="text" id="name" class="cv-input" required value="{{ Auth::user()->name }}" placeholder="Naufal">
+                            <input type="text" id="name" class="cv-input" required value="<?php echo e(Auth::user()->name); ?>" placeholder="Naufal">
                         </div>
                         <div>
                             <label class="cv-label">Alamat Email</label>
-                            <input type="email" id="email" class="cv-input" required value="{{ Auth::user()->email }}" placeholder="naufal@gmail.com">
+                            <input type="email" id="email" class="cv-input" required value="<?php echo e(Auth::user()->email); ?>" placeholder="naufal@gmail.com">
                         </div>
                         <div class="grid grid-cols-2 gap-2">
                             <div>
@@ -68,7 +68,7 @@
 
             <div class="border-t border-slate-200 dark:border-slate-700 my-1"></div>
 
-            {{-- Short Profile --}}
+            
             <div class="form-section">
                 <button type="button" class="form-section-header w-full flex items-center justify-between py-2.5" data-target="sec-summary">
                     <div class="flex items-center gap-4">
@@ -89,7 +89,7 @@
 
             <div class="border-t border-slate-200 dark:border-slate-700 my-1"></div>
 
-            {{-- Education --}}
+            
             <div class="form-section">
                 <button type="button" class="form-section-header w-full flex items-center justify-between py-2.5" data-target="sec-edu">
                     <div class="flex items-center gap-4">
@@ -102,7 +102,7 @@
                 </button>
                 <div class="form-section-body collapsed pb-3" id="sec-edu" style="max-height:0;">
                     <div id="edu-entries" class="space-y-4">
-                        {{-- Education Entry Template --}}
+                        
                         <div class="edu-entry cv-entry-card">
                             <div class="space-y-2">
                                 <div>
@@ -139,7 +139,7 @@
 
             <div class="border-t border-slate-200 dark:border-slate-700 my-1"></div>
 
-            {{-- Work Experience --}}
+            
             <div class="form-section">
                 <button type="button" class="form-section-header w-full flex items-center justify-between py-2.5" data-target="sec-exp">
                     <div class="flex items-center gap-4">
@@ -152,7 +152,7 @@
                 </button>
                 <div class="form-section-body collapsed pb-3" id="sec-exp" style="max-height:0;">
                     <div id="exp-entries" class="space-y-4">
-                        {{-- Experience Entry Template --}}
+                        
                         <div class="exp-entry cv-entry-card">
                             <div class="space-y-2">
                                 <div>
@@ -189,7 +189,7 @@
 
             <div class="border-t border-slate-200 dark:border-slate-700 my-1"></div>
 
-            {{-- Skills --}}
+            
             <div class="form-section">
                 <button type="button" class="form-section-header w-full flex items-center justify-between py-2.5" data-target="sec-skills">
                     <div class="flex items-center gap-4">
@@ -220,7 +220,7 @@
 
         </div>
 
-        {{-- Footer CTA --}}
+        
         <div class="px-5 py-4 border-t border-slate-200 dark:border-slate-700 space-y-2 flex-shrink-0">
             <button type="button" id="generate-cv-btn"
                 class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-500-hover rounded-xl shadow-none transition-all duration-200 active:scale-95">
@@ -251,19 +251,19 @@
         </div>
     </div>
 
-    {{-- ============================================================ --}}
-    {{-- RIGHT PANEL                                                   --}}
-    {{-- ============================================================ --}}
+    
+    
+    
     <div id="cv-right-panel">
 
-        {{-- Toolbar --}}
+        
         <div id="cv-toolbar">
-            {{-- Template Selector --}}
+            
             <div class="flex items-center gap-2 flex-1">
                 <span class="text-xs font-bold text-slate-400 uppercase tracking-widest shrink-0">Template</span>
                 <div class="flex gap-2" id="template-selector">
 
-                    {{-- Classic --}}
+                    
                     <div class="tpl-card active" data-template="classic" title="Classic">
                         <div class="tpl-card-thumb bg-white dark:bg-slate-900">
                             <div style="padding:6px 6px 0; border-bottom:2px solid #5e6ad2; margin-bottom:3px;">
@@ -278,7 +278,7 @@
                         <p class="text-center text-[11px] font-semibold text-slate-900 dark:text-white mt-1">Classic</p>
                     </div>
 
-                    {{-- Modern --}}
+                    
                     <div class="tpl-card" data-template="modern" title="Modern">
                         <div class="tpl-card-thumb flex">
                             <div style="width:38%;background:#1e293b;padding:5px 4px;flex-shrink:0;">
@@ -295,7 +295,7 @@
                         <p class="text-center text-[11px] font-semibold text-slate-900 dark:text-white mt-1">Modern</p>
                     </div>
 
-                    {{-- Minimal --}}
+                    
                     <div class="tpl-card" data-template="minimal" title="Minimal">
                         <div class="tpl-card-thumb bg-white dark:bg-slate-900" style="padding:6px 6px;">
                             <div style="height:8px;background:#111;border-radius:1px;width:60%;margin-bottom:6px;"></div>
@@ -306,7 +306,7 @@
                         <p class="text-center text-[11px] font-semibold text-slate-900 dark:text-white mt-1">Minimal</p>
                     </div>
 
-                    {{-- Creative --}}
+                    
                     <div class="tpl-card" data-template="creative" title="Creative">
                         <div class="tpl-card-thumb">
                             <div style="background:linear-gradient(135deg,#10b981,#059669);padding:6px 6px;height:22px;display:flex;align-items:center;">
@@ -324,7 +324,7 @@
                 </div>
             </div>
 
-            {{-- View Toggle --}}
+            
             <div class="flex bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full p-1 flex-shrink-0 gap-0.5">
                 <button id="tab-preview" class="tab-pill active flex items-center gap-1.5">
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -337,12 +337,12 @@
             </div>
         </div>
 
-        {{-- Preview Scroll Area --}}
+        
         <div id="cv-preview-scroll">
 
-            {{-- PREVIEW PAPER --}}
+            
             <div id="cv-preview-paper">
-                <div id="cv-empty-state" @if(Auth::user()->cv_html) style="display:none" @endif>
+                <div id="cv-empty-state" <?php if(Auth::user()->cv_html): ?> style="display:none" <?php endif; ?>>
                     <div class="w-20 h-20 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center mb-5 shadow-lg">
                         <svg class="w-10 h-10 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -366,16 +366,17 @@
                     <div class="shimmer-line h-3 w-4/6"></div>
                 </div>
 
-                <div id="cv-preview-content" class="tpl-classic" @if(!Auth::user()->cv_html) style="display:none" @endif>
-                    @if(Auth::user()->cv_html)
-                        {!! Auth::user()->cv_html !!}
-                    @endif
+                <div id="cv-preview-content" class="tpl-classic" <?php if(!Auth::user()->cv_html): ?> style="display:none" <?php endif; ?>>
+                    <?php if(Auth::user()->cv_html): ?>
+                        <?php echo Auth::user()->cv_html; ?>
+
+                    <?php endif; ?>
                 </div>
             </div>
 
-            {{-- WYSIWYG EDITOR (hidden by default) --}}
+            
             <div id="cv-wysiwyg-editor" class="hidden w-full max-w-3xl">
-                {{-- Formatting Toolbar --}}
+                
                 <div id="wysiwyg-toolbar">
                     <button class="wysiwyg-btn" onclick="document.execCommand('bold')" title="Tebal">
                         <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5S13.83 9.5 13 9.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg>
@@ -402,9 +403,9 @@
                     <div class="wysiwyg-sep"></div>
                     <span class="text-[11px] text-slate-400 ml-1">Klik langsung pada teks CV untuk mulai mengedit</span>
                 </div>
-                {{-- Editable content --}}
+                
                 <div id="cv-wysiwyg-content" contenteditable="true" class="tpl-classic">
-                    @if(Auth::user()->cv_html) {!! Auth::user()->cv_html !!} @endif
+                    <?php if(Auth::user()->cv_html): ?> <?php echo Auth::user()->cv_html; ?> <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -415,9 +416,11 @@
 <script>
     // Pass CV data to cv-builder.js (loaded via Vite bundle in app.js)
     window.cvBuilderData = {
-        cvHtml: @json(Auth::user()->cv_html ?? ''),
-        csrf: '{{ csrf_token() }}'
+        cvHtml: <?php echo json_encode(Auth::user()->cv_html ?? '', 15, 512) ?>,
+        csrf: '<?php echo e(csrf_token()); ?>'
     };
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.main', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\LookForJob\resources\views/cv.blade.php ENDPATH**/ ?>

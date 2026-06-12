@@ -1,7 +1,35 @@
-@props(['jobs', 'offset' => 0])
+<?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
 
-@foreach ($jobs as $index => $job)
-@php
+$__newAttributes = [];
+$__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames((['jobs', 'offset' => 0]));
+
+foreach ($attributes->all() as $__key => $__value) {
+    if (in_array($__key, $__propNames)) {
+        $$__key = $$__key ?? $__value;
+    } else {
+        $__newAttributes[$__key] = $__value;
+    }
+}
+
+$attributes = new \Illuminate\View\ComponentAttributeBag($__newAttributes);
+
+unset($__propNames);
+unset($__newAttributes);
+
+foreach (array_filter((['jobs', 'offset' => 0]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
+    $$__key = $$__key ?? $__value;
+}
+
+$__defined_vars = get_defined_vars();
+
+foreach ($attributes->all() as $__key => $__value) {
+    if (array_key_exists($__key, $__defined_vars)) unset($$__key);
+}
+
+unset($__defined_vars); ?>
+
+<?php $__currentLoopData = $jobs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $job): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php
     $cleanTitle = $job['title'];
     $cleanTitle = trim(preg_replace('/\s*\([mwfdx\s\/]+\)/iu', '', $cleanTitle));
     // Extract salary if present
@@ -23,7 +51,7 @@
     $cleanTitle = trim($cleanTitle);
     
     $cleanDesc = html_entity_decode(strip_tags($job['description']));
-@endphp
+?>
     <article class="group bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-none hover:border-emerald-500/50 dark:hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/5 dark:from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
         
@@ -37,53 +65,61 @@
                 <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-2">
                     <div>
                         <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">
-                            <a href="{{ route('jobs.detail', ['title' => $cleanTitle, 'company' => $job['company'], 'location' => $job['location_text'] ?: $job['location'], 'url' => $job['url']]) }}" class="before:absolute before:inset-0">{{ $cleanTitle }}</a>
+                            <a href="<?php echo e(route('jobs.detail', ['title' => $cleanTitle, 'company' => $job['company'], 'location' => $job['location_text'] ?: $job['location'], 'url' => $job['url']])); ?>" class="before:absolute before:inset-0"><?php echo e($cleanTitle); ?></a>
                         </h2>
-                        <p class="text-slate-500 dark:text-slate-400 font-medium">{{ $job['company'] }}</p>
+                        <p class="text-slate-500 dark:text-slate-400 font-medium"><?php echo e($job['company']); ?></p>
                     </div>
                     
-                    @if(isset($job['is_remote']) && $job['is_remote'])
+                    <?php if(isset($job['is_remote']) && $job['is_remote']): ?>
                         <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-600/10 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 text-xs font-bold whitespace-nowrap self-start">
-                            {{ __('Remote') }}
+                            <?php echo e(__('Remote')); ?>
+
                         </span>
-                    @else
+                    <?php else: ?>
                         <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-600/10 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 text-xs font-bold whitespace-nowrap self-start">
-                            {{ __('Full Time') }}
+                            <?php echo e(__('Full Time')); ?>
+
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-4 text-sm text-slate-500 dark:text-slate-400 mb-4">
                     <div class="flex items-center gap-1.5">
                         <i data-lucide="map-pin" class="w-4 h-4"></i>
-                        {{ $job['location_text'] ?: $job['location'] }}
+                        <?php echo e($job['location_text'] ?: $job['location']); ?>
+
                     </div>
                     <div class="flex items-center gap-1.5">
                         <i data-lucide="clock" class="w-4 h-4"></i>
-                        {{ $job['date_posted'] ? (\Carbon\Carbon::parse(is_numeric($job['date_posted']) ? (int)$job['date_posted'] : $job['date_posted'])->diffForHumans()) : __('New') }}
+                        <?php echo e($job['date_posted'] ? (\Carbon\Carbon::parse(is_numeric($job['date_posted']) ? (int)$job['date_posted'] : $job['date_posted'])->diffForHumans()) : __('New')); ?>
+
                     </div>
                     <div class="flex items-center gap-1.5">
                         <i data-lucide="banknote" class="w-4 h-4"></i>
-                        {{ $salary ? $salary : __('Confidential') }}
+                        <?php echo e($salary ? $salary : __('Confidential')); ?>
+
                     </div>
                 </div>
 
                 <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed line-clamp-2 mb-6">
-                    {{ \Illuminate\Support\Str::limit($cleanDesc, 150) }}
+                    <?php echo e(\Illuminate\Support\Str::limit($cleanDesc, 150)); ?>
+
                 </p>
                 
                 <div class="flex items-center gap-3 relative z-20">
-                    <a href="{{ route('jobs.detail', ['title' => $cleanTitle, 'company' => $job['company'], 'location' => $job['location_text'] ?: $job['location'], 'url' => $job['url']]) }}" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold text-sm hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-600 transition-colors">
-                        {{ __('View Details') }}
+                    <a href="<?php echo e(route('jobs.detail', ['title' => $cleanTitle, 'company' => $job['company'], 'location' => $job['location_text'] ?: $job['location'], 'url' => $job['url']])); ?>" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold text-sm hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-600 transition-colors">
+                        <?php echo e(__('View Details')); ?>
+
                     </a>
                     
-                    @if (!empty($job['company_url']))
-                        <a href="{{ $job['company_url'] }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors tooltip-trigger" title="{{ __('Company Website') }}">
+                    <?php if(!empty($job['company_url'])): ?>
+                        <a href="<?php echo e($job['company_url']); ?>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors tooltip-trigger" title="<?php echo e(__('Company Website')); ?>">
                             <i data-lucide="external-link" class="w-4 h-4"></i>
                         </a>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </article>
-@endforeach
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php /**PATH C:\xampp\htdocs\LookForJob\resources\views/jobs/partials/job-cards.blade.php ENDPATH**/ ?>
