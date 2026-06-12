@@ -91,7 +91,6 @@
             
             submitBtn.innerHTML = originalBtnText;
             submitBtn.disabled = false;
-            lucide.createIcons();
 
             if (result.success) {
                 const resultsDiv = document.getElementById('resultsContainer');
@@ -159,6 +158,9 @@
                     </div>
                 `;
                 document.getElementById('emptyState').classList.add('hidden');
+                if (typeof window.lucide !== 'undefined') {
+                    window.lucide.createIcons({ icons: window.lucide.icons });
+                }
             } else {
                 alert(result.message || 'Gagal mengambil data dari AI. Pastikan API Key valid.');
             }
@@ -166,7 +168,9 @@
             console.error('Error:', error);
             submitBtn.innerHTML = originalBtnText;
             submitBtn.disabled = false;
-            lucide.createIcons();
+            if (typeof window.lucide !== 'undefined') {
+                window.lucide.createIcons({ icons: window.lucide.icons });
+            }
             alert('Gagal mengambil data dari AI. Silakan coba lagi.');
         }
     });
