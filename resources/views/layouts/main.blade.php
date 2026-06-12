@@ -28,7 +28,6 @@
     @else
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
-    @livewireStyles
 
     <script>
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -250,7 +249,7 @@
             initIcons();
         });
     </script>
-    @livewireScriptConfig
-    <script src="/vendor/livewire/livewire.min.js" defer></script>
+    <!-- Alpine.js for lightweight interactions -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
