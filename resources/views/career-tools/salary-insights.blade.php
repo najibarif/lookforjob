@@ -159,6 +159,8 @@
                     </div>
                 `;
                 document.getElementById('emptyState').classList.add('hidden');
+            } else {
+                alert(result.message || 'Gagal mengambil data dari AI. Pastikan API Key valid.');
             }
         } catch (error) {
             console.error('Error:', error);

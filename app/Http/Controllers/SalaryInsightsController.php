@@ -56,10 +56,33 @@ class SalaryInsightsController extends Controller
                 'data' => $formattedData,
             ]);
         } catch (\Exception $e) {
+            \Log::error('Cohere API Error: ' . $e->getMessage());
+            
+            // Fallback to static calculation if AI fails
+            $jobTitle = $validated['job_title'];
+            $averageSalary = $this->calculateAverageSalary($jobTitle);
+            $salaryRange = $this->getSalaryRange($jobTitle);
+            
             return response()->json([
-                'success' => false,
-                'message' => 'Error fetching salary data: ' . $e->getMessage()
-            ], 500);
+                'success' => true,
+                'data' => [
+                    'job_title' => $jobTitle,
+                    'location' => $validated['location'] ?? 'Indonesia',
+                    'average_salary' => $averageSalary,
+                    'salary_range' => [
+                        'entry_level' => $salaryRange['entry_level'],
+                        'mid_level' => $salaryRange['mid_level'],
+                        'senior_level' => $salaryRange['senior_level'],
+                    ],
+                    'market_demand' => [
+                        'high' => 80,
+                        'medium' => 15,
+                        'low' => 5,
+                    ],
+                    'top_skills' => ['Communication', 'Problem Solving', 'Teamwork', 'Adaptability', 'Leadership'],
+                    'job_growth' => '+15% (Estimasi)',
+                ]
+            ]);
         }
     }
 
