@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Services\JobScraper;
+use App\Services\Jobs\JobAggregator;
 
 class JobFrontendController extends Controller
 {
-    public function index(Request $request, JobScraper $scraper)
+    public function index(Request $request, JobAggregator $aggregator)
     {
         $keyword = (string) $request->input('keyword');
         $location = (string) $request->input('location');
@@ -17,7 +17,7 @@ class JobFrontendController extends Controller
         $perPage = 20;
 
         try {
-            $allJobs = collect($scraper->scrapeIndeed($keyword, $location, $refresh));
+            $allJobs = collect($aggregator->fetchAndStore($keyword, $location, $refresh));
             $lastRefreshedAt = $allJobs->max('updated_at') ?: now()->toDateTimeString();
 
             $jobs = new LengthAwarePaginator(
@@ -51,6 +51,16 @@ class JobFrontendController extends Controller
                 'lastRefreshedAt' => now()->toDateTimeString(),
             ]);
         }
+    }
+
+    public function detail(Request $request)
+    {
+        return view('jobs.detail', [
+            'url' => $request->query('url'),
+            'title' => $request->query('title', 'Position Unavailable'),
+            'company' => $request->query('company', 'Company Unavailable'),
+            'location' => $request->query('location') ?: 'Remote / Unspecified',
+        ]);
     }
 
     public function apply(Request $request)

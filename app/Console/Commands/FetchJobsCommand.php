@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\JobAggregatorService;
+use App\Services\Jobs\JobAggregator;
 use Illuminate\Console\Command;
 
 class FetchJobsCommand extends Command
@@ -24,7 +24,7 @@ class FetchJobsCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(JobAggregatorService $jobAggregatorService)
+    public function handle(JobAggregator $aggregator)
     {
         $keyword = $this->argument('keyword') ?? 'developer';
         $location = $this->argument('location') ?? '';
@@ -32,7 +32,7 @@ class FetchJobsCommand extends Command
         $this->info("Fetching jobs for keyword: '{$keyword}' and location: '{$location}'...");
 
         // Set refresh to true to force fetching from API instead of retrieving from DB
-        $jobs = $jobAggregatorService->fetchAndStore($keyword, $location, true);
+        $jobs = $aggregator->fetchAndStore($keyword, $location, true);
 
         if (empty($jobs)) {
             $this->warn('No jobs found or failed to fetch jobs.');

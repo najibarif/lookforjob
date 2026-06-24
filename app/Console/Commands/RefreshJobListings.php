@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\JobListing;
-use App\Services\JobAggregatorService;
+use App\Services\Jobs\JobAggregator;
 use Illuminate\Console\Command;
 
 class RefreshJobListings extends Command
@@ -12,7 +12,7 @@ class RefreshJobListings extends Command
 
     protected $description = 'Refresh saved job listings by re-querying the configured job APIs.';
 
-    public function handle(JobAggregatorService $aggregator): int
+    public function handle(JobAggregator $aggregator): int
     {
         $limit = (int) $this->option('limit');
         $pairs = JobListing::select('keyword', 'location')

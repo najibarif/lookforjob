@@ -11,7 +11,7 @@ class CohereService
 
     public function __construct()
     {
-        $this->apiKey = env('COHERE_API_KEY');
+        $this->apiKey = config('services.cohere.api_key');
     }
 
     public function generateCV($userInput)
@@ -49,8 +49,6 @@ EOT;
             'max_tokens' => 1000,
             'temperature' => 0.7,
         ];
-
-        Log::info('Payload sent to Cohere API:', $payload);
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiKey,

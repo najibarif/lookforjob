@@ -2,21 +2,31 @@
 
 namespace App\Providers;
 
+use App\Services\Jobs\Contracts\JobProviderInterface;
+use App\Services\Jobs\JobAggregator;
+use App\Services\Jobs\Providers\ArbeitNowProvider;
+use App\Services\Jobs\Providers\LinkedInProvider;
+use App\Services\Jobs\Providers\RemotiveProvider;
+use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        // Tidak ada binding JobScraper karena class-nya tidak ada
+        $this->app->tag([
+            LinkedInProvider::class,
+            RemotiveProvider::class,
+            ArbeitNowProvider::class,
+        ], 'job-providers');
+
+        $this->app->bind(JobAggregator::class, function ($app) {
+            $providers = $app->tagged('job-providers');
+            $cache = $app->make(Cache::class);
+            return new JobAggregator($cache, ...$providers);
+        });
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         if (config('app.env') === 'production') {

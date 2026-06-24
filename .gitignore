@@ -23,3 +23,5 @@ yarn-error.log
 
 .vercel
 /bootstrap/cache/*.php
+/storage/framework/views/*.php
+/storage/framework/cache/data/*

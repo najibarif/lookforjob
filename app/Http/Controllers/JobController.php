@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Jobs\JobAggregator;
 use Illuminate\Http\Request;
-use App\Services\JobScraper;
 
 class JobController extends Controller
 {
-    public function getJobs(Request $request, JobScraper $scraper)
+    public function getJobs(Request $request, JobAggregator $aggregator)
     {
         $request->validate([
             'keyword' => 'required|string|max:255',
@@ -19,7 +19,7 @@ class JobController extends Controller
         $refresh = $request->boolean('refresh', false);
 
         try {
-            $jobs = $scraper->scrapeIndeed($keyword, $location, $refresh);
+            $jobs = $aggregator->fetchAndStore($keyword, $location, $refresh);
 
             return response()->json(['data' => $jobs]);
         } catch (\Exception $e) {

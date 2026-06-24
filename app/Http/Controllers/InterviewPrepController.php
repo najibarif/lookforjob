@@ -102,7 +102,7 @@ class InterviewPrepController extends Controller
             'language' => 'nullable|string',
         ]);
 
-        $apiKey = env('GEMINI_API_KEY');
+        $apiKey = config('services.gemini.api_key');
         if (empty($apiKey)) {
             return response()->json([
                 'success' => false,

@@ -35,4 +35,17 @@ return [
         ],
     ],
 
+    'linkedin' => [
+        'key' => env('RAPIDAPI_KEY'),
+        'host' => env('RAPIDAPI_HOST'),
+    ],
+
+    'cohere' => [
+        'api_key' => env('COHERE_API_KEY'),
+    ],
+
+    'gemini' => [
+        'api_key' => env('GEMINI_API_KEY'),
+    ],
+
 ];
